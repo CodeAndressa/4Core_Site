@@ -34,8 +34,8 @@ export function Header() {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'py-2 bg-white/70 backdrop-blur-xl border-b border-black/[0.03] shadow-premium' 
-          : 'py-4 bg-transparent'
+          ? 'py-1 bg-white/70 backdrop-blur-xl border-b border-black/[0.03] shadow-premium' 
+          : 'py-3 bg-transparent'
       }`}
     >
       <Container>
@@ -46,7 +46,7 @@ export function Header() {
               alt="4Core Logo" 
               width={160} 
               height={50} 
-              className="h-20 lg:h-24 w-auto transition-transform duration-500 group-hover:scale-105"
+              className="h-40 lg:h-48 w-auto transition-transform duration-500 group-hover:scale-105"
               priority
             />
           </Link>
