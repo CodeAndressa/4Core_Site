@@ -3,23 +3,29 @@
 @theme {
   --color-brand-deep: #0F0022;
   --color-brand-vibrant: #7B00FF;
-  --color-brand-light: #F4EEFF;
+  --color-brand-light: #F8F4FF;
   
   --color-surface-white: #FFFFFF;
-  --color-surface-gray: #FAFAFB;
+  --color-surface-gray: #F9FAFB;
+  --color-surface-muted: #F3F4F6;
   
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #4A4A4A;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #6B7280;
   
-  --color-border-default: #E2E8F0;
-  --color-border-light: #F1F5F9;
+  --color-border-default: #E5E7EB;
+  --color-border-light: #F3F4F6;
 
   --font-sans: 'Inter', sans-serif;
+  
+  --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 50px -12px rgba(123, 0, 255, 0.25);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
   }
   
   body {
@@ -27,10 +33,13 @@
     color: var(--color-text-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    line-height: 1.1;
   }
 
   ::selection {
@@ -41,17 +50,14 @@
 
 @layer utilities {
   .glass {
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
   
-  .glow-purple {
-    box-shadow: 0 0 50px -12px rgba(123, 0, 255, 0.3);
+  .section-padding {
+    padding-top: 120px;
+    padding-bottom: 120px;
   }
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-brand-vibrant);
-  outline-offset: 4px;
-}

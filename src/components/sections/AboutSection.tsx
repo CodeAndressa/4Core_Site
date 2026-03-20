@@ -3,104 +3,89 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Compass, BookOpen, ArrowRight } from 'lucide-react'
+import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="py-24 bg-surface-white overflow-visible">
+    <Section variant="white" id="sobre">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="relative isolate">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: 'circOut' }}
-              className="relative z-10"
-            >
-              <div className="absolute -inset-6 bg-brand-vibrant/10 blur-3xl rounded-full" />
-              <div className="relative bg-white border border-border-light p-10 lg:p-12 rounded-[56px] shadow-2xl">
-                 <div className="relative h-[500px] w-full rounded-[40px] overflow-hidden mb-10 border border-border-light">
-                   <Image 
-                      src="/images/team-consulting.png" 
-                      alt="Consultoria 4Core em reunião de estratégia" 
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover hover:scale-110 transition-transform duration-[2000ms]"
-                   />
-                 </div>
-                 
-                 <div className="flex flex-col md:flex-row gap-6 md:items-center justify-between">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-brand-deep tracking-tight mb-1">
-                        Consultoria Especializada
-                      </h3>
-                      <p className="text-text-secondary font-medium">Segurança e Processo em primeiro lugar.</p>
-                    </div>
-                    <Button href="/sobre" variant="outline" className="border-border-default rounded-2xl group py-6 px-8 h-auto shadow-sm">
-                      Nossa História <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                 </div>
-              </div>
-            </motion.div>
-          </div>
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-12"
+            className="relative"
+          >
+            {/* Image mask/frame premium */}
+            <div className="relative z-10 rounded-[48px] overflow-hidden shadow-premium aspect-square lg:aspect-[4/5] max-w-[500px]">
+              <Image 
+                src="/images/team-consulting.png" 
+                alt="Consultoria 4Core em reunião de estratégia" 
+                fill
+                sizes="(max-width: 1024px) 100vw, 500px"
+                className="object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            {/* Decorative background element */}
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-light rounded-full -z-10 blur-xl" />
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col"
           >
             <SectionHeading
-              subtitle="Fundamento & Propósito"
-              title="Precisão onde sempre faltou."
-              description="Nascemos da percepção de que o mercado não entrega o básico: implementação correta, integração limpa e suporte que realmente resolve. Estamos aqui para restaurar a ordem na sua operação de ponto."
+              subtitle="Fundamento & Método"
+              title="A precisão que o RH precisa."
+              description="Nascemos da percepção de que o mercado entrega apenas tecnologia. A 4Core entrega processos, conformidade e suporte especializado."
             />
             
-            <div className="space-y-12">
-              <div className="flex gap-8 group">
-                <div className="w-16 h-16 rounded-[24px] bg-brand-light/30 flex items-center justify-center text-brand-vibrant flex-shrink-0 group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500 shadow-sm">
-                    <Compass size={28} />
+            <div className="space-y-10 mt-12">
+              <div className="flex gap-6 group">
+                <div className="w-14 h-14 rounded-2xl bg-brand-light/50 flex items-center justify-center text-brand-vibrant shrink-0 group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500">
+                    <Compass size={24} />
                 </div>
                 <div>
-                  <h4 className="text-xl lg:text-2xl font-semibold text-brand-deep mb-3 tracking-tight ">
-                    Restabelecendo a Confiança
+                  <h4 className="text-xl font-bold text-brand-deep mb-3 tracking-tight">
+                    Restaurando a Confiança
                   </h4>
-                  <p className="text-text-secondary text-base lg:text-lg leading-relaxed font-medium">
-                    A 4Core existe para devolver controle e tranquilidade a quem carrega a operação nas costas. Restauramos a confiança nos dados para gestores e colaboradores.
+                  <p className="text-text-secondary text-base leading-relaxed font-medium">
+                    Devolvemos o controle total dos dados de jornada para o DP e RH, eliminando a insegurança jurídica e operacional.
                   </p>
                 </div>
               </div>
               
-              <div className="flex gap-8 group">
-                <div className="w-16 h-16 rounded-[24px] bg-brand-light/30 flex items-center justify-center text-brand-vibrant flex-shrink-0 group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500 shadow-sm">
-                    <BookOpen size={28} />
+              <div className="flex gap-6 group">
+                <div className="w-14 h-14 rounded-2xl bg-brand-light/50 flex items-center justify-center text-brand-vibrant shrink-0 group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500">
+                    <BookOpen size={24} />
                 </div>
                 <div>
-                  <h4 className="text-xl lg:text-2xl font-semibold text-brand-deep mb-3 tracking-tight ">
-                    Institucionalizando o Processo
+                  <h4 className="text-xl font-bold text-brand-deep mb-3 tracking-tight">
+                    Institucionalizando Processos
                   </h4>
-                  <p className="text-text-secondary text-base lg:text-lg leading-relaxed font-medium">
-                    Transformamos o improviso em método. Nosso diferencial não é apenas tecnologia, é como as pessoas e os sistemas trabalham em harmonia e conformidade.
+                  <p className="text-text-secondary text-base leading-relaxed font-medium">
+                    Transformamos tecnologia instável em método certificado. Garantimos que sua operação de ponto funcione em harmonia com a lei.
                   </p>
                 </div>
               </div>
-              
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button href="/contato" size="lg" className="px-12 py-8 text-xl rounded-[24px] w-full lg:w-auto shadow-2xl shadow-brand-vibrant/30">
-                  Agende sua Auditoria Técnica
-                </Button>
-              </motion.div>
+            </div>
+
+            <div className="mt-12">
+              <Button href="/contato" size="lg" className="px-10 py-6 text-base font-bold shadow-premium">
+                Agende uma Auditoria Técnica <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
             </div>
           </motion.div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }
+

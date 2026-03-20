@@ -1,53 +1,70 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 const faqs = [
   {
     q: 'A 4Core vende relógios de ponto físicos?',
-    a: 'Entregamos soluções completas que incluem hardware certificado (REP-P e REP-C), mas nosso foco principal é a implementação correta e a segurança jurídica operacional desses dispositivos.'
+    a: 'Sim, entregamos hardware certificado (REP-P e REP-C), mas nosso diferencial é a implementação correta e a segurança jurídica contínua desses dispositivos.'
   },
   {
     q: 'O sistema está de acordo com a Portaria 671?',
-    a: 'Sim, todos os sistemas e hardwares recomendados e implementados pela 4Core estão em total conformidade com a Portaria 671 do MTE, garantindo validade jurídica às marcações.'
+    a: 'Sim, todos os hardwares e softwares implementados pela 4Core estão em total conformidade com a Portaria 671 do MTE, garantindo validade jurídica total.'
   },
   {
     q: 'É possível integrar com qualquer folha de pagamento?',
-    a: 'Sim. Projetamos integrações limpas e reais com os principais softwares de ERP e folha do mercado brasileiro, evitando duplicidades de dados e erros de importação.'
+    a: 'Sim. Projetamos integrações reais com os principais ERPs e sistemas de folha, evitando duplicidade de dados e erros de importação.'
   },
   {
     q: 'Como funciona o suporte proativo da 4Core?',
-    a: 'Diferente do mercado tradicional, nossa equipe monitora indicadores de operação e antecipa inconsistências de dados antes que elas afetem o fechamento da sua folha.'
+    a: 'Diferente do mercado tradicional, nossa equipe monitora indicadores de operação e antecipa inconsistências antes que elas afetem o fechamento da sua folha.'
   }
 ]
 
-/**
- * Seção de FAQ inspirada no site 4core.site
- */
 export function FAQ() {
   return (
-    <section id="faq" className="py-24 bg-surface-white">
+    <Section variant="gray" id="faq">
       <Container>
-        <SectionHeading
-          subtitle="Tire Suas Dúvidas"
-          title="Frequentes"
-          description="Respostas diretas sobre como blindamos sua operação de ponto."
-          centered
-        />
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.6 }}
+        >
+          <SectionHeading
+            subtitle="Dúvidas Frequentes"
+            title="Perguntas comuns."
+            description="Respostas diretas sobre como blindamos e otimizamos sua operação de ponto."
+            centered
+            className="mb-16 lg:mb-24"
+          />
+        </motion.div>
         
-        <div className="max-w-3xl mx-auto space-y-6 mt-12">
+        <div className="max-w-4xl mx-auto space-y-6">
           {faqs.map((faq, i) => (
-            <div key={i} className="group p-8 bg-surface-gray rounded-3xl border border-border-light hover:bg-white hover:shadow-xl transition-all">
-              <h3 className="text-xl font-semibold text-brand-deep mb-4 flex items-start gap-4">
-                <span className="text-brand-vibrant block pt-0.5 select-none">Q.</span>
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="group p-8 lg:p-10 bg-white rounded-3xl border border-black/[0.03] hover:shadow-premium transition-all duration-300"
+            >
+              <h3 className="text-xl lg:text-2xl font-bold text-brand-deep mb-4 flex items-start gap-4">
+                <span className="text-brand-vibrant block pt-0.5 select-none font-black">?</span>
                 {faq.q}
               </h3>
-              <p className="text-text-secondary text-base leading-relaxed pl-9">
+              <p className="text-text-secondary text-base lg:text-lg leading-relaxed pl-8 lg:pl-10 font-medium">
                 {faq.a}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }
+

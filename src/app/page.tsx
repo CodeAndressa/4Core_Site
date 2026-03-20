@@ -1,22 +1,24 @@
 import { Hero } from '@/components/sections/Hero'
 import { Contrast } from '@/components/sections/Contrast'
 import { Solutions } from '@/components/sections/Solutions'
+import { TrustIndicators } from '@/components/sections/TrustIndicators'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { FAQ } from '@/components/sections/FAQ'
 import { CTA } from '@/components/sections/CTA'
 
 /**
- * Página Inicial da 4Core (SPA / Landing Page Orientada à Conversão)
+ * Página Inicial da 4Core (Landing Page Premium B2B)
  * 
- * Estrutura baseada em Consultative Sales (B2B):
- * 1. Hero: Impacto e Proposta de Valor imediata.
- * 2. Contrast/Dor: Conscientização sobre fraude e passivo trabalhista (Por que agir).
- * 3. Solutions (Vitrine): Catálogo do ecossistema Topdata/4Core (Como nós resolvemos).
- * 4. AboutSection (Garantia/Autoridade): O método de auditoria e credibilidade.
- * 5. Testimonials (Prova Social): Casos de sucesso reais.
- * 6. FAQ: Quebra tática de objeções técnicas.
- * 7. CTA: Rota de conversão final (Agendamento online / WhatsApp).
+ * Narrativa de Conversão:
+ * 1. Hero: Impacto, Proposta de Valor e Prova Social (Logos).
+ * 2. Contrast: Diferenciação no mercado (Problema vs Solução).
+ * 3. Solutions: Ecossistema de produtos (Como resolvemos).
+ * 4. TrustIndicators: Autoridade técnica e Auditoria.
+ * 5. About: Fundamento e Método (Quem somos/O que acreditamos).
+ * 6. Testimonials: Prova Social Real.
+ * 7. FAQ: Quebra de objeções.
+ * 8. CTA: Conversão final.
  */
 export default function HomePage() {
   return (
@@ -24,6 +26,7 @@ export default function HomePage() {
       <Hero />
       <Contrast />
       <Solutions />
+      <TrustIndicators />
       <AboutSection />
       <Testimonials />
       <FAQ />
@@ -31,3 +34,4 @@ export default function HomePage() {
     </>
   )
 }
+

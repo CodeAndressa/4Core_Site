@@ -2,104 +2,132 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ShieldCheck, ArrowRight, ArrowDown } from 'lucide-react'
+import { ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
 
 /**
- * Hero Section Premium & Interativa
- * Foco visual em imagens reais e animações Framer Motion.
+ * Hero Section Professional B2B
+ * Foco em Proposta de Valor e Autoridade imediata.
  */
 export function Hero() {
+  const benefits = [
+    'Conformidade com Portaria 671',
+    'Integração com principais ERPs',
+    'Segurança jurídica e técnica',
+  ]
+
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-surface-white">
-      {/* Background Decorative */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-light/10 -skew-x-12 translate-x-1/2 pointer-events-none" />
-      
+    <Section variant="gradient" className="pt-32 pb-16 lg:pt-48 lg:pb-24">
+      {/* Background Blobs for depth */}
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-vibrant/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-vibrant/5 blur-[100px] rounded-full pointer-events-none" />
+
       <Container className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-xs font-bold tracking-widest text-brand-vibrant uppercase bg-brand-light/30 rounded-full border border-brand-vibrant/10"
-            >
-              <ShieldCheck className="w-4 h-4" />
-              Consultoria Técnica Especializada
-            </motion.span>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-brand-deep leading-[0.9] mb-8 tracking-tighter">
-              Controle de ponto <br />
-              <span className="text-brand-vibrant">com conformidade total.</span>
+            <Badge variant="primary" className="mb-6 py-1.5 px-4 rounded-lg">
+              <span className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4" />
+                Líder em Conformidade Técnica
+              </span>
+            </Badge>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-deep mb-8 leading-[1.05] tracking-tight">
+              A base sólida para <br />
+              o <span className="text-brand-vibrant">controle de jornada.</span>
             </h1>
-            
-            <p className="text-xl md:text-2xl text-text-secondary mb-12 leading-relaxed max-w-xl font-medium">
-              Implementação de REP-P, integração com folha e suporte proativo para garantir conformidade real no controle de jornada.
+
+            <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed max-w-xl font-medium">
+              Não vendemos apenas tecnologia. Entregamos segurança operacional e 
+              blindagem jurídica total para a gestão de ponto da sua empresa.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-5">
-              <Button href="/contato" size="lg" className="group px-10 py-7 text-lg rounded-2xl shadow-2xl shadow-brand-vibrant/30">
-                Fale Conosco <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+
+            <ul className="space-y-4 mb-10">
+              {benefits.map((benefit, idx) => (
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + idx * 0.1 }}
+                  className="flex items-center gap-3 text-text-secondary font-semibold"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-brand-vibrant shrink-0" />
+                  {benefit}
+                </motion.li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button href="/contato" size="lg" className="px-8 py-6 text-base font-bold shadow-premium">
+                Falar com Especialista <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
-              <Button href="/solucoes" variant="outline" size="lg" className="px-10 py-7 text-lg rounded-2xl border-border-default text-brand-deep hover:bg-surface-gray">
-                Ver Soluções
+              <Button href="/solucoes" variant="outline" size="lg" className="px-8 py-6 text-base font-bold bg-white/50 hover:bg-white text-brand-deep">
+                Conhecer Soluções
               </Button>
             </div>
-
-            <motion.div 
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 0.5 }}
-               transition={{ delay: 1, duration: 2 }}
-               className="mt-16 flex items-center gap-4 text-brand-deep animate-bounce opacity-50"
-            >
-                <ArrowDown className="w-5 h-5" />
-                <span className="text-xs font-bold uppercase tracking-widest">Explore Nosso Método</span>
-            </motion.div>
           </motion.div>
 
-          {/* Imagem de Herói Gerada */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, rotate: 2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            className="relative"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="relative hidden lg:block"
           >
-            <div className="absolute -inset-4 bg-brand-vibrant/20 blur-3xl rounded-full animate-pulse" />
-            <div className="relative rounded-[60px] overflow-hidden shadow-2xl border-8 border-white">
-              <Image 
-                src="/images/hero-hr.png" 
-                alt="Gestão de RH Profissional" 
-                width={800} 
-                height={1000} 
-                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+            {/* Image Container with depth */}
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-premium bg-brand-deep aspect-[4/5] max-w-[500px] ml-auto">
+              <Image
+                src="/images/hero-hr.png"
+                alt="Gestão de RH Profissional 4Core"
+                width={600}
+                height={750}
+                className="w-full h-full object-cover"
                 priority
               />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-deep/80 to-transparent" />
             </div>
-            
-            {/* Elemento flutuante interativo */}
-            <motion.div 
-              animate={{ y: [0, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-2xl border border-border-light hidden md:block"
+
+            {/* Floating Trust Card */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              className="absolute -bottom-8 -left-12 z-20 glass p-6 rounded-2xl shadow-premium max-w-[280px]"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center text-green-600">
+                <div className="w-12 h-12 bg-brand-vibrant/10 rounded-xl flex items-center justify-center text-brand-vibrant">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-text-secondary uppercase tracking-tight">Status de Conformidade</p>
-                  <p className="text-lg font-bold text-brand-deep">100% Protegido</p>
+                  <p className="text-sm font-bold text-brand-deep">Gestão 671</p>
+                  <p className="text-xs text-text-secondary font-medium">100% de Conformidade Técnica</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </Container>
-    </section>
+
+      {/* Social Proof Row */}
+      <Container className="mt-20 lg:mt-32 pt-16 border-t border-brand-vibrant/5">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-text-muted mb-12">
+          Empresas que confiam na 4Core
+        </p>
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+          {/* Aqui usaremos placeholders ou logos reais conforme o projeto evolui */}
+          <div className="text-xl font-black text-brand-deep italic">TOPDATA</div>
+          <div className="text-xl font-black text-brand-deep italic">HENRY</div>
+          <div className="text-xl font-black text-brand-deep italic">CONTROLID</div>
+          <div className="text-xl font-black text-brand-deep italic">DIMEP</div>
+          <div className="text-xl font-black text-brand-deep italic">ZITEC</div>
+        </div>
+      </Container>
+    </Section>
   )
 }
+

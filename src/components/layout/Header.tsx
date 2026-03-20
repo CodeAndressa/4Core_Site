@@ -10,8 +10,8 @@ import { Button } from '@/components/ui/Button'
 import { ROUTES } from '@/lib/constants'
 
 const navLinks = [
+  { label: 'Soluções', href: '/solucoes' },
   { label: 'Sobre', href: ROUTES.about },
-  { label: 'Soluções', href: ROUTES.solutions },
   { label: 'Contato', href: ROUTES.contact },
 ]
 
@@ -21,7 +21,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 10)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -32,9 +32,9 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'py-4 bg-white/80 backdrop-blur-xl border-b border-border-light shadow-sm' 
+          ? 'py-3 bg-white/70 backdrop-blur-xl border-b border-black/[0.03] shadow-premium' 
           : 'py-6 bg-transparent'
       }`}
     >
@@ -42,11 +42,12 @@ export function Header() {
         <nav className="flex items-center justify-between">
           <Link href="/" className="relative z-10 group">
             <Image 
-              src={isScrolled ? "/images/logo-purple.png" : "/images/logo-purple.png"} 
-              alt="4Core" 
-              width={180} 
-              height={55} 
-              className="h-10 lg:h-14 w-auto transition-transform group-hover:scale-105"
+              src="/images/logo-purple.png" 
+              alt="4Core Logo" 
+              width={160} 
+              height={50} 
+              className="h-10 lg:h-12 w-auto transition-transform duration-500 group-hover:scale-105"
+              priority
             />
           </Link>
 
@@ -56,23 +57,21 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-bold uppercase tracking-widest transition-colors hover:text-brand-vibrant ${
-                  isScrolled ? 'text-brand-deep' : 'text-brand-deep'
-                }`}
+                className="text-xs font-bold uppercase tracking-[0.15em] text-brand-deep hover:text-brand-vibrant transition-colors"
               >
                 {link.label}
               </Link>
             ))}
-            <Button href={ROUTES.contact} size="sm" className="rounded-full px-6">
-              Fale Conosco <ArrowRight className="ml-2 w-4 h-4" />
+            <Button href={ROUTES.contact} size="sm" className="px-6 py-5 text-sm shadow-premium">
+              Especialista <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </div>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-brand-deep"
+            className="md:hidden p-2 text-brand-deep hover:bg-brand-vibrant/10 rounded-xl transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Abrir menu"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -86,21 +85,21 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-border-light overflow-hidden"
+            className="md:hidden bg-white/95 backdrop-blur-2xl border-b border-black/[0.03] overflow-hidden"
           >
-            <div className="flex flex-col p-6 gap-6">
+            <div className="flex flex-col p-8 gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-bold text-brand-deep uppercase tracking-widest"
+                  className="text-lg font-bold text-brand-deep uppercase tracking-widest border-b border-black/5 pb-4"
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button href={ROUTES.contact} onClick={() => setMobileMenuOpen(false)}>
-                Fale Conosco
+              <Button href={ROUTES.contact} onClick={() => setMobileMenuOpen(false)} className="py-6">
+                Falar com Especialista
               </Button>
             </div>
           </motion.div>
@@ -109,3 +108,4 @@ export function Header() {
     </motion.header>
   )
 }
+
