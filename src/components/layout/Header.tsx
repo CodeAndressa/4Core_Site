@@ -41,12 +41,12 @@ export function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0 group">
-            <Image
-              src="/images/logo-purple.png"
+          <Image
+              src={isScrolled ? '/images/logo-purple.png' : '/images/logo-black.png'}
               alt="4Core"
               width={120}
               height={38}
-              className="h-7 lg:h-8 w-auto"
+              className="h-9 lg:h-10 w-auto"
               priority
             />
           </Link>
