@@ -8,11 +8,11 @@ export const company = {
   description: 
     'Consultoria técnica especializada em Portaria 671, controle de ponto e conformidade. Nascemos da percepção de que o mercado não entrega o básico: implementação correta, integração limpa e suporte que realmente resolve.',
   email: 'contato@4core.site',
-  phone: '(11) 9999-0000', // Placeholder se não houver um real ou use o do site
-  whatsapp: '5511999990000',
+  phone: '+55 41 98847-6431',
+  whatsapp: '5541988476431',
   address: {
-    city: 'São Paulo',
-    state: 'SP',
+    city: 'Curitiba',
+    state: 'PR',
     country: 'Brasil',
   },
   social: {

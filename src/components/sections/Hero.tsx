@@ -113,21 +113,8 @@ export function Hero() {
         </div>
       </Container>
 
-      {/* Social Proof Row */}
-      <Container className="mt-20 lg:mt-32 pt-16 border-t border-brand-vibrant/5">
-        <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-text-muted mb-12">
-          Empresas que confiam na 4Core
-        </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-          {/* Aqui usaremos placeholders ou logos reais conforme o projeto evolui */}
-          <div className="text-xl font-black text-brand-deep italic">TOPDATA</div>
-          <div className="text-xl font-black text-brand-deep italic">HENRY</div>
-          <div className="text-xl font-black text-brand-deep italic">CONTROLID</div>
-          <div className="text-xl font-black text-brand-deep italic">DIMEP</div>
-          <div className="text-xl font-black text-brand-deep italic">ZITEC</div>
-        </div>
-      </Container>
     </Section>
   )
 }
+
 

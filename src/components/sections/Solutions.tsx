@@ -9,15 +9,15 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { products } from '@/data/products'
 import { ProductCard } from '@/components/ui/ProductCard'
 
-// Mostramos apenas os principais para a Home
+// Priorizamos o Facial como destaque principal
 const featuredProducts = products.filter(p => 
-  ['relogio-de-ponto', 'ponto-web', 'catracas'].includes(p.slug)
-)
+  ['relogio-de-ponto', 'ponto-web', 'sistema-de-ponto'].includes(p.slug)
+).sort((a, b) => (a.slug === 'relogio-de-ponto' ? -1 : 1))
 
 const iconMap = {
-  'relogio-de-ponto': <Fingerprint className="w-8 h-8" />,
+  'relogio-de-ponto': <div className="text-brand-vibrant"><Shield className="w-8 h-8" /></div>,
   'ponto-web': <Box className="w-8 h-8" />,
-  'catracas': <Shield className="w-8 h-8" />,
+  'sistema-de-ponto': <Fingerprint className="w-8 h-8" />,
 }
 
 export function Solutions() {
@@ -66,7 +66,7 @@ export function Solutions() {
               <ProductCard 
                 product={sol} 
                 icon={iconMap[sol.slug as keyof typeof iconMap] || <Box />}
-                badgeText={sol.category === 'controle-de-jornada' ? 'Jornada' : 'Acesso'}
+                badgeText={sol.slug === 'relogio-de-ponto' ? 'Destaque 4Core' : (sol.categories[0] === 'controle-de-jornada' ? 'Jornada' : 'Acesso')}
               />
             </motion.div>
           ))}

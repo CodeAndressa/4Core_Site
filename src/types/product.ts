@@ -9,7 +9,7 @@ export interface ProductSpecs {
 
 export interface Product {
   slug: string;
-  category: CategorySlug;
+  categories: CategorySlug[];
   name: string;
   description: string;
   shortDescription: string;

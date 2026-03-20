@@ -22,31 +22,33 @@ export const products: Product[] = [
   // Controle de Jornada
   {
     slug: 'relogio-de-ponto',
-    category: 'controle-de-jornada',
-    name: 'Relógio de Ponto (REP-P/REP-C)',
-    shortDescription: 'Hardware de alta performance para registro físico de ponto com biometria facial ou digital.',
-    description: 'Equipamentos robustos e certificados que garantem o registro inviolável da jornada de trabalho, em total conformidade com as exigências da Portaria 671 do MTP.',
-    image: '/images/products/rep-hardware.png',
-    problem: 'Fraudes no registro de ponto, filas excessivas na entrada e falta de comprovantes fiscais exigidos por lei.',
-    solution: 'Implementação de relógios de ponto certificados (Topdata) com leitores biométricos de alta velocidade e impressão de comprovante inviolável.',
+    categories: ['controle-de-jornada', 'controle-de-acesso'],
+    name: 'REP-P Facial: Registro Sem Contato',
+    shortDescription: 'Hardware Topdata com IA e reconhecimento facial ultra-rápido para conformidade 671.',
+    description: 'Relógio de ponto com reconhecimento facial seguro, leitura precisa e total aderência às normas da Portaria 671. Equipado com IA para detecção de rosto vivo, eliminando fraudes e garantindo agilidade na entrada e saída.',
+    image: '/images/topdata-facial-hero.png',
+    problem: 'Fraudes no registro de ponto (marcação por terceiros), filas lentas e riscos de contaminação por contato físico.',
+    solution: 'Implementação do REP-P Facial Topdata com tecnologia "Liveness Detection" e capacidade para milhares de usuários com reconhecimento em milissegundos.',
     benefits: [
       'Eliminação total de marcação por terceiros',
-      'Impressão térmica de alta durabilidade',
-      'Memória de registro para até 10 anos',
-      'Total aderência à Portaria 671'
+      'Registro sem contato físico (Higiene total)',
+      'Detecção de rosto vivo (Impede fotos e vídeos)',
+      'Funciona perfeitamente mesmo com máscaras',
+      'Agilidade extrema na entrada e saída',
+      'Conformidade técnica absoluta com a Portaria 671'
     ],
     specs: {
-      tipo: 'REP-C / REP-P (Certificado)',
-      tecnologia: 'Biometria Facial / Digital / Proximidade',
-      conectividade: 'Ethernet (TCP/IP) e WiFi (Opcional)',
-      conformidade: 'Portaria 671 MTP / Inmetro'
+      tipo: 'REP-P (Hardware Certificado Topdata)',
+      tecnologia: 'Reconhecimento Facial com IA (Deep Learning)',
+      conectividade: 'Ethernet (TCP/IP) nativo',
+      conformidade: 'Portaria 671 MTP / Auditoria Fiscal'
     },
-    applications: ['Indústrias', 'Comércio Geral', 'Hospitais', 'Canteiros de Obra'],
-    ctaText: 'Solicitar Orçamento'
+    applications: ['Empresas com Grande Fluxo', 'Indústrias', 'Varejo', 'Escritórios B2B'],
+    ctaText: 'Solicitar Proposta Especial'
   },
   {
     slug: 'ponto-web',
-    category: 'controle-de-jornada',
+    categories: ['controle-de-jornada'],
     name: 'Ponto Web / Cloud (TopPonto)',
     shortDescription: 'Software de gestão em nuvem para administração de jornadas e tratamento de ponto.',
     description: 'Plataforma 100% em nuvem que centraliza todas as marcações de ponto, automatiza o cálculo de horas extras e simplifica o fechamento da folha.',
@@ -70,7 +72,7 @@ export const products: Product[] = [
   },
   {
     slug: 'sistema-de-ponto',
-    category: 'controle-de-jornada',
+    categories: ['controle-de-jornada'],
     name: 'Aplicativo Mobile TopPonto',
     shortDescription: 'Registro de jornada para equipes externas ou home office com geolocalização.',
     description: 'Aplicativo mobile seguro que permite o registro de ponto de qualquer lugar, utilizando cerca geográfica (Geofence) e reconhecimento facial para garantir a autenticidade.',
@@ -79,7 +81,7 @@ export const products: Product[] = [
     solution: 'App com prova de vida (reconhecimento facial) e marcação vinculada à coordenada GPS exata no momento do registro.',
     benefits: [
       'Geofencing (Cerca geográfica inteligente)',
-      'Funcionamento Offline com sincronização posterior',
+      'Funcionamento Offline with sincronização posterior',
       'Reconhecimento Facial (Bio-prova de vida)',
       'Redução de custos com infraestrutura física'
     ],
@@ -96,7 +98,7 @@ export const products: Product[] = [
   // Controle de Acesso
   {
     slug: 'catracas',
-    category: 'controle-de-acesso',
+    categories: ['controle-de-acesso'],
     name: 'Catracas e Bloqueios Físicos',
     shortDescription: 'Segurança e controle de fluxo em portarias corporativas e industriais.',
     description: 'Equipamentos de controle de acesso físico robustos, com designs modernos e diversos tipos de leitores integrados para gerir o fluxo de pessoas.',
@@ -120,7 +122,7 @@ export const products: Product[] = [
   },
   {
     slug: 'controle-de-acesso',
-    category: 'controle-de-acesso',
+    categories: ['controle-de-acesso'],
     name: 'Terminais de Acesso Facial',
     shortDescription: 'Gestão de acesso por biometria sem contato para áreas sensíveis.',
     description: 'Leitores biométricos faciais de alta precisão que restringem o acesso apenas a pessoal autorizado, garantindo higiene e velocidade.',
@@ -146,9 +148,9 @@ export const products: Product[] = [
   // Segurança
   {
     slug: 'bastao-de-ronda',
-    category: 'seguranca-operacional',
+    categories: ['seguranca-operacional'],
     name: 'Bastão de Ronda Viggia',
-    shortDescription: 'Solução completa para controle de rondas, garantindo que vigilantes sigam a rota planejada.',
+    shortDescription: 'Soluções completa para controle de rondas, garantindo que vigilantes sigam a rota planejada.',
     description: 'O kit Viggia é formado por três componentes (Bastão Viggia, iButtons e Software TopRonda). Desenvolvido pela Topdata, permite monitorar de perto a equipe de vigilância para assegurar execução correta de roteiros e horários, sendo robusto, confiável e com excelente custo-benefício.',
     image: '/images/products/bastao-de-ronda.png',
     problem: 'Falta de controle efetivo sobre o percurso e os horários das rondas noturnas e de segurança patrimonial.',
@@ -171,7 +173,7 @@ export const products: Product[] = [
 ]
 
 export function getProductsByCategory(categorySlug: string) {
-  return products.filter(p => p.category === categorySlug)
+  return products.filter(p => p.categories.includes(categorySlug as any))
 }
 
 export function getProductBySlug(slug: string) {

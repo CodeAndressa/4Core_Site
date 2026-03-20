@@ -15,6 +15,7 @@ import { company } from '@/data/company'
 import { Container } from '@/components/ui/Container'
 import { ROUTES } from '@/lib/constants'
 import { categories } from '@/data/products'
+import { CONTACTS } from '@/lib/constants/contacts'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -112,10 +113,10 @@ export function Footer() {
               Contato Direto
             </h4>
             <div className="flex flex-col gap-6">
+              {/* Email + Sede */}
               {[
-                { icon: <Mail size={18} />, text: company.email, label: 'E-mail' },
-                { icon: <Phone size={18} />, text: company.phone, label: 'Telefone' },
-                { icon: <MapPin size={18} />, text: `${company.address.city}, ${company.address.state}`, label: 'Sede' },
+                { icon: <Mail size={18} />, text: company.email, label: 'E-mail', href: `mailto:${company.email}` },
+                { icon: <MapPin size={18} />, text: `${company.address.city}, ${company.address.state}`, label: 'Sede', href: undefined },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 group">
                   <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-brand-vibrant shrink-0 group-hover:bg-brand-vibrant group-hover:text-white transition-colors duration-300">
@@ -123,10 +124,43 @@ export function Footer() {
                   </div>
                   <div>
                     <span className="block text-[10px] font-bold text-white/20 uppercase tracking-widest mb-1">{item.label}</span>
-                    <span className="text-white/80 font-medium text-sm lg:text-base">{item.text}</span>
+                    {item.href
+                      ? <a href={item.href} className="text-white/80 font-medium text-sm lg:text-base hover:text-white transition-colors">{item.text}</a>
+                      : <span className="text-white/80 font-medium text-sm lg:text-base">{item.text}</span>
+                    }
                   </div>
                 </div>
               ))}
+
+              {/* Comercial */}
+              <div className="flex gap-4 group">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-[#25D366] shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors duration-300">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <span className="block text-[10px] font-bold text-white/20 uppercase tracking-widest mb-1">Comercial</span>
+                  <div className="flex flex-col gap-1">
+                    {CONTACTS.comercial.map((c) => (
+                      <a key={c.tel} href={c.tel} className="text-white/80 font-medium text-sm hover:text-white transition-colors">
+                        {c.phone}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Suporte */}
+              <div className="flex gap-4 group">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-brand-vibrant shrink-0 group-hover:bg-brand-vibrant group-hover:text-white transition-colors duration-300">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <span className="block text-[10px] font-bold text-white/20 uppercase tracking-widest mb-1">Suporte</span>
+                  <a href={CONTACTS.suporte.tel} className="text-white/80 font-medium text-sm hover:text-white transition-colors">
+                    {CONTACTS.suporte.phone}
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
