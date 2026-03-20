@@ -13,7 +13,7 @@ interface ProductCardProps {
 export function ProductCard({ product, icon, badgeText }: ProductCardProps) {
   return (
     <Link 
-      href={`/solucoes/${product.category}/${product.slug}`}
+      href={`/solucoes/${product.categories[0]}/${product.slug}`}
       className="group block h-full focus-visible:outline-none"
     >
       <article className="h-full bg-white rounded-[32px] border border-black/[0.03] hover:shadow-premium hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col shadow-sm">

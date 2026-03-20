@@ -13,7 +13,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const product = getProductBySlug(slug)
   const category = getCategoryBySlug(categorySlug)
 
-  if (!product || !category || product.category !== categorySlug) {
+  if (!product || !category || !product.categories.includes(categorySlug as any)) {
     notFound()
   }
 

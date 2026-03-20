@@ -33,7 +33,7 @@ export default function SolutionsDirectory() {
         <Container>
           <div className="space-y-32">
             {categories.map((cat, i) => {
-              const catProducts = products.filter(p => p.category === cat.slug)
+              const catProducts = products.filter(p => p.categories.includes(cat.slug as any))
               
               return (
                 <div key={cat.slug} className="group">

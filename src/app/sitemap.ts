@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Rotas dinâmicas das soluções
   const dynamicRoutes = products.map((prod) => ({
-    url: `${SITE_URL}${ROUTES.solution(prod.category, prod.slug)}`,
+    url: `${SITE_URL}${ROUTES.solution(prod.categories[0], prod.slug)}`,
     lastModified,
     changeFrequency: 'monthly' as const,
     priority: 0.7,
