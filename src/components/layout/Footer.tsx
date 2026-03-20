@@ -35,7 +35,7 @@ export function Footer() {
                 alt="4Core Logo" 
                 width={160} 
                 height={50} 
-                className="h-40 lg:h-48 w-auto transition-transform duration-500 group-hover:scale-105"
+                className="w-44 lg:w-56 h-auto transition-transform duration-500 group-hover:scale-105"
               />
             </Link>
             <p className="text-lg lg:text-xl text-white/50 leading-relaxed max-w-sm font-medium">
