@@ -37,7 +37,7 @@ export function Testimonials() {
            transition={{ duration: 0.6 }}
         >
           <SectionHeading
-            subtitle="Prova do Método"
+            subtitle="Prova do método"
             title="Resultados em quem confia."
             description="Empresas que priorizam a segurança jurídica já transformaram sua operação com a 4Core."
             centered

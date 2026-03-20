@@ -47,13 +47,13 @@ export function Compliance() {
               <div className="absolute -inset-4 bg-brand-vibrant/20 blur-3xl rounded-full" />
               <div className="relative bg-white/5 border border-white/10 p-10 rounded-3xl backdrop-blur-sm">
                  <div className="text-xs font-bold text-brand-vibrant uppercase tracking-widest mb-4">Certificação 4Core</div>
-                 <div className="text-4xl lg:text-5xl font-bold text-white mb-6">Método<br />Comprovado.</div>
+                 <div className="text-4xl lg:text-5xl font-bold text-white mb-6">Método<br />comprovado.</div>
                  <p className="text-brand-light/60 text-sm leading-relaxed mb-8">
                    Aplicamos uma metodologia ágil de auditoria que identifica 100% dos riscos críticos em menos de 15 dias de consultoria direta.
                  </p>
                  <div className="flex items-center gap-4 py-6 border-t border-white/10">
                     <div className="text-3xl font-bold text-brand-vibrant">100%</div>
-                    <div className="text-xs uppercase tracking-wider text-brand-light/70 font-semibold leading-tight">Segurança nos<br />Auditores Fiscais</div>
+                    <div className="text-xs uppercase tracking-wider text-brand-light/70 font-semibold leading-tight">Segurança nos<br />auditores fiscais</div>
                  </div>
               </div>
             </div>

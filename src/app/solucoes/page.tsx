@@ -19,8 +19,8 @@ export default function SolutionsDirectory() {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-vibrant/10 blur-3xl pointer-events-none" />
         <Container>
            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-none mb-10">
-              Soluções Técnicas <br />
-              <span className="text-brand-vibrant underline decoration-white/10 uppercase">em Conformidade.</span>
+              Soluções técnicas <br />
+              <span className="text-brand-vibrant underline decoration-white/10 uppercase">em conformidade.</span>
            </h1>
            <p className="text-xl lg:text-3xl text-brand-light/70 max-w-3xl font-medium leading-relaxed">
              Da gestão de jornada ao monitoramento de segurança operacional, entregamos consultoria técnica baseada em performance e estabilidade.
@@ -53,7 +53,7 @@ export default function SolutionsDirectory() {
                         href={`/solucoes/${cat.slug}`}
                         className="inline-flex items-center gap-4 text-brand-vibrant font-bold text-lg uppercase tracking-tight hover:gap-6 transition-all"
                      >
-                        Ver Categoria completa <ArrowRight />
+                        Ver categoria completa <ArrowRight />
                      </Link>
                   </div>
 

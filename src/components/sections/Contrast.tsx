@@ -9,19 +9,19 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 export function Contrast() {
   const points = [
     {
-      title: 'Configuração Técnica',
+      title: 'Configuração técnica',
       icon: <Terminal className="w-6 h-6" />,
       problem: 'Instalação rápida e genérica sem método.',
       solution: 'Parametrização orientada à Portaria 671 e às regras da sua empresa.',
     },
     {
-      title: 'Integração com Folha',
+      title: 'Integração com folha',
       icon: <Activity className="w-6 h-6" />,
       problem: 'Dados inconsistentes que geram retrabalho no fechamento.',
       solution: 'Fluxo de dados limpo e validado, pronto para o fechamento mensal.',
     },
     {
-      title: 'Suporte Consultivo',
+      title: 'Suporte consultivo',
       icon: <Zap className="w-6 h-6" />,
       problem: 'Atendimento reativo que só aparece após a crise.',
       solution: 'Prevenção de falhas e suporte especializado proativo.',

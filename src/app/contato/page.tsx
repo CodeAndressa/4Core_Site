@@ -33,7 +33,7 @@ export default function ContatoPage() {
                 <div>
                   <h4 className="font-semibold text-brand-deep text-lg mb-4 flex items-center gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-vibrant" />
-                    Atendimento Comercial
+                    Atendimento comercial
                   </h4>
                   <ul className="space-y-4">
                      <li className="flex items-center gap-4 text-text-secondary">

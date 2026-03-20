@@ -3,7 +3,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 
 const differentials = [
   {
-    title: 'Abordagem Consultiva',
+    title: 'Abordagem consultiva',
     description: 'Não apenas instalamos software; entendemos sua regra de negócio e orientamos a melhor prática operacional.',
     icon: '🤝'
   },
@@ -13,12 +13,12 @@ const differentials = [
     icon: '📜'
   },
   {
-    title: 'Foco em Redução de Risco',
+    title: 'Foco em redução de risco',
     description: 'Cada etapa do nosso método é desenhada para eliminar brechas que geram passivo trabalhista.',
     icon: '🛡️'
   },
   {
-    title: 'Suporte Técnico e Jurídico',
+    title: 'Suporte técnico e jurídico',
     description: 'Equipe multidisciplinar para atender tanto dúvidas sistêmicas quanto interpretações de CCT.',
     icon: '⚖️'
   }

@@ -23,7 +23,7 @@ export const products: Product[] = [
   {
     slug: 'relogio-de-ponto',
     categories: ['controle-de-jornada', 'controle-de-acesso'],
-    name: 'REP-P Facial: Registro Sem Contato',
+    name: 'REP-P facial: registro sem contato',
     shortDescription: 'Hardware Topdata com IA e reconhecimento facial ultra-rápido para conformidade 671.',
     description: 'Relógio de ponto com reconhecimento facial seguro, leitura precisa e total aderência às normas da Portaria 671. Equipado com IA para detecção de rosto vivo, eliminando fraudes e garantindo agilidade na entrada e saída.',
     image: '/images/topdata-facial-hero.png',
@@ -49,7 +49,7 @@ export const products: Product[] = [
   {
     slug: 'ponto-web',
     categories: ['controle-de-jornada'],
-    name: 'Ponto Web / Cloud (TopPonto)',
+    name: 'Ponto web / cloud (TopPonto)',
     shortDescription: 'Software de gestão em nuvem para administração de jornadas e tratamento de ponto.',
     description: 'Plataforma 100% em nuvem que centraliza todas as marcações de ponto, automatiza o cálculo de horas extras e simplifica o fechamento da folha.',
     image: '/images/products/software-web.png',
@@ -73,7 +73,7 @@ export const products: Product[] = [
   {
     slug: 'sistema-de-ponto',
     categories: ['controle-de-jornada'],
-    name: 'Aplicativo Mobile TopPonto',
+    name: 'Aplicativo mobile TopPonto',
     shortDescription: 'Registro de jornada para equipes externas ou home office com geolocalização.',
     description: 'Aplicativo mobile seguro que permite o registro de ponto de qualquer lugar, utilizando cerca geográfica (Geofence) e reconhecimento facial para garantir a autenticidade.',
     image: '/images/products/app-mobile.png',
@@ -99,7 +99,7 @@ export const products: Product[] = [
   {
     slug: 'catracas',
     categories: ['controle-de-acesso'],
-    name: 'Catracas e Bloqueios Físicos',
+    name: 'Catracas e bloqueios físicos',
     shortDescription: 'Segurança e controle de fluxo em portarias corporativas e industriais.',
     description: 'Equipamentos de controle de acesso físico robustos, com designs modernos e diversos tipos de leitores integrados para gerir o fluxo de pessoas.',
     image: '/images/products/catracas.png',
@@ -123,7 +123,7 @@ export const products: Product[] = [
   {
     slug: 'controle-de-acesso',
     categories: ['controle-de-acesso'],
-    name: 'Terminais de Acesso Facial',
+    name: 'Terminais de acesso facial',
     shortDescription: 'Gestão de acesso por biometria sem contato para áreas sensíveis.',
     description: 'Leitores biométricos faciais de alta precisão que restringem o acesso apenas a pessoal autorizado, garantindo higiene e velocidade.',
     image: '/images/products/facial-term.png',
@@ -149,7 +149,7 @@ export const products: Product[] = [
   {
     slug: 'bastao-de-ronda',
     categories: ['seguranca-operacional'],
-    name: 'Bastão de Ronda Viggia',
+    name: 'Bastão de ronda Viggia',
     shortDescription: 'Soluções completa para controle de rondas, garantindo que vigilantes sigam a rota planejada.',
     description: 'O kit Viggia é formado por três componentes (Bastão Viggia, iButtons e Software TopRonda). Desenvolvido pela Topdata, permite monitorar de perto a equipe de vigilância para assegurar execução correta de roteiros e horários, sendo robusto, confiável e com excelente custo-benefício.',
     image: '/images/products/bastao-de-ronda.png',

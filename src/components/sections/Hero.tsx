@@ -35,12 +35,12 @@ export function Hero() {
             <Badge variant="primary" className="mb-6 py-1.5 px-4 rounded-lg">
               <span className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4" />
-                Líder em Conformidade Técnica
+                Líder em conformidade técnica
               </span>
             </Badge>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-deep mb-8 leading-[1.05] tracking-tight">
-              Hardware + Método: <br />
+              Hardware + método: <br />
               A base sólida para o seu <span className="text-brand-vibrant">controle de jornada.</span>
             </h1>
 
@@ -66,10 +66,10 @@ export function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button href="/contato" size="lg" className="px-8 py-6 text-base font-bold shadow-premium">
-                Falar com um Especialista <ArrowRight className="ml-2 w-4 h-4" />
+                Falar com um especialista <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
               <Button href="/solucoes" variant="outline" size="lg" className="px-8 py-6 text-base font-bold bg-white/50 hover:bg-white text-brand-deep">
-                Conhecer Hardware
+                Conhecer hardware
               </Button>
             </div>
           </motion.div>
@@ -105,7 +105,7 @@ export function Hero() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-brand-deep">Gestão 671</p>
-                  <p className="text-xs text-text-secondary font-medium">100% de Conformidade Técnica</p>
+                  <p className="text-xs text-text-secondary font-medium">100% de conformidade técnica</p>
                 </div>
               </div>
             </motion.div>

@@ -52,7 +52,7 @@ export function CTA() {
                     href="/contato" 
                     className="bg-brand-vibrant text-white hover:bg-white hover:text-brand-vibrant px-10 py-6 text-base font-bold shadow-premium border-none"
                 >
-                  Receba orientação para implementar com segurança <ArrowRight className="ml-2 w-4 h-4" />
+              Receba orientação para implementar com segurança <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
                 <Button 
                     href={getWhatsAppUrl()} 
@@ -89,7 +89,7 @@ export function CTA() {
                  className="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-premium border border-border-light"
                >
                   <span className="block text-4xl font-black text-brand-vibrant leading-none mb-2">98%</span>
-                  <span className="text-xs font-bold text-brand-deep uppercase tracking-widest leading-tight block">Precisão de <br />Fechamento</span>
+                  <span className="text-xs font-bold text-brand-deep uppercase tracking-widest leading-tight block">Precisão de <br />fechamento</span>
                </motion.div>
             </motion.div>
           </div>

@@ -24,21 +24,21 @@ export function Benefits() {
     },
     {
       title: 'Redução real de riscos jurídicos',
-      subtitle: 'Segurança Jurídica',
+      subtitle: 'Segurança jurídica',
       icon: <ShieldCheck className="w-6 h-6" />,
       desc: 'Com dados consistentes, sua empresa evita passivos trabalhistas e inconsistências legais.',
       tags: ['Zero divergências', 'Conformidade']
     },
     {
       title: 'Equipes mais organizadas e produtivas',
-      subtitle: 'Eficiência Operacional',
+      subtitle: 'Eficiência operacional',
       icon: <Users className="w-6 h-6" />,
       desc: 'Registros corretos melhoram previsibilidade, gestão da jornada e tomada de decisão.',
       tags: ['Precisão nas horas', 'Operação fluida']
     },
     {
       title: 'RH estratégico e focado em pessoas',
-      subtitle: 'Foco Estratégico',
+      subtitle: 'Foco estratégico',
       icon: <Target className="w-6 h-6" />,
       desc: 'Com menos erros e menos correções, o RH ganha tempo para focar no que realmente importa.',
       tags: ['Menos tarefas', 'Foco humano']
@@ -57,7 +57,7 @@ export function Benefits() {
            >
              <SectionHeading
                subtitle="O Resultado do Método"
-               title="Diferencial 4Core: Funciona de verdade."
+               title="Diferencial 4Core: funciona de verdade."
                description="Os benefícios abaixo são consequência direta de uma implementação técnica precisa e suporte proativo."
              />
              
@@ -66,13 +66,13 @@ export function Benefits() {
                 <div className="w-6 h-6 bg-brand-vibrant/20 rounded-full flex items-center justify-center text-brand-vibrant">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
-                <span>Totalmente Integrado com sua folha</span>
+                <span>Totalmente integrado com sua folha</span>
               </div>
               <div className="flex items-center gap-4 text-brand-deep font-bold">
                 <div className="w-6 h-6 bg-brand-vibrant/20 rounded-full flex items-center justify-center text-brand-vibrant">
                     <ShieldCheck className="w-4 h-4" />
                 </div>
-                <span>Suporte Proativo e Humanizado</span>
+                <span>Suporte proativo e humanizado</span>
               </div>
              </div>
            </motion.div>

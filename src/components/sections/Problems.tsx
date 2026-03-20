@@ -3,22 +3,22 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 
 const problems = [
   {
-    title: 'Risco Trabalhista Invisível',
+    title: 'Risco trabalhista invisível',
     description: 'Empresas sem controle de jornada estruturado acumulam passivos milionários que só aparecem em processos ou auditorias.',
     icon: '⚖️',
   },
   {
-    title: 'Inconsistência de Dados',
+    title: 'Inconsistência de dados',
     description: 'Falhas no registro e tratamento de ponto geram divergências no fechamento da folha e erros no pagamento de horas extras.',
     icon: '📉',
   },
   {
-    title: 'Desorientação Legal',
+    title: 'Desorientação legal',
     description: 'Dificuldade em acompanhar e implementar as constantes mudanças nas portarias (como a 671) e convenções coletivas.',
     icon: '📑',
   },
   {
-    title: 'Operação Ineficiente',
+    title: 'Operação ineficiente',
     description: 'Processos manuais e sem método no controle de jornada consomem tempo produtivo do DP e RH desnecessariamente.',
     icon: '⚙️',
   },
@@ -33,7 +33,7 @@ export function Problems() {
     <section className="py-24 bg-surface-white">
       <Container>
         <SectionHeading
-          subtitle="O Desafio do Controle de Ponto"
+          subtitle="O desafio do controle de ponto"
           title="O que gera risco para seu negócio?"
           description="O controle de jornada não é apenas uma obrigação burocrática, é uma camada crítica de segurança jurídica para qualquer empresa."
           centered

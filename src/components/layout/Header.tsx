@@ -99,7 +99,7 @@ export function Header() {
                 </Link>
               ))}
               <Button href={ROUTES.contact} onClick={() => setMobileMenuOpen(false)} className="py-6">
-                Falar com Especialista
+                Falar com especialista
               </Button>
             </div>
           </motion.div>

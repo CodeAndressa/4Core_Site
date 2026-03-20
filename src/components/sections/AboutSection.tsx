@@ -42,7 +42,7 @@ export function AboutSection() {
             className="flex flex-col"
           >
             <SectionHeading
-              subtitle="Fundamento & Método"
+              subtitle="Fundamento & método"
               title="A precisão que o RH precisa."
               description="Nascemos da percepção de que o mercado entrega apenas tecnologia. A 4Core entrega processos, conformidade e suporte especializado."
             />
@@ -54,7 +54,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-brand-deep mb-3 tracking-tight">
-                    Restaurando a Confiança
+                    Restaurando a confiança
                   </h4>
                   <p className="text-text-secondary text-base leading-relaxed font-medium">
                     Devolvemos o controle total dos dados de jornada para o DP e RH, eliminando a insegurança jurídica e operacional.
@@ -68,7 +68,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-brand-deep mb-3 tracking-tight">
-                    Institucionalizando Processos
+                    Institucionalizando processos
                   </h4>
                   <p className="text-text-secondary text-base leading-relaxed font-medium">
                     Transformamos tecnologia instável em método certificado. Garantimos que sua operação de ponto funcione em harmonia com a lei.
@@ -79,7 +79,7 @@ export function AboutSection() {
 
             <div className="mt-12">
               <Button href="/contato" size="lg" className="px-10 py-6 text-base font-bold shadow-premium">
-                Agende uma Auditoria Técnica <ArrowRight className="ml-2 w-4 h-4" />
+                Agende uma auditoria técnica <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
           </motion.div>

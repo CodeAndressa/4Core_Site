@@ -22,7 +22,7 @@ export default function SobrePage() {
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start mb-24">
             <div className="lg:w-1/2">
               <SectionHeading
-                subtitle="O Propósito da 4Core"
+                subtitle="O propósito da 4Core"
                 title="Não vendemos apenas tecnologia. Entregamos método e segurança."
                 className="mb-8"
               />
@@ -68,9 +68,9 @@ export default function SobrePage() {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {[
-                  { title: 'Excelência Técnica', text: 'Não aceitamos o "mais ou menos". Cada parâmetro é verificado com rigor jurídico.' },
-                  { title: 'Visão Consultiva', text: 'Ouvimos as dores operacionais da sua empresa antes de sugerir qualquer solução.' },
-                  { title: 'Ética Legal', text: 'Garantimos que cada ação de registro esteja em compliance com a Portaria 671.' }
+                  { title: 'Excelência técnica', text: 'Não aceitamos o "mais ou menos". Cada parâmetro é verificado com rigor jurídico.' },
+                  { title: 'Visão consultiva', text: 'Ouvimos as dores operacionais da sua empresa antes de sugerir qualquer solução.' },
+                  { title: 'Ética legal', text: 'Garantimos que cada ação de registro esteja em compliance com a Portaria 671.' }
                 ].map((v, i) => (
                   <div key={i} className="flex flex-col items-center">
                     <div className="w-12 h-1 bg-brand-vibrant mb-6" />

@@ -12,17 +12,17 @@ import { Section } from '@/components/ui/Section'
 export function TrustIndicators() {
   const items = [
     { 
-      title: 'Auditoria Mensal', 
+      title: 'Auditoria mensal', 
       icon: <ShieldCheck className="w-10 h-10 text-brand-vibrant mb-6" />,
       desc: 'Não apenas instalamos. Auditamos mensalmente os logs para garantir que sua empresa permaneça 100% blindada.' 
     },
     { 
-      title: 'Integridade de Dados', 
+      title: 'Integridade de dados', 
       icon: <FileText className="w-10 h-10 text-brand-vibrant mb-6" />,
       desc: 'Garantimos arquivos AFDT e ACJEF sem edições, prontos para qualquer fiscalização trabalhista ou auditoria externa.' 
     },
     { 
-      title: 'Capacitação Estratégica', 
+      title: 'Capacitação estratégica', 
       icon: <Lock className="w-10 h-10 text-brand-vibrant mb-6" />,
       desc: 'Treinamos seu DP para utilizar as ferramentas de forma estratégica, reduzindo o tempo de fechamento da folha.' 
     }

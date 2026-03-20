@@ -33,7 +33,7 @@ export function Solutions() {
             className="max-w-2xl"
           >
             <SectionHeading
-              subtitle="Nossas Soluções"
+              subtitle="Nossas soluções"
               title="Tecnologia a serviço da conformidade."
               description="Do hardware robusto ao software inteligente, entregamos um ecossistema completo para gestão de jornada e acesso."
               noMargin
@@ -49,7 +49,7 @@ export function Solutions() {
                href="/solucoes" 
                className="group inline-flex items-center gap-4 text-brand-vibrant font-bold uppercase tracking-wider text-sm hover:gap-6 transition-all"
             >
-              Ver Todas as Soluções <ArrowRight className="w-4 h-4" />
+              Ver todas as soluções <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

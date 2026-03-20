@@ -38,7 +38,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
             transition={{ duration: 0.8 }}
           >
             <Badge className="mb-6 bg-brand-light text-brand-vibrant border-brand-vibrant/20 font-bold uppercase tracking-widest px-4 py-1">
-              Solução Técnica
+              Solução técnica
             </Badge>
             
             <div className="text-brand-vibrant mb-8 flex items-center gap-4">
@@ -55,7 +55,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
             </p>
             
             <Button href="/contato" size="lg" className="rounded-2xl px-10 py-7 text-lg shadow-xl shadow-brand-vibrant/20">
-              Solicitar Auditoria Técnica <ArrowRight className="ml-2 w-5 h-5" />
+              Solicitar auditoria técnica <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </motion.div>
 
@@ -87,7 +87,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
               <div className="absolute top-0 right-0 p-8 text-brand-vibrant/10 pointer-events-none group-hover:scale-110 transition-transform">
                 <ShieldCheck size={120} />
               </div>
-              <h2 className="text-2xl lg:text-3xl font-semibold text-brand-deep mb-6 leading-none">O Problema</h2>
+              <h2 className="text-2xl lg:text-3xl font-semibold text-brand-deep mb-6 leading-none">O problema</h2>
               <p className="text-text-secondary text-lg leading-relaxed font-medium relative z-10">
                 {solution.problem}
               </p>
@@ -103,7 +103,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
               <div className="absolute top-0 right-0 p-8 text-white/5 pointer-events-none">
                 <Lock size={120} />
               </div>
-              <h2 className="text-2xl lg:text-3xl font-semibold text-brand-vibrant mb-6 leading-none ">A Solução</h2>
+              <h2 className="text-2xl lg:text-3xl font-semibold text-brand-vibrant mb-6 leading-none ">A solução</h2>
               <p className="text-brand-light/70 text-lg leading-relaxed font-medium relative z-10">
                 {solution.impact}
               </p>
@@ -114,7 +114,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
            <div className="lg:col-span-5 space-y-12">
               <h2 className="text-3xl font-semibold text-brand-deep uppercase tracking-tight flex items-center gap-3">
-                 <ShieldCheck className="text-brand-vibrant" /> Diferenciais Técnicos
+                 <ShieldCheck className="text-brand-vibrant" /> Diferenciais técnicos
               </h2>
               <div className="space-y-6">
                 {solution.benefits.map((benefit, i) => (
@@ -137,7 +137,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
 
            <div className="lg:col-span-7 space-y-12">
               <h2 className="text-3xl font-semibold text-brand-deep uppercase tracking-tight flex items-center gap-3">
-                 <FileText className="text-brand-vibrant" /> Plano de Implementação
+                 <FileText className="text-brand-vibrant" /> Plano de implementação
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {solution.howItWorks.map((step, i) => (
@@ -176,7 +176,7 @@ export function SolutionDetailContent({ solution }: { solution: Solution }) {
              Agende uma reunião estratégica para entendermos sua operação e propor o melhor ecossistema de conformidade.
            </p>
            <Button href="/contato" className="bg-brand-deep text-white hover:bg-white hover:text-brand-deep px-12 py-8 text-xl rounded-2xl shadow-2xl">
-             Agendar Reunião Técnica <ArrowRight className="ml-2 w-6 h-6" />
+             Agendar reunião técnica <ArrowRight className="ml-2 w-6 h-6" />
            </Button>
         </motion.div>
       </Container>

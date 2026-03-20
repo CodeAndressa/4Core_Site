@@ -13,17 +13,17 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 export function RiskSection() {
   const risks = [
     {
-      title: 'Passivo Trabalhista',
+      title: 'Passivo trabalhista',
       icon: <FileWarning className="w-10 h-10 text-red-500 mb-6" />,
       desc: 'Relógios mal configurados e logs editáveis são a maior causa de condenações na justiça do trabalho.'
     },
     {
-      title: 'Multas por Descumprimento',
+      title: 'Multas por descumprimento',
       icon: <ShieldX className="w-10 h-10 text-red-500 mb-6" />,
       desc: 'A Portaria 671 exige conformidade técnica absoluta. O descumprimento gera multas pesadas por cada colaborador.'
     },
     {
-      title: 'Inconsistência de Dados',
+      title: 'Inconsistência de dados',
       icon: <TrendingDown className="w-10 h-10 text-red-500 mb-6" />,
       desc: 'Erros na importação de dados para a folha geram retrabalho e pagamentos indevidos que drenam seu caixa.'
     }

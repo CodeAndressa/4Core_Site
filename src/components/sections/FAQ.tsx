@@ -35,7 +35,7 @@ export function FAQ() {
            transition={{ duration: 0.6 }}
         >
           <SectionHeading
-            subtitle="Dúvidas Frequentes"
+            subtitle="Dúvidas frequentes"
             title="Perguntas comuns."
             description="Respostas diretas sobre como blindamos e otimizamos sua operação de ponto."
             centered
