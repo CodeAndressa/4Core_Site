@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-deep: #0F0022;
+  --color-brand-vibrant: #7B00FF;
+  --color-brand-light: #F4EEFF;
+  
+  --color-surface-white: #FFFFFF;
+  --color-surface-gray: #FAFAFB;
+  
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  
+  --color-border-default: #E2E8F0;
+  --color-border-light: #F1F5F9;
+
+  --font-sans: 'Inter', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--color-surface-white);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-vibrant);
+    color: white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .glass {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 50px -12px rgba(123, 0, 255, 0.3);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-vibrant);
+  outline-offset: 4px;
 }
