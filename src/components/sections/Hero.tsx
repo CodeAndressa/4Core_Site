@@ -20,7 +20,7 @@ export function Hero() {
   ]
 
   return (
-    <Section variant="gradient" className="pt-32 pb-16 lg:pt-48 lg:pb-24">
+    <Section variant="gradient" className="pb-16 lg:pb-24">
       {/* Background Blobs for depth */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-vibrant/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-vibrant/5 blur-[100px] rounded-full pointer-events-none" />

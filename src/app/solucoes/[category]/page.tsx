@@ -28,7 +28,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   return (
     <main className="flex-1 bg-white">
       {/* Category Header */}
-      <Section variant="gray" className="pt-32 lg:pt-48 border-b border-black/[0.03]">
+      <Section variant="gray" className="border-b border-black/[0.03]">
         <Container>
           <Link 
             href="/solucoes" 

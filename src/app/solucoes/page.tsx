@@ -15,7 +15,7 @@ export default function SolutionsDirectory() {
   return (
     <main className="flex-1 min-h-screen bg-surface-white">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 bg-brand-deep text-white relative overflow-hidden">
+      <section className="pb-20 lg:pb-32 bg-brand-deep text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-vibrant/10 blur-3xl pointer-events-none" />
         <Container>
            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-none mb-10">

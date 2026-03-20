@@ -54,7 +54,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
         <Header />
-        <main className="flex-1 pt-20 lg:pt-24">{children}</main>
+        <main className="flex-1 pt-16 lg:pt-20">{children}</main>
         <Footer />
         <WhatsAppButton />
       </body>

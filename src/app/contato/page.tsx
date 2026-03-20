@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function ContatoPage() {
   return (
     <div className="bg-surface-gray min-h-[80vh]">
-      <section className="py-20 lg:py-28">
+      <section className="py-12 lg:py-16">
         <Container>
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
             {/* Sidebar info */}

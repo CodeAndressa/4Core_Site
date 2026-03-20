@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function SobrePage() {
   return (
     <>
-      <section className="py-20 lg:py-28 bg-surface-white">
+      <section className="py-12 lg:py-16 bg-surface-white">
         <Container>
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start mb-24">
             <div className="lg:w-1/2">
