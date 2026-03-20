@@ -40,13 +40,13 @@ export function Hero() {
             </Badge>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-deep mb-8 leading-[1.05] tracking-tight">
-              A base sólida para <br />
-              o <span className="text-brand-vibrant">controle de jornada.</span>
+              Hardware + Método: <br />
+              A base sólida para o seu <span className="text-brand-vibrant">controle de jornada.</span>
             </h1>
 
             <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed max-w-xl font-medium">
-              Não vendemos apenas tecnologia. Entregamos segurança operacional e 
-              blindagem jurídica total para a gestão de ponto da sua empresa.
+              Não vendemos apenas tecnologia. Entregamos conformidade absoluta com a 
+              Portaria 671 e blindagem jurídica total para a gestão de ponto da sua empresa.
             </p>
 
             <ul className="space-y-4 mb-10">
@@ -66,10 +66,10 @@ export function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button href="/contato" size="lg" className="px-8 py-6 text-base font-bold shadow-premium">
-                Falar com Especialista <ArrowRight className="ml-2 w-4 h-4" />
+                Falar com um Especialista <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
               <Button href="/solucoes" variant="outline" size="lg" className="px-8 py-6 text-base font-bold bg-white/50 hover:bg-white text-brand-deep">
-                Conhecer Soluções
+                Conhecer Hardware
               </Button>
             </div>
           </motion.div>

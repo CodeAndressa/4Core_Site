@@ -1,4 +1,5 @@
 import { Hero } from '@/components/sections/Hero'
+import { RiskSection } from '@/components/sections/RiskSection'
 import { Contrast } from '@/components/sections/Contrast'
 import { Solutions } from '@/components/sections/Solutions'
 import { TrustIndicators } from '@/components/sections/TrustIndicators'
@@ -10,22 +11,22 @@ import { CTA } from '@/components/sections/CTA'
 /**
  * Página Inicial da 4Core (Landing Page Premium B2B)
  * 
- * Narrativa de Conversão:
- * 1. Hero: Impacto, Proposta de Valor e Prova Social (Logos).
- * 2. Contrast: Diferenciação no mercado (Problema vs Solução).
- * 3. Solutions: Ecossistema de produtos (Como resolvemos).
- * 4. TrustIndicators: Autoridade técnica e Auditoria.
- * 5. About: Fundamento e Método (Quem somos/O que acreditamos).
- * 6. Testimonials: Prova Social Real.
- * 7. FAQ: Quebra de objeções.
- * 8. CTA: Conversão final.
+ * Estratégia de Conversão (CRO):
+ * 1. Hero: Impacto e Proposta de Valor.
+ * 2. RiskSection: Conscientização de risco e passivo trabalhista (URGÊNCIA).
+ * 3. Solutions: Vitrine de hardware e software com contexto operacional.
+ * 4. Contrast: Explicação consultiva fundamentada (Problema -> Solução).
+ * 5. TrustIndicators/About: Diferencial 4Core, Metodologia e Autoridade Técnica.
+ * 6. Social Proof & FAQ: Quebra de objeções e validação de mercado.
+ * 7. CTA: Conversão final direta.
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Contrast />
+      <RiskSection />
       <Solutions />
+      <Contrast />
       <TrustIndicators />
       <AboutSection />
       <Testimonials />
@@ -34,4 +35,5 @@ export default function HomePage() {
     </>
   )
 }
+
 

@@ -39,12 +39,12 @@ export function CTA() {
               </div>
               
               <h2 className="text-4xl lg:text-6xl font-bold mb-8 leading-[1.1] tracking-tight">
-                Sua folha <br /> livre de erros <br /> 
-                <span className="text-brand-vibrant">hoje mesmo.</span>
+                Sua folha <br /> livre de riscos <br /> 
+                <span className="text-brand-vibrant">trabalhistas.</span>
               </h2>
               
               <p className="text-lg lg:text-xl text-white/60 mb-12 leading-relaxed max-w-md font-medium">
-                Transformamos inconsistências jurídicas em processos de auditoria técnica automatizada.
+                Garanta o compliance técnico absoluto na sua empresa com hardware homologado e implementação estratégica.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -52,7 +52,7 @@ export function CTA() {
                     href="/contato" 
                     className="bg-brand-vibrant text-white hover:bg-white hover:text-brand-vibrant px-10 py-6 text-base font-bold shadow-premium border-none"
                 >
-                  Falar com Especialista <ArrowRight className="ml-2 w-4 h-4" />
+                  Receba orientação para implementar com segurança <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
                 <Button 
                     href={getWhatsAppUrl()} 
@@ -73,11 +73,11 @@ export function CTA() {
             >
                <div className="relative rounded-[32px] overflow-hidden border border-white/10 shadow-premium">
                  <Image 
-                    src="/images/hero-hr.png" 
-                    alt="Profissional 4Core" 
-                    width={500} 
+                    src="/images/cta-access.png" 
+                    alt="Tecnologia de Acesso 4Core" 
+                    width={600} 
                     height={600} 
-                    className="w-full h-auto object-cover grayscale opacity-80"
+                    className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/90 via-transparent to-transparent" />
                </div>
