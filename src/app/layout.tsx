@@ -45,6 +45,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
 import { AdminButton } from '@/components/ui/AdminButton'
+import { Chatbot } from '@/components/ui/Chatbot'
 import { PageViewTracker } from '@/components/tracking/PageViewTracker'
 
 export default function RootLayout({
@@ -61,6 +62,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppButton />
         <AdminButton />
+        <Chatbot />
       </body>
     </html>
   )
