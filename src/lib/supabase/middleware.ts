@@ -12,47 +12,53 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
+  try {
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll()
+          },
+          setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
+            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+            supabaseResponse = NextResponse.next({
+              request,
+            })
+            cookiesToSet.forEach(({ name, value, options }) =>
+              supabaseResponse.cookies.set(name, value, options)
+            )
+          },
         },
-        setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
+      }
+    )
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    // Proteger rotas /admin (exceto /admin/login)
+    if (request.nextUrl.pathname.startsWith('/admin') && 
+        !request.nextUrl.pathname.startsWith('/admin/login')) {
+      if (!user) {
+        const url = request.nextUrl.clone()
+        url.pathname = '/admin/login'
+        return NextResponse.redirect(url)
+      }
     }
-  )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  // Proteger rotas /admin (exceto /admin/login)
-  if (request.nextUrl.pathname.startsWith('/admin') && 
-      !request.nextUrl.pathname.startsWith('/admin/login')) {
-    if (!user) {
+    // Redirecionar usuário autenticado de /admin/login para /admin/dashboard
+    if (request.nextUrl.pathname === '/admin/login' && user) {
       const url = request.nextUrl.clone()
-      url.pathname = '/admin/login'
+      url.pathname = '/admin/dashboard'
       return NextResponse.redirect(url)
     }
-  }
 
-  // Redirecionar usuário autenticado de /admin/login para /admin/dashboard
-  if (request.nextUrl.pathname === '/admin/login' && user) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/admin/dashboard'
-    return NextResponse.redirect(url)
+    return supabaseResponse
+  } catch (error) {
+    console.error('Middleware error:', error)
+    // Em caso de erro, permitir acesso mas logar o erro
+    return supabaseResponse
   }
-
-  return supabaseResponse
 }

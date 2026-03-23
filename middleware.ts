@@ -1,7 +1,22 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
+  // Verificar se as variáveis de ambiente estão configuradas
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.error('Supabase environment variables not configured')
+    
+    // Se for rota admin, redirecionar para login
+    if (request.nextUrl.pathname.startsWith('/admin')) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/admin/login'
+      return NextResponse.redirect(url)
+    }
+    
+    // Para outras rotas, permitir acesso
+    return NextResponse.next()
+  }
+
   return await updateSession(request)
 }
 
