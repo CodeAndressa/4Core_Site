@@ -131,7 +131,7 @@ export default function PrivacidadePage() {
               <div className="bg-gray-50 p-6 rounded-lg mt-4">
                 <p><strong>E-mail:</strong> {company.email}</p>
                 <p><strong>Telefone:</strong> {company.phone}</p>
-                <p><strong>Endereço:</strong> {company.address.street}, {company.address.city} - {company.address.state}</p>
+                <p><strong>Localização:</strong> {company.address.city} - {company.address.state}</p>
               </div>
             </section>
 

@@ -180,7 +180,7 @@ export default function CompliancePage() {
                 <p><strong>E-mail Geral:</strong> {company.email}</p>
                 <p><strong>E-mail Compliance:</strong> compliance@4core.site</p>
                 <p><strong>Telefone:</strong> {company.phone}</p>
-                <p><strong>Endereço:</strong> {company.address.street}, {company.address.city} - {company.address.state}</p>
+                <p><strong>Localização:</strong> {company.address.city} - {company.address.state}</p>
               </div>
             </section>
           </div>
