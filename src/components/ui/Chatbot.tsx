@@ -107,10 +107,34 @@ export function Chatbot() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 w-16 h-16 bg-purple-600 hover:bg-purple-700 rounded-full shadow-lg flex items-center justify-center text-white text-2xl transition-all duration-300 hover:scale-110 z-50"
-        aria-label="Abrir chat"
+        className="fixed bottom-24 right-4 group z-50"
+        aria-label="Abrir chat com IA"
       >
-        💬
+        {/* Botão principal */}
+        <div className="relative">
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
+          
+          {/* Botão */}
+          <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3 transition-all duration-300 group-hover:scale-105">
+            {/* Ícone IA */}
+            <div className="relative">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              {/* Pulse indicator */}
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            </div>
+            
+            {/* Texto */}
+            <div className="text-left">
+              <div className="text-white font-bold text-sm">Assistente IA</div>
+              <div className="text-purple-100 text-xs">Online agora</div>
+            </div>
+          </div>
+        </div>
       </button>
     )
   }
@@ -118,19 +142,22 @@ export function Chatbot() {
   return (
     <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-4 rounded-t-2xl flex items-center justify-between">
+      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-2xl">
-            🤖
+          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5">
+            <img src="/favicon.ico" alt="4Core" className="w-full h-full object-contain" />
           </div>
           <div>
-            <h3 className="font-bold">Assistente 4Core</h3>
-            <p className="text-xs text-purple-100">Online agora</p>
+            <h3 className="font-bold">Assistente IA 4Core</h3>
+            <p className="text-xs text-purple-100 flex items-center gap-1">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              Online agora
+            </p>
           </div>
         </div>
         <button
           onClick={() => setIsOpen(false)}
-          className="text-white hover:bg-purple-800 rounded-full w-8 h-8 flex items-center justify-center transition"
+          className="text-white hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition"
         >
           ✕
         </button>
@@ -158,17 +185,37 @@ export function Chatbot() {
             {message.solutions && message.solutions.length > 0 && (
               <div className="mt-2 space-y-2">
                 {message.solutions.map((solution, idx) => (
-                  <div
+                  <button
                     key={idx}
-                    className="bg-white border border-purple-200 rounded-lg p-3 text-sm"
+                    onClick={() => {
+                      const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5511984295040'
+                      const whatsappMessage = encodeURIComponent(
+                        `Olá! Gostaria de falar com um especialista sobre ${solution.name}`
+                      )
+                      window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank')
+                    }}
+                    className="w-full bg-white border-2 border-purple-200 hover:border-purple-400 rounded-lg p-3 text-left transition-all hover:shadow-md group"
                   >
-                    <h4 className="font-bold text-purple-600 mb-1">{solution.name}</h4>
-                    <p className="text-gray-600 text-xs mb-2">{solution.description}</p>
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <span>💰 {solution.priceRange}</span>
-                      <span>⏱️ {solution.implementationTime}</span>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <h4 className="font-bold text-purple-600 mb-1 text-sm group-hover:text-purple-700">
+                          {solution.name}
+                        </h4>
+                        <p className="text-gray-600 text-xs mb-2 line-clamp-2">
+                          {solution.description}
+                        </p>
+                        <div className="flex items-center gap-2 text-xs text-purple-600 font-medium">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                          </svg>
+                          Falar com especialista
+                        </div>
+                      </div>
+                      <svg className="w-5 h-5 text-purple-400 group-hover:text-purple-600 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}

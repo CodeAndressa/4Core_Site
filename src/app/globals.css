@@ -59,6 +59,13 @@
     padding-top: 80px;
     padding-bottom: 80px;
   }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   @media (min-width: 1024px) {
     .section-padding {
