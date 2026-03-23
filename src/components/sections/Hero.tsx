@@ -83,8 +83,8 @@ export function Hero() {
             {/* Image Container with depth */}
             <div className="relative z-10 rounded-3xl overflow-hidden shadow-premium bg-brand-deep aspect-[4/5] max-w-[500px] ml-auto">
               <Image
-                src="/images/hero-hr.png"
-                alt="Gestão de RH Profissional 4Core"
+                src="/images/products/app-mobile.png"
+                alt="Aplicativo Mobile TopPonto - Controle de Ponto Digital"
                 width={600}
                 height={750}
                 className="w-full h-full object-cover"
