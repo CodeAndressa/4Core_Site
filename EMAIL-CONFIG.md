@@ -1,31 +1,18 @@
 # Configuração de E-mail - Hostinger
 
-## Credenciais necessárias
+## Credenciais configuradas
 
-Para o envio de e-mails funcionar, você precisa configurar as seguintes variáveis no arquivo `.env.local`:
+O sistema usa a conta `comercial@4core.site` tanto para enviar quanto para receber os leads:
 
 ```env
 SMTP_HOST=smtp.hostinger.com
 SMTP_PORT=587
-SMTP_USER=noreply@4core.site
-SMTP_PASS=<senha-do-email-noreply>
+SMTP_USER=comercial@4core.site
+SMTP_PASS=4C0R3@senha2026
 CONTACT_EMAIL=comercial@4core.site
 ```
 
-## Passos para configurar
-
-### 1. Criar o e-mail noreply@4core.site na Hostinger
-
-1. Acesse o painel da Hostinger
-2. Vá em **E-mails** > **Contas de E-mail**
-3. Crie a conta `noreply@4core.site` com uma senha forte
-4. Anote a senha
-
-### 2. Atualizar o arquivo .env.local
-
-Edite o arquivo `.env.local` e substitua `<sua-senha-aqui>` pela senha real do e-mail `noreply@4core.site`.
-
-### 3. Configurar no Vercel (Produção)
+## Configurar no Vercel (Produção)
 
 1. Acesse o [Vercel Dashboard](https://vercel.com/dashboard)
 2. Selecione o projeto **4Core_Site**
@@ -36,12 +23,12 @@ Edite o arquivo `.env.local` e substitua `<sua-senha-aqui>` pela senha real do e
 |------|-------|
 | `SMTP_HOST` | `smtp.hostinger.com` |
 | `SMTP_PORT` | `587` |
-| `SMTP_USER` | `noreply@4core.site` |
-| `SMTP_PASS` | `<senha-real>` |
+| `SMTP_USER` | `comercial@4core.site` |
+| `SMTP_PASS` | `4C0R3@senha2026` |
 | `CONTACT_EMAIL` | `comercial@4core.site` |
 
 5. Clique em **Save**
-6. Faça um novo deploy (ou aguarde o próximo push)
+6. Faça um novo deploy (Deployments > ... > Redeploy)
 
 ## Formato do e-mail enviado
 
@@ -49,7 +36,7 @@ Quando um lead preencher o formulário, o e-mail `comercial@4core.site` receber�
 
 ```
 Assunto: Novo lead - Site 4Core
-De: Site 4Core <noreply@4core.site>
+De: Site 4Core <comercial@4core.site>
 Responder para: <email-do-lead>
 
 Site 4Core
@@ -66,7 +53,7 @@ Mensagem: [Mensagem]
 
 ## Testando localmente
 
-1. Configure o `.env.local` com as credenciais reais
+1. O `.env.local` já está configurado com as credenciais
 2. Rode o servidor: `npm run dev`
 3. Acesse: http://localhost:3000/contato
 4. Preencha e envie o formulário
@@ -78,24 +65,31 @@ Mensagem: [Mensagem]
 
 **Possíveis causas:**
 - Senha incorreta no `SMTP_PASS`
-- E-mail `noreply@4core.site` não existe na Hostinger
 - Porta bloqueada (tente usar porta `465` com `secure: true`)
+- Limite de envio atingido na Hostinger
 
 **Solução:**
-1. Verifique se o e-mail existe no painel da Hostinger
-2. Confirme que a senha está correta
-3. Se necessário, altere a porta para 465 no arquivo `src/lib/email.ts`:
+1. Verifique se a senha está correta
+2. Se necessário, altere a porta para 465 no arquivo `src/lib/email.ts`:
    ```typescript
    port: 465,
    secure: true,
    ```
 
-### E-mail não chega em comercial@4core.site
+### E-mail não chega
 
 **Verifique:**
 - Caixa de spam
-- Se o e-mail `comercial@4core.site` existe e está ativo
 - Logs do servidor (console do terminal onde roda `npm run dev`)
+- Se a conta `comercial@4core.site` está ativa na Hostinger
+
+## Fluxo completo
+
+1. Lead preenche formulário em `/contato`
+2. Sistema valida os dados
+3. Lead é salvo no Supabase (tabela `leads`)
+4. E-mail é enviado para `comercial@4core.site`
+5. Lead recebe mensagem de sucesso
 
 ## Próximos passos (opcional)
 

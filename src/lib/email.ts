@@ -71,7 +71,7 @@ export async function sendContactEmail(
     const transporter = createTransporter()
 
     await transporter.sendMail({
-      from: `"Site 4Core" <noreply@4core.site>`,
+      from: `"Site 4Core" <comercial@4core.site>`,
       to: contactEmail,
       replyTo: data.email,
       subject: `Novo lead - Site 4Core`,
