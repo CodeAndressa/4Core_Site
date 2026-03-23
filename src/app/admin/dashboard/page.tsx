@@ -107,6 +107,9 @@ export default function DashboardPage() {
 
   if (!data) return null
 
+  // Verificar se há dados
+  const hasData = data.kpis.totalPageviews > 0 || data.kpis.uniqueVisitors > 0
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -136,31 +139,56 @@ export default function DashboardPage() {
           <DateFilter onFilterChange={handleDateFilterChange} />
         </div>
 
-        {/* KPIs */}
-        <div className="mb-8">
-          <KPICards metrics={data.kpis} />
-        </div>
-
-        {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <TrafficChart data={data.traffic} />
-          <ConversionChart data={data.conversions} />
-        </div>
-
-        {/* Tables and Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-2">
-            <PagesTable data={data.pages} />
+        {!hasData ? (
+          /* Mensagem de sem dados */
+          <div className="bg-white rounded-xl p-12 text-center shadow-sm border border-gray-200">
+            <div className="text-6xl mb-4">📊</div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Nenhum dado encontrado</h2>
+            <p className="text-gray-600 mb-6">
+              Não há eventos registrados no período selecionado.
+            </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
+              <p className="text-sm text-blue-800 mb-2">
+                <strong>Como gerar dados:</strong>
+              </p>
+              <ul className="text-sm text-blue-700 text-left space-y-1">
+                <li>• Navegue pelas páginas do site</li>
+                <li>• Clique no botão WhatsApp</li>
+                <li>• Envie o formulário de contato</li>
+                <li>• Tente selecionar "Todos os dados" no filtro acima</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <DeviceStats data={data.devices} />
-          </div>
-        </div>
+        ) : (
+          /* Dashboard com dados */
+          <>
+            {/* KPIs */}
+            <div className="mb-8">
+              <KPICards metrics={data.kpis} />
+            </div>
 
-        {/* Sources */}
-        <div className="mb-8">
-          <SourcesTable data={data.sources} />
-        </div>
+            {/* Charts */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              <TrafficChart data={data.traffic} />
+              <ConversionChart data={data.conversions} />
+            </div>
+
+            {/* Tables and Stats */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div className="lg:col-span-2">
+                <PagesTable data={data.pages} />
+              </div>
+              <div>
+                <DeviceStats data={data.devices} />
+              </div>
+            </div>
+
+            {/* Sources */}
+            <div className="mb-8">
+              <SourcesTable data={data.sources} />
+            </div>
+          </>
+        )}
       </main>
     </div>
   )
