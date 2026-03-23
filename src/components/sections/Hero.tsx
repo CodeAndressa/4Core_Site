@@ -35,13 +35,13 @@ export function Hero() {
             <Badge variant="primary" className="mb-6 py-1.5 px-4 rounded-lg">
               <span className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4" />
-                Líder em conformidade técnica
+                Especialista em controle de ponto e acesso
               </span>
             </Badge>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-deep mb-8 leading-[1.05] tracking-tight">
-              Hardware + método: <br />
-              A base sólida para o seu <span className="text-brand-vibrant">controle de jornada.</span>
+              Relógio de ponto + software: <br />
+              A solução completa para <span className="text-brand-vibrant">sua empresa.</span>
             </h1>
 
             <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed max-w-xl font-medium">
@@ -69,7 +69,7 @@ export function Hero() {
                 Falar com um especialista <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
               <Button href="/solucoes" variant="outline" size="lg" className="px-8 py-6 text-base font-bold bg-white/50 hover:bg-white text-brand-deep">
-                Conhecer hardware
+                Conhecer soluções 4Core
               </Button>
             </div>
           </motion.div>
