@@ -44,7 +44,7 @@ export function CTA() {
               </h2>
               
               <p className="text-lg lg:text-xl text-white/60 mb-12 leading-relaxed max-w-md font-medium">
-                Garanta o compliance técnico absoluto na sua empresa com hardware homologado e implementação estratégica.
+                Garanta o compliance técnico absoluto na sua empresa com equipamento homologado e implementação estratégica.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">

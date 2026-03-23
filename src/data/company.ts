@@ -4,9 +4,9 @@
  */
 export const company = {
   name: '4Core',
-  tagline: 'Blindagem jurídica e eficiência operacional em controle de ponto.',
+  tagline: 'Especialista em controle de ponto e acesso.',
   description: 
-    'Consultoria técnica especializada em Portaria 671, controle de ponto e conformidade. Nascemos da percepção de que o mercado não entrega o básico: implementação correta, integração limpa e suporte que realmente resolve.',
+    'Consultoria técnica especializada em controle de ponto, acesso e conformidade trabalhista. Entregamos relógio de ponto + software com implementação correta, integração limpa e suporte que realmente resolve.',
   email: 'contato@4core.site',
   phone: '+55 41 98847-6431',
   whatsapp: '5541988476431',

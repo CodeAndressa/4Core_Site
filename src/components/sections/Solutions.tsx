@@ -34,8 +34,8 @@ export function Solutions() {
           >
             <SectionHeading
               subtitle="Nossas soluções"
-              title="Tecnologia a serviço da conformidade."
-              description="Do hardware robusto ao software inteligente, entregamos um ecossistema completo para gestão de jornada e acesso."
+              title="Relógio de ponto + software: solução completa."
+              description="Do equipamento robusto ao software inteligente, entregamos um ecossistema completo para gestão de jornada e acesso."
               noMargin
             />
           </motion.div>

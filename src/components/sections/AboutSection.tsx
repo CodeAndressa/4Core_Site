@@ -42,9 +42,9 @@ export function AboutSection() {
             className="flex flex-col"
           >
             <SectionHeading
-              subtitle="Fundamento & método"
+              subtitle="Fundamento & solução"
               title="A precisão que o RH precisa."
-              description="Nascemos da percepção de que o mercado entrega apenas tecnologia. A 4Core entrega processos, conformidade e suporte especializado."
+              description="Nascemos da percepção de que o mercado entrega apenas tecnologia. A 4Core entrega relógio de ponto + software com processos, conformidade e suporte especializado."
             />
             
             <div className="space-y-10 mt-12">

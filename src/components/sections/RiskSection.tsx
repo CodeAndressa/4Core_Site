@@ -43,8 +43,8 @@ export function RiskSection() {
               <AlertTriangle className="w-4 h-4" /> Alerta de Risco
             </div>
             <SectionHeading
-              title="Sua gestão de ponto é uma bomba relógio ou uma blindagem jurídica?"
-              description="A maioria das empresas acredita que comprar um relógio de ponto resolve o problema. A realidade é que hardware sem implementação técnica é apenas um gerador de provas contra você."
+              title="Seu controle de ponto é uma bomba relógio ou uma blindagem jurídica?"
+              description="A maioria das empresas acredita que comprar um relógio de ponto resolve o problema. A realidade é que equipamento sem implementação técnica é apenas um gerador de provas contra você."
               noMargin
             />
           </motion.div>
@@ -64,7 +64,7 @@ export function RiskSection() {
                 'Processos trabalhistas por horas extras não computadas',
                 'Logs de registro vulneráveis e passíveis de fraude',
                 'Divergência entre o ponto e a folha de pagamento',
-                'Hardware desatualizado para a nova Portaria 671'
+                'Equipamento desatualizado para a nova Portaria 671'
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start">
                   <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-1">

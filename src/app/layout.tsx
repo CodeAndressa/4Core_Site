@@ -11,13 +11,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: '4Core — Consultoria em Controle de Ponto e Conformidade Trabalhista',
+    default: '4Core — Especialista em Controle de Ponto e Acesso',
     template: '%s — 4Core',
   },
   description:
-    'Blindagem jurídica e eficiência operacional no controle de jornada. Consultoria especializada para RH e Departamento Pessoal.',
+    'Relógio de ponto + software: a solução completa para controle de jornada e acesso. Consultoria especializada para RH e Departamento Pessoal.',
   keywords: [
     'controle de ponto',
+    'relógio de ponto',
+    'software de ponto',
+    'controle de acesso',
     'conformidade trabalhista',
     'portaria 671',
     'gestão de jornada',
@@ -31,9 +34,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     siteName: '4Core',
-    title: '4Core — Consultoria em Controle de Ponto e Conformidade Trabalhista',
+    title: '4Core — Especialista em Controle de Ponto e Acesso',
     description:
-      'Blindagem jurídica e eficiência operacional no controle de jornada. Consultoria especializada para RH e DP.',
+      'Relógio de ponto + software: a solução completa para controle de jornada e acesso. Consultoria especializada para RH e DP.',
   },
   robots: {
     index: true,

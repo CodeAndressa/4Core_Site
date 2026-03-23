@@ -42,7 +42,7 @@ export function Contrast() {
         >
           <SectionHeading
             subtitle="Diferencial 4Core"
-            title="Onde o mercado falha, nós entregamos método."
+            title="Onde o mercado falha, nós entregamos solução completa."
             description="Enquanto o mercado entrega apenas o equipamento, a 4Core estrutura processos que garantem a conformidade total da sua operação."
             inverse
             className="max-w-4xl"
