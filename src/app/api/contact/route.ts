@@ -1,20 +1,21 @@
 import { NextResponse } from 'next/server'
 import { contactFormSchema } from '@/lib/validators'
 import { sendContactEmail } from '@/lib/email'
+import { createLead } from '@/lib/services/leadService'
 import type { ContactApiResponse } from '@/types/contact'
 
 /**
  * POST /api/contact
  *
- * Recebe os dados do formulário de contato, valida com Zod
- * e envia o e-mail para a empresa.
+ * Recebe os dados do formulário de contato, valida com Zod,
+ * salva no Supabase como lead e envia o e-mail para a empresa.
  *
  * Fluxo:
  * 1. Parse do JSON body
  * 2. Validação server-side (mesmo schema do client)
- * 3. Envio de e-mail via SMTP
- * 4. [FUTURO] Enviar para webhook n8n
- * 5. [FUTURO] Criar lead no CRM
+ * 3. Salvar lead no Supabase (CRM)
+ * 4. Envio de e-mail via SMTP
+ * 5. [FUTURO] Enviar para webhook n8n
  */
 export async function POST(request: Request) {
   try {
@@ -33,6 +34,23 @@ export async function POST(request: Request) {
       return NextResponse.json(response, { status: 400 })
     }
 
+    // Salvar lead no Supabase
+    const leadResult = await createLead({
+      name: result.data.name,
+      email: result.data.email,
+      phone: result.data.phone,
+      company: result.data.company,
+      employees: result.data.employees,
+      message: result.data.message,
+      source_page: 'contato',
+      source_channel: 'form',
+    })
+
+    if (!leadResult.success) {
+      console.error('[api/contact] Erro ao salvar lead:', leadResult.error)
+      // NÃO bloqueia o fluxo - continua para enviar email
+    }
+
     // Envio do e-mail
     const emailResult = await sendContactEmail(result.data)
 
@@ -49,9 +67,6 @@ export async function POST(request: Request) {
 
     // [FUTURO] Enviar dados para webhook n8n
     // await sendToWebhook(result.data)
-
-    // [FUTURO] Criar lead no CRM
-    // await createCrmLead(result.data)
 
     const responseContent: ContactApiResponse = {
       success: true,
