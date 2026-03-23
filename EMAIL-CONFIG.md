@@ -14,10 +14,7 @@ CONTACT_EMAIL=comercial@4core.site
 
 ## Configurar no Vercel (Produção)
 
-1. Acesse o [Vercel Dashboard](https://vercel.com/dashboard)
-2. Selecione o projeto **4Core_Site**
-3. Vá em **Settings** > **Environment Variables**
-4. Adicione as seguintes variáveis:
+### Variáveis SMTP (obrigatórias):
 
 | Nome | Valor |
 |------|-------|
@@ -27,8 +24,26 @@ CONTACT_EMAIL=comercial@4core.site
 | `SMTP_PASS` | `4C0R3@senha2026` |
 | `CONTACT_EMAIL` | `comercial@4core.site` |
 
-5. Clique em **Save**
-6. Faça um novo deploy (Deployments > ... > Redeploy)
+### Variáveis Supabase (para salvar leads):
+
+**IMPORTANTE**: Use apenas variáveis server-side (sem `NEXT_PUBLIC_`) para evitar alertas do Vercel.
+
+| Nome | Valor | Onde pegar |
+|------|-------|------------|
+| `SUPABASE_URL` | `https://uesqdbaxhnblefrtjtae.supabase.co` | Supabase Dashboard > Settings > API > Project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | `eyJ...` (chave longa) | Supabase Dashboard > Settings > API > service_role key |
+
+**NÃO precisa** da `ANON_KEY` - usamos apenas a `SERVICE_ROLE_KEY` no backend.
+
+### Como adicionar no Vercel:
+
+1. Acesse: https://vercel.com/dashboard
+2. Selecione o projeto **4Core_Site**
+3. Vá em **Settings** > **Environment Variables**
+4. Clique em **Add New**
+5. Adicione cada variável (nome e valor)
+6. Clique em **Save**
+7. Após adicionar todas, vá em **Deployments** > ... > **Redeploy**
 
 ## Formato do e-mail enviado
 
