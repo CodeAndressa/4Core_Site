@@ -88,8 +88,8 @@ export function CTA() {
                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                  className="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-premium border border-border-light"
                >
-                  <span className="block text-4xl font-black text-brand-vibrant leading-none mb-2">98%</span>
-                  <span className="text-xs font-bold text-brand-deep uppercase tracking-widest leading-tight block">Precisão de <br />fechamento</span>
+                  <span className="block text-4xl font-black text-brand-vibrant leading-none mb-2">100%</span>
+                  <span className="text-xs font-bold text-brand-deep uppercase tracking-widest leading-tight block">Conformidade <br />garantida</span>
                </motion.div>
             </motion.div>
           </div>
