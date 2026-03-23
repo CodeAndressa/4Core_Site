@@ -1,6 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -25,8 +27,10 @@ const faqs = [
 ]
 
 export function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
   return (
-    <Section variant="gray" id="faq">
+    <Section variant="white" id="faq">
       <Container>
         <motion.div
            initial={{ opacity: 0, y: 20 }}
@@ -36,30 +40,52 @@ export function FAQ() {
         >
           <SectionHeading
             subtitle="Dúvidas frequentes"
-            title="Perguntas comuns."
+            title="Perguntas comuns"
             description="Respostas diretas sobre como blindamos e otimizamos sua operação de ponto."
             centered
-            className="mb-16 lg:mb-24"
+            className="mb-12 lg:mb-16"
           />
         </motion.div>
         
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-3xl mx-auto">
           {faqs.map((faq, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group p-8 lg:p-10 bg-white rounded-3xl border border-black/[0.03] hover:shadow-premium transition-all duration-300"
+              className="border-b border-gray-200 last:border-b-0"
             >
-              <h3 className="text-xl lg:text-2xl font-bold text-brand-deep mb-4 flex items-start gap-4">
-                <span className="text-brand-vibrant block pt-0.5 select-none font-black">?</span>
-                {faq.q}
-              </h3>
-              <p className="text-text-secondary text-base lg:text-lg leading-relaxed pl-8 lg:pl-10 font-medium">
-                {faq.a}
-              </p>
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="w-full py-6 flex items-center justify-between gap-4 text-left group hover:opacity-70 transition-opacity"
+              >
+                <h3 className="text-lg lg:text-xl font-semibold text-brand-deep pr-4">
+                  {faq.q}
+                </h3>
+                <ChevronDown 
+                  className={`w-5 h-5 text-brand-vibrant flex-shrink-0 transition-transform duration-300 ${
+                    openIndex === i ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              
+              <AnimatePresence initial={false}>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pb-6 text-base text-gray-600 leading-relaxed">
+                      {faq.a}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
@@ -67,4 +93,3 @@ export function FAQ() {
     </Section>
   )
 }
-
