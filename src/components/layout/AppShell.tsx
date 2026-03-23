@@ -5,13 +5,10 @@ import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { cn } from '@/lib/utils'
 
 const WhatsAppButton = dynamic(
   () => import('@/components/layout/WhatsAppButton').then((mod) => mod.WhatsAppButton),
-  { ssr: false }
-)
-const AdminButton = dynamic(
-  () => import('@/components/ui/AdminButton').then((mod) => mod.AdminButton),
   { ssr: false }
 )
 const Chatbot = dynamic(() => import('@/components/ui/Chatbot').then((mod) => mod.Chatbot), {
@@ -25,6 +22,7 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const isAdminRoute = pathname?.startsWith('/admin')
+  const isHomeRoute = pathname === '/'
   const [showFloatingUi, setShowFloatingUi] = useState(false)
 
   useEffect(() => {
@@ -55,10 +53,9 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <>
       <Header />
-      <main className="flex-1 pt-[72px]">{children}</main>
+      <main className={cn('flex-1', isHomeRoute ? 'pt-0' : 'pt-[86px]')}>{children}</main>
       <Footer />
       {showFloatingUi && <WhatsAppButton />}
-      {showFloatingUi && <AdminButton />}
       {showFloatingUi && <Chatbot />}
     </>
   )

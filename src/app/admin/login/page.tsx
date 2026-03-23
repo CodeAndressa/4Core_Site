@@ -27,7 +27,7 @@ export default function LoginPage() {
       })
 
       if (loginError) {
-        setError('Credenciais invalidas')
+        setError('Credenciais inválidas')
         return
       }
 
@@ -44,7 +44,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-surface-gray to-brand-light/40 px-4">
       <Card className="w-full max-w-md" padding="lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-brand-deep mb-2">4Core Admin</h1>
+          <h1 className="text-3xl font-bold text-brand-deep mb-2">Área admin 4Core</h1>
           <p className="text-text-secondary">Acesso restrito</p>
         </div>
 

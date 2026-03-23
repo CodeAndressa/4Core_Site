@@ -50,9 +50,9 @@ export function ContactForm() {
         <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-8">
           ✓
         </div>
-        <h3 className="text-3xl font-semibold text-brand-deep mb-4">Solicitacao Enviada!</h3>
+        <h3 className="text-3xl font-semibold text-brand-deep mb-4">Solicitação enviada!</h3>
         <p className="text-text-secondary text-lg mb-10 leading-relaxed">
-          Recebemos sua mensagem! Em breve entraremos em contato para darmos o proximo passo.
+          Recebemos sua mensagem. Em breve, entraremos em contato para o próximo passo.
         </p>
         <Button onClick={handleNewContact} variant="outline" size="lg">
           Enviar outra mensagem
@@ -67,11 +67,11 @@ export function ContactForm() {
 
       <form onSubmit={handleFormSubmit(onSubmit)} className="space-y-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField id="name" label="Nome Completo" required error={getFieldError('name')}>
-            <TextField id="name" placeholder="Ex: Joao da Silva" hasError={Boolean(getFieldError('name'))} {...register('name')} />
+          <FormField id="name" label="Nome completo" required error={getFieldError('name')}>
+            <TextField id="name" placeholder="Ex: João da Silva" hasError={Boolean(getFieldError('name'))} {...register('name')} />
           </FormField>
 
-          <FormField id="email" label="E-mail Corporativo" required error={getFieldError('email')}>
+          <FormField id="email" label="E-mail corporativo" required error={getFieldError('email')}>
             <TextField
               id="email"
               type="email"
@@ -95,14 +95,14 @@ export function ContactForm() {
           <FormField id="company" label="Empresa" error={getFieldError('company')}>
             <TextField
               id="company"
-              placeholder="Nome da sua organizacao"
+              placeholder="Nome da sua organização"
               hasError={Boolean(getFieldError('company'))}
               {...register('company')}
             />
           </FormField>
         </div>
 
-        <FormField id="employees" label="Numero de Funcionarios" error={getFieldError('employees')}>
+        <FormField id="employees" label="Número de funcionários" error={getFieldError('employees')}>
           <SelectField id="employees" hasError={Boolean(getFieldError('employees'))} {...register('employees')}>
             <option value="">Selecione uma faixa...</option>
             {EMPLOYEE_RANGES.map((range) => (
@@ -117,7 +117,7 @@ export function ContactForm() {
           <TextAreaField
             id="message"
             rows={4}
-            placeholder="Conte-nos brevemente sobre o seu cenario de controle de ponto."
+            placeholder="Conte-nos brevemente sobre o seu cenário de controle de ponto."
             hasError={Boolean(getFieldError('message'))}
             {...register('message')}
           />
@@ -131,10 +131,10 @@ export function ContactForm() {
 
         <div className="pt-2">
           <Button type="submit" size="lg" fullWidth isLoading={status === 'submitting'}>
-            Fale com um especialista 4Core agora mesmo
+            Fale com um especialista da 4Core
           </Button>
           <p className="mt-4 text-center text-xs text-text-muted">
-            Ao clicar em solicitar, voce concorda com nossa politica de processamento de dados para fins comerciais.
+            Ao clicar em solicitar, você concorda com nossa política de processamento de dados para fins comerciais.
           </p>
         </div>
       </form>

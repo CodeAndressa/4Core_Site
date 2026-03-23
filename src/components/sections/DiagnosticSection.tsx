@@ -25,7 +25,7 @@ interface DiagnosticSectionProps {
 
 const questions = {
   employees: {
-    question: 'Quantos funcionarios sua empresa tem?',
+    question: 'Quantos funcionários sua empresa tem?',
     options: [
       { id: '1-20', label: '1 a 20', icon: <Users className="w-5 h-5" /> },
       { id: '21-50', label: '21 a 50', icon: <Users className="w-5 h-5" /> },
@@ -37,14 +37,14 @@ const questions = {
     question: 'Qual o modelo de trabalho?',
     options: [
       { id: 'presencial', label: '100% Presencial', icon: <Building2 className="w-5 h-5" /> },
-      { id: 'hibrido', label: 'Hibrido', icon: <Clock className="w-5 h-5" /> },
+      { id: 'hibrido', label: 'Híbrido', icon: <Clock className="w-5 h-5" /> },
       { id: 'remoto', label: 'Remoto/Externo', icon: <Clock className="w-5 h-5" /> },
     ],
   },
   currentSystem: {
-    question: 'Voce ja tem sistema de ponto?',
+    question: 'Você já tem sistema de ponto?',
     options: [
-      { id: 'nao', label: 'Nao tenho', icon: <AlertTriangle className="w-5 h-5" /> },
+      { id: 'nao', label: 'Não tenho', icon: <AlertTriangle className="w-5 h-5" /> },
       { id: 'manual', label: 'Controle manual', icon: <AlertTriangle className="w-5 h-5" /> },
       { id: 'sim', label: 'Sim, mas com problemas', icon: <AlertTriangle className="w-5 h-5" /> },
       { id: 'sim-ok', label: 'Sim, funciona bem', icon: <CheckCircle2 className="w-5 h-5" /> },
@@ -123,20 +123,20 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
       return {
         title: 'Recomendamos: TopPonto Mobile + Web',
         description:
-          'Para equipes remotas e hibridas, voce precisa de controle via app com geolocalizacao + sistema web para gestao.',
+          'Para equipes remotas e híbridas, você precisa de controle via app com geolocalização + sistema web para gestão.',
         risk:
-          'Risco Alto: Sem controle adequado de jornada remota, voce esta exposto a processos trabalhistas.',
+          'Risco alto: sem controle adequado de jornada remota, você está exposto a processos trabalhistas.',
         cta: 'Falar com especialista em ponto remoto',
       }
     }
 
     if (employees === '200+') {
       return {
-        title: 'Recomendamos: Solucao Enterprise Completa',
+        title: 'Recomendamos: Solução enterprise completa',
         description:
-          'Para grandes empresas, voce precisa de REP-P Facial + Software Web + Integracao ERP.',
+          'Para grandes empresas, você precisa de REP-P Facial + Software Web + Integração ERP.',
         risk:
-          'Risco Critico: Volume alto de funcionarios exige conformidade rigorosa e automacao total.',
+          'Risco crítico: volume alto de funcionários exige conformidade rigorosa e automação total.',
         cta: 'Solicitar consultoria enterprise',
       }
     }
@@ -145,9 +145,9 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
       return {
         title: 'Recomendamos: REP-P Facial + TopPonto Web',
         description:
-          'Voce precisa urgentemente de um sistema certificado. Controle manual expoe sua empresa a riscos graves.',
+          'Você precisa urgentemente de um sistema certificado. Controle manual expõe sua empresa a riscos graves.',
         risk:
-          'Risco Critico: Sem sistema certificado, voce esta vulneravel a multas de ate R$ 6 mil por funcionario.',
+          'Risco crítico: sem sistema certificado, você está vulnerável a multas de até R$ 6 mil por funcionário.',
         cta: 'Implementar sistema certificado agora',
       }
     }
@@ -155,9 +155,9 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
     return {
       title: 'Recomendamos: Auditoria de Conformidade',
       description:
-        'Mesmo com sistema, e essencial verificar se esta 100% em conformidade com a Portaria 671.',
+        'Mesmo com sistema, é essencial verificar se está 100% em conformidade com a Portaria 671.',
       risk:
-        'Risco Medio: Sistemas mal configurados sao a principal causa de processos trabalhistas.',
+        'Risco médio: sistemas mal configurados são a principal causa de processos trabalhistas.',
       cta: 'Solicitar auditoria gratuita',
     }
   }
@@ -196,7 +196,7 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
                 <button
                   onClick={handleCloseDiagnostic}
                   className="absolute top-5 right-5 z-20 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-brand-vibrant/25 bg-white/90 text-brand-deep hover:bg-white transition-colors"
-                  aria-label="Fechar diagnostico"
+                  aria-label="Fechar diagnóstico"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -209,10 +209,10 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
                     className="text-center mb-8 lg:mb-10"
                   >
                     <h2 id="diagnostic-modal-title" className="text-3xl lg:text-4xl font-bold text-brand-deep mb-3">
-                      Diagnostico Rapido: Qual solucao e ideal para voce?
+                      Diagnóstico rápido: qual solução é ideal para você?
                     </h2>
                     <p className="text-base lg:text-lg text-gray-600">
-                      Responda 3 perguntas e descubra a solucao certa para sua empresa
+                      Responda 3 perguntas e descubra a solução certa para sua empresa.
                     </p>
                   </motion.div>
 
@@ -287,7 +287,7 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
                         <div className="flex items-start gap-3">
                           <AlertTriangle className="w-6 h-6 text-red-600 shrink-0 mt-1" />
                           <div>
-                            <p className="font-bold text-red-900 mb-1">Atencao ao Risco:</p>
+                            <p className="font-bold text-red-900 mb-1">Atenção ao risco:</p>
                             <p className="text-red-800">{recommendation.risk}</p>
                           </div>
                         </div>
@@ -310,7 +310,7 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
                           size="lg"
                           className="px-8 py-6 text-base font-bold"
                         >
-                          Refazer diagnostico
+                          Refazer diagnóstico
                         </Button>
                       </div>
                     </motion.div>

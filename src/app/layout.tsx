@@ -10,14 +10,13 @@ const inter = Inter({
   display: 'swap',
 })
 
-
 export const metadata: Metadata = {
   title: {
-    default: '4Core — Especialista em Controle de Ponto e Acesso',
-    template: '%s — 4Core',
+    default: '4Core - Especialista em controle de ponto e acesso',
+    template: '%s - 4Core',
   },
   description:
-    'Relógio de ponto + software: a solução completa para controle de jornada e acesso. Consultoria especializada para RH e Departamento Pessoal.',
+    'Relógio de ponto + software: a solução completa para controle de jornada e acesso. Consultoria especializada para RH e departamento pessoal.',
   keywords: [
     'controle de ponto',
     'relógio de ponto',
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     siteName: '4Core',
-    title: '4Core — Especialista em Controle de Ponto e Acesso',
+    title: '4Core - Especialista em controle de ponto e acesso',
     description:
       'Relógio de ponto + software: a solução completa para controle de jornada e acesso. Consultoria especializada para RH e DP.',
   },

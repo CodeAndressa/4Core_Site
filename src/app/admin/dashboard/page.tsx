@@ -20,7 +20,7 @@ export default function DashboardPage() {
     start: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
     end: new Date().toISOString(),
   })
-  
+
   const router = useRouter()
   const supabase = createClient()
 
@@ -35,7 +35,9 @@ export default function DashboardPage() {
   }, [dateRange])
 
   const checkAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) {
       router.push('/admin/login')
     }
@@ -60,7 +62,7 @@ export default function DashboardPage() {
       }
 
       setData(result.data)
-    } catch (err) {
+    } catch {
       setError('Erro ao carregar dashboard')
     } finally {
       setLoading(false)
@@ -91,7 +93,6 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white p-8 rounded-xl shadow-lg max-w-md">
-          <div className="text-red-600 text-center mb-4">❌</div>
           <h2 className="text-xl font-bold text-gray-900 text-center mb-2">Erro</h2>
           <p className="text-gray-600 text-center mb-4">{error}</p>
           <button
@@ -107,12 +108,10 @@ export default function DashboardPage() {
 
   if (!data) return null
 
-  // Verificar se há dados
   const hasData = data.kpis.totalPageviews > 0 || data.kpis.uniqueVisitors > 0
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
@@ -132,17 +131,13 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Date Filter */}
         <div className="mb-6">
           <DateFilter onFilterChange={handleDateFilterChange} />
         </div>
 
         {!hasData ? (
-          /* Mensagem de sem dados */
           <div className="bg-white rounded-xl p-12 text-center shadow-sm border border-gray-200">
-            <div className="text-6xl mb-4">📊</div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Nenhum dado encontrado</h2>
             <p className="text-gray-600 mb-6">
               Não há eventos registrados no período selecionado.
@@ -152,28 +147,24 @@ export default function DashboardPage() {
                 <strong>Como gerar dados:</strong>
               </p>
               <ul className="text-sm text-blue-700 text-left space-y-1">
-                <li>• Navegue pelas páginas do site</li>
-                <li>• Clique no botão WhatsApp</li>
-                <li>• Envie o formulário de contato</li>
-                <li>• Tente selecionar "Todos os dados" no filtro acima</li>
+                <li>- Navegue pelas páginas do site</li>
+                <li>- Clique no botão WhatsApp</li>
+                <li>- Envie o formulário de contato</li>
+                <li>- Selecione &quot;Todos os dados&quot; no filtro acima</li>
               </ul>
             </div>
           </div>
         ) : (
-          /* Dashboard com dados */
           <>
-            {/* KPIs */}
             <div className="mb-8">
               <KPICards metrics={data.kpis} />
             </div>
 
-            {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               <TrafficChart data={data.traffic} />
               <ConversionChart data={data.conversions} />
             </div>
 
-            {/* Tables and Stats */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
               <div className="lg:col-span-2">
                 <PagesTable data={data.pages} />
@@ -183,7 +174,6 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Sources */}
             <div className="mb-8">
               <SourcesTable data={data.sources} />
             </div>

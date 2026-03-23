@@ -114,7 +114,7 @@ export function LeadCaptureModal({
                 >
                   <X className="w-5 h-5 text-white" />
                 </button>
-                <h3 className="text-xl font-bold text-white pr-8">Receba sua recomendacao completa</h3>
+                <h3 className="text-xl font-bold text-white pr-8">Receba sua recomendação completa</h3>
               </div>
 
               <div className="p-8">
@@ -183,12 +183,12 @@ export function LeadCaptureModal({
                             Enviando...
                           </>
                         ) : (
-                          'Receber recomendacao'
+                          'Receber recomendação'
                         )}
                       </Button>
 
                       <p className="text-xs text-gray-500 text-center">
-                        Seus dados sao protegidos e nunca serao compartilhados.
+                        Seus dados são protegidos e nunca serão compartilhados.
                       </p>
                     </form>
                   </motion.div>
@@ -205,7 +205,7 @@ export function LeadCaptureModal({
                     </div>
                     <h4 className="text-xl font-bold text-brand-deep mb-2">Perfeito!</h4>
                     <p className="text-gray-600 mb-4">
-                      Sua recomendacao foi enviada. Entraremos em contato em breve via WhatsApp ou e-mail.
+                      Sua recomendação foi enviada. Entraremos em contato em breve via WhatsApp ou e-mail.
                     </p>
                     <p className="text-sm text-gray-500">Redirecionando...</p>
                   </motion.div>

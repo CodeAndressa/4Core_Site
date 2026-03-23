@@ -47,38 +47,38 @@ const SYSTEM_PROMPT = `Você é um SDR (Sales Development Representative) digita
 
 ## SEU PAPEL:
 - Atuar como pré-vendedor consultivo
-- Fazer perguntas estratégicas UMA DE CADA VEZ
-- Recomendar soluções APENAS após entender o cenário
-- Capturar dados de contato (email ou telefone)
+- Fazer perguntas estratégicas, uma de cada vez
+- Recomendar soluções apenas após entender o cenário
+- Capturar dados de contato (e-mail ou telefone)
 
 ## PERSONALIDADE:
-- Tom: Amigável e profissional
-- Estilo: Conversacional e direto
-- Respostas: CURTAS (máximo 2-3 linhas)
+- Tom: amigável e profissional
+- Estilo: conversacional e direto
+- Respostas: curtas (máximo de 2 a 3 linhas)
 
 ## REGRAS OBRIGATÓRIAS:
-1. NUNCA invente informações sobre produtos ou preços
-2. Faça APENAS UMA pergunta por vez
-3. AGUARDE a resposta antes de sugerir soluções
+1. Nunca invente informações sobre produtos ou preços
+2. Faça apenas uma pergunta por vez
+3. Aguarde a resposta antes de sugerir soluções
 4. Use linguagem simples e clara
-5. Respostas CURTAS e objetivas
-6. NÃO liste múltiplas opções de uma vez
+5. Priorize respostas curtas e objetivas
+6. Não liste múltiplas opções de uma vez
 7. Se o usuário fizer uma pergunta direta sobre uma solução, responda primeiro com base no contexto disponível e só depois siga qualificando
 
 ## SOLUÇÕES DISPONÍVEIS:
-1. REP-P Facial - Relógio de ponto com reconhecimento facial
-2. TopPonto Web - Software em nuvem para gestão de jornada
-3. TopPonto Mobile - App para equipes externas/home office
-4. Catracas - Controle de acesso físico
-5. Terminais Faciais - Controle de áreas restritas
-6. Bastão de Ronda - Controle de rondas de segurança
+1. REP-P Facial - relógio de ponto com reconhecimento facial
+2. TopPonto Web - software em nuvem para gestão de jornada
+3. TopPonto Mobile - app para equipes externas e home office
+4. Catracas - controle de acesso físico
+5. Terminais faciais - controle de áreas restritas
+6. Bastão de ronda - controle de rondas de segurança
 
 ## CAPTURA DE LEAD:
-- Momento: Após demonstrar interesse em solução específica
+- Momento: após demonstrar interesse em uma solução específica
 - Abordagem: "Posso te enviar mais detalhes por e-mail?"
 - Se recusar: "Sem problemas! Prefere WhatsApp?"
 
-Responda de forma natural, conversacional e SEMPRE aguarde a resposta antes de avançar.`
+Responda de forma natural, conversacional e sempre aguarde a resposta antes de avançar.`
 
 function cloneConversationState(state: ConversationState): ConversationState {
   return {
@@ -206,7 +206,7 @@ export class ChatbotService {
       const score = calculateQualificationScore(state.qualificationData)
       context += `Score: ${score}/100\n`
       if (score > 70 && !state.leadCaptured) {
-        context += 'AÇÃO: Lead quente. Capture email ou WhatsApp.\n'
+        context += 'AÇÃO: Lead quente. Capture e-mail ou WhatsApp.\n'
       }
       context += '\n'
     }
@@ -216,7 +216,7 @@ export class ChatbotService {
     } else if (dataCount < 3) {
       context += 'INSTRUÇÃO: Continue qualificando com uma pergunta por vez.\n'
     } else if (!state.leadCaptured) {
-      context += 'INSTRUÇÃO: Recomende a solução mais adequada e peça email ou WhatsApp.\n'
+      context += 'INSTRUÇÃO: Recomende a solução mais adequada e peça e-mail ou WhatsApp.\n'
     } else {
       context += 'INSTRUÇÃO: Lead capturado. Ofereça o próximo passo.\n'
     }
@@ -250,9 +250,9 @@ export class ChatbotService {
   private static resolveInformationalSolution(userMessage: string, solutions: Solution[]) {
     const directlyMentionedSolution = this.findSolutionByDirectMention(userMessage)
     const candidateSolutions =
-      directlyMentionedSolution ?
-        [directlyMentionedSolution, ...solutions.filter((solution) => solution.id !== directlyMentionedSolution.id)]
-      : solutions
+      directlyMentionedSolution
+        ? [directlyMentionedSolution, ...solutions.filter((solution) => solution.id !== directlyMentionedSolution.id)]
+        : solutions
 
     if (candidateSolutions.length === 0) return null
 
@@ -355,8 +355,8 @@ export class ChatbotService {
     const data: Record<string, string> = {}
     const messageLower = message.toLowerCase()
 
-    if (messageLower.match(/\d+\s*(?:funcionários|colaboradores|pessoas)/)) {
-      const numberMatch = messageLower.match(/(\d+)\s*(?:funcionários|colaboradores|pessoas)/)
+    if (messageLower.match(/\d+\s*(?:funcionários|funcionarios|colaboradores|pessoas)/)) {
+      const numberMatch = messageLower.match(/(\d+)\s*(?:funcionários|funcionarios|colaboradores|pessoas)/)
       if (numberMatch) {
         const num = parseInt(numberMatch[1], 10)
         if (num <= 20) data.company_size = '1-20'
@@ -449,7 +449,7 @@ export class ChatbotService {
         .map((id) => knowledgeBase.solutions.find((solution) => solution.id === id)?.name)
         .filter(Boolean)
         .join(', ')
-      parts.push(`Me interessei em: ${solutionNames}`)
+      parts.push(`Tenho interesse em: ${solutionNames}`)
     }
 
     if (state.qualificationData.company_size) {

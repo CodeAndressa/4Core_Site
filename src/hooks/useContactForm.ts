@@ -91,7 +91,7 @@ export function useContactForm(): UseContactFormReturn {
       }
     } catch {
       setStatus('error')
-      setServerMessage('Erro de conexao. Verifique sua internet e tente novamente.')
+      setServerMessage('Erro de conexão. Verifique sua internet e tente novamente.')
     }
   }
 

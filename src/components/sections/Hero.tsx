@@ -15,14 +15,14 @@ interface HeroProps {
 export function Hero({ onOpenDiagnostic }: HeroProps) {
   const risks = [
     { icon: <AlertTriangle className="w-5 h-5" />, text: 'Processos trabalhistas por ponto irregular' },
-    { icon: <AlertTriangle className="w-5 h-5" />, text: 'Multas de ate R$ 6 mil por funcionario' },
+    { icon: <AlertTriangle className="w-5 h-5" />, text: 'Multas de até R$ 6 mil por funcionário' },
     { icon: <AlertTriangle className="w-5 h-5" />, text: 'Dados inconsistentes gerando retrabalho' },
   ]
 
   const solutions = [
     'Conformidade 100% com Portaria 671',
-    'Implementacao tecnica correta',
-    'Blindagem juridica total',
+    'Implementação técnica correta',
+    'Blindagem jurídica total',
   ]
 
   return (
@@ -40,7 +40,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="primary" className="mb-6 py-2 px-4 rounded-lg bg-white/10 text-brand-lilac border border-white/15">
+            <Badge variant="primary" className="mb-6 py-2 px-4 rounded-lg bg-white/10 text-brand-light border border-white/15">
               <span className="flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4" />
                 Seu controle de ponto pode estar te expondo a riscos
@@ -49,20 +49,20 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.05] tracking-tight">
               Evite processos trabalhistas com{' '}
-              <span className="text-brand-lilac">controle de ponto em conformidade</span>
+              <span className="text-brand-vibrant">controle de ponto em conformidade</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed font-medium max-w-2xl">
-              Relogio de ponto + software + implementacao correta. A 4Core garante conformidade com a Portaria 671
+              Relógio de ponto + software + implementação correta. A 4Core garante conformidade com a Portaria 671
               e elimina riscos trabalhistas da sua empresa.
             </p>
 
             <div className="bg-white/8 border border-white/15 backdrop-blur-sm rounded-2xl p-6 mb-8">
-              <p className="text-sm font-bold text-brand-lilac mb-4 uppercase tracking-wide">Riscos que voce evita:</p>
+              <p className="text-sm font-bold text-brand-vibrant mb-4 uppercase tracking-wide">Riscos que você evita:</p>
               <ul className="space-y-3">
                 {risks.map((risk, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-white/85 text-sm font-medium">
-                    <span className="text-brand-lilac">{risk.icon}</span>
+                    <span className="text-brand-vibrant">{risk.icon}</span>
                     <span>{risk.text}</span>
                   </li>
                 ))}
@@ -78,7 +78,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
                   transition={{ delay: 0.28 + idx * 0.1 }}
                   className="flex items-center gap-3 text-white/90 font-semibold"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-brand-lilac shrink-0" />
+                  <CheckCircle2 className="w-5 h-5 text-brand-vibrant shrink-0" />
                   {benefit}
                 </motion.li>
               ))}
@@ -92,20 +92,20 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
               <Button
                 onClick={onOpenDiagnostic}
                 size="lg"
-                className="px-8 py-6 text-base font-black bg-gradient-to-r from-brand-lilac via-white to-brand-lilac text-brand-nebula hover:from-white hover:to-brand-lilac border border-white/35 shadow-[0_18px_42px_-18px_rgba(223,204,255,0.95)] cta-diagnostic"
+                className="px-8 py-6 text-base font-black bg-gradient-to-r from-brand-lilac via-white to-brand-lilac text-brand-nebula hover:from-white hover:to-brand-lilac border border-white/35 shadow-[0_18px_42px_-18px_rgba(123,0,255,0.9)] cta-diagnostic"
               >
                 <Sparkles className="mr-2 w-5 h-5" />
-                Fazer diagnostico rapido
+                Fazer diagnóstico rápido
               </Button>
             </div>
 
             <div className="mt-8 flex items-center gap-6 text-sm text-white/75">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-brand-lilac" />
+                <ShieldCheck className="w-5 h-5 text-brand-vibrant" />
                 <span className="font-semibold">100% Conformidade</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-brand-lilac" />
+                <CheckCircle2 className="w-5 h-5 text-brand-vibrant" />
                 <span className="font-semibold">Certificado MTE</span>
               </div>
             </div>
