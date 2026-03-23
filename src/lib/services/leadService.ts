@@ -20,11 +20,6 @@ import type { CreateLeadInput, Lead, LeadServiceResponse } from '@/types/lead'
 export async function createLead(
   input: CreateLeadInput
 ): Promise<LeadServiceResponse> {
-  // Debug: verificar se Supabase está configurado
-  console.log('[leadService] supabaseAdmin:', supabaseAdmin ? 'CONFIGURADO' : 'NÃO CONFIGURADO')
-  console.log('[leadService] SUPABASE_URL:', process.env.SUPABASE_URL ? 'PRESENTE' : 'AUSENTE')
-  console.log('[leadService] SUPABASE_SERVICE_ROLE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'PRESENTE' : 'AUSENTE')
-  
   // Se Supabase não estiver configurado, retorna erro
   if (!supabaseAdmin) {
     console.error('[leadService] Supabase não configurado - variáveis de ambiente ausentes')
@@ -51,8 +46,6 @@ export async function createLead(
       status: 'novo',
     }
 
-    console.log('[leadService] Tentando inserir lead:', { email: leadData.email, name: leadData.name })
-
     // Inserir no Supabase
     const { data, error } = await supabaseAdmin
       .from('leads')
@@ -61,10 +54,7 @@ export async function createLead(
       .single()
 
     if (error) {
-      console.error('[leadService] Erro ao inserir lead:', error)
-      console.error('[leadService] Error code:', error.code)
-      console.error('[leadService] Error message:', error.message)
-      console.error('[leadService] Error details:', error.details)
+      console.error('[leadService] Erro ao inserir lead:', error.message)
       
       // Tratamento de erro de duplicata
       if (error.code === '23505') {
