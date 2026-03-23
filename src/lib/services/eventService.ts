@@ -74,14 +74,21 @@ export class EventService {
         .single()
 
       if (error) {
+        // Se for erro de política de segurança RLS (chave de serviço no Vercel configurada como chave anon)
+        if (error.code === '42501') {
+          console.warn('⚠️ Alerta: Evento de analytics bloqueado por proteção RLS do Supabase.')
+          console.warn('👉 Para corrigir definitivamente: Verifique a variável SUPABASE_SERVICE_ROLE_KEY no Vercel (garanta que usou a "service_role key" e NÃO a chave "anon").')
+          return { success: false, error: 'Evento bloqueado por RLS (Variável Vercel Incorreta)' } // Retorna sem travar tudo
+        }
+
         console.error('Erro ao criar evento:', error)
         return { success: false, error: error.message }
       }
 
       return { success: true, data: mapStoredEvent(data as Event) }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao criar evento:', error)
-      return { success: false, error: 'Erro interno ao criar evento' }
+      return { success: false, error: error.message || 'Erro interno ao criar evento' }
     }
   }
 
