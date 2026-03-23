@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 import { contactFormSchema } from '@/lib/validators'
 import type { ContactFormValues } from '@/lib/validators'
 import type { ContactApiResponse } from '@/types/contact'
+import { trackFormSubmit, trackFormView } from '@/lib/tracking/trackEvent'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -31,6 +33,7 @@ export function useContactForm(): UseContactFormReturn {
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<keyof ContactFormValues, string>>
   >({})
+  const pathname = usePathname()
 
   const reset = useCallback(() => {
     setStatus('idle')
@@ -77,6 +80,11 @@ export function useContactForm(): UseContactFormReturn {
       if (result.success) {
         setStatus('success')
         setServerMessage(result.message)
+        
+        // Track form submit
+        if (pathname) {
+          trackFormSubmit(pathname)
+        }
       } else {
         setStatus('error')
         setServerMessage(result.message)

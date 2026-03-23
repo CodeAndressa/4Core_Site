@@ -44,6 +44,8 @@ export const metadata: Metadata = {
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
+import { AdminButton } from '@/components/ui/AdminButton'
+import { PageViewTracker } from '@/components/tracking/PageViewTracker'
 
 export default function RootLayout({
   children,
@@ -53,10 +55,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
+        <PageViewTracker />
         <Header />
         <main className="flex-1 pt-16">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <AdminButton />
       </body>
     </html>
   )

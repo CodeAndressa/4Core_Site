@@ -1,6 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
+import { trackWhatsAppClick } from '@/lib/tracking/trackEvent'
 
 interface WhatsAppFloatProps {
   href: string
@@ -18,11 +20,20 @@ function WhatsAppIcon({ size = 22 }: { size?: number }) {
 }
 
 export function WhatsAppFloat({ href, label, color, index }: WhatsAppFloatProps) {
+  const pathname = usePathname()
+
+  const handleClick = () => {
+    if (pathname) {
+      trackWhatsAppClick(pathname)
+    }
+  }
+
   return (
     <motion.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       initial={{ opacity: 0, scale: 0.5, x: 40 }}
       animate={{ opacity: 1, scale: 1, x: 0 }}
       transition={{ delay: index * 0.12, type: 'spring', stiffness: 260, damping: 20 }}
