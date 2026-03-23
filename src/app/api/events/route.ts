@@ -1,45 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { EventService } from '@/lib/services/eventService'
-import type { TrackEventInput } from '@/types/analytics'
-
-/**
- * POST /api/events
- * 
- * Endpoint público para capturar eventos do site
- * Usado pela função trackEvent() do frontend
- */
+import { enforceRateLimit, requireAuthenticatedUser, validateTrustedOrigin } from '@/lib/apiSecurity'
+import { trackEventSchema } from '@/lib/validators'
 
 export async function POST(request: NextRequest) {
+  const originCheck = validateTrustedOrigin(request)
+  if (!originCheck.ok) {
+    return originCheck.response
+  }
+
+  const rateLimit = enforceRateLimit(request, 'events:create', {
+    limit: 120,
+    windowMs: 60 * 1000,
+  })
+  if (!rateLimit.ok) {
+    return rateLimit.response
+  }
+
   try {
     const body = await request.json()
+    const parsedEvent = trackEventSchema.safeParse(body)
 
-    // Validar campos obrigatórios
-    if (!body.type || !body.page) {
+    if (!parsedEvent.success) {
       return NextResponse.json(
-        { success: false, error: 'Campos obrigatórios: type, page' },
+        { success: false, error: parsedEvent.error.issues[0]?.message || 'Evento inválido' },
         { status: 400 }
       )
     }
 
-    // Validar tipo de evento
-    const validTypes = ['page_view', 'whatsapp_click', 'form_submit', 'form_view', 'cta_click']
-    if (!validTypes.includes(body.type)) {
-      return NextResponse.json(
-        { success: false, error: 'Tipo de evento inválido' },
-        { status: 400 }
-      )
-    }
-
-    // Criar evento
-    const result = await EventService.createEvent({
-      type: body.type,
-      page: body.page,
-      source: body.source,
-      referrer: body.referrer,
-      device: body.device,
-      session_id: body.session_id,
-      user_agent: body.user_agent,
-    })
+    const result = await EventService.createEvent(parsedEvent.data)
 
     if (!result.success) {
       return NextResponse.json(
@@ -48,7 +37,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    return NextResponse.json({ success: true, data: result.data })
+    return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Erro ao processar evento:', error)
     return NextResponse.json(
@@ -58,22 +47,21 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * GET /api/events
- * 
- * Endpoint protegido para listar eventos (admin)
- */
-
 export async function GET(request: NextRequest) {
+  const auth = await requireAuthenticatedUser()
+  if (!auth.ok) {
+    return auth.response
+  }
+
   try {
     const { searchParams } = new URL(request.url)
-    
+
     const filters = {
       startDate: searchParams.get('startDate') || undefined,
       endDate: searchParams.get('endDate') || undefined,
       type: searchParams.get('type') || undefined,
       page: searchParams.get('page') || undefined,
-      limit: searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 100,
+      limit: searchParams.get('limit') ? parseInt(searchParams.get('limit')!, 10) : 100,
     }
 
     const events = await EventService.getEvents(filters)

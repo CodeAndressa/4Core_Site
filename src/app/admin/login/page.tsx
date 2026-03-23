@@ -1,8 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { FormField, TextField } from '@/components/ui/form'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -18,19 +21,19 @@ export default function LoginPage() {
     setError('')
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: loginError } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
 
-      if (error) {
-        setError('Credenciais inválidas')
+      if (loginError) {
+        setError('Credenciais invalidas')
         return
       }
 
       router.push('/admin/dashboard')
       router.refresh()
-    } catch (err) {
+    } catch {
       setError('Erro ao fazer login')
     } finally {
       setLoading(false)
@@ -38,59 +41,47 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-purple-100">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-surface-gray to-brand-light/40 px-4">
+      <Card className="w-full max-w-md" padding="lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">4Core Admin</h1>
-          <p className="text-gray-600">Acesso restrito</p>
+          <h1 className="text-3xl font-bold text-brand-deep mb-2">4Core Admin</h1>
+          <p className="text-text-secondary">Acesso restrito</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              E-mail
-            </label>
-            <input
+        <form onSubmit={handleLogin} className="space-y-5">
+          <FormField label="E-mail" id="email" required>
+            <TextField
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
               placeholder="admin@4core.com.br"
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Senha
-            </label>
-            <input
+          <FormField label="Senha" id="password" required>
+            <TextField
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
-              placeholder="••••••••"
+              placeholder="********"
             />
-          </div>
+          </FormField>
 
           {error && (
-            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm border border-red-200">
               {error}
             </div>
           )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
-          >
+          <Button type="submit" fullWidth isLoading={loading} size="md">
             {loading ? 'Entrando...' : 'Entrar'}
-          </button>
+          </Button>
         </form>
-      </div>
+      </Card>
     </div>
   )
 }

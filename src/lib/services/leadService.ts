@@ -14,6 +14,14 @@ import type { CreateLeadInput, Lead, LeadServiceResponse } from '@/types/lead'
  * - Log de erros
  */
 
+function buildFallbackEmail() {
+  return `sem-email+${Date.now()}-${Math.random().toString(36).slice(2, 8)}@4core.local`
+}
+
+function buildFallbackPhone() {
+  return `SEM-WHATSAPP-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+}
+
 /**
  * Cria um novo lead no Supabase
  */
@@ -30,11 +38,14 @@ export async function createLead(
   }
 
   try {
+    const normalizedEmail = input.email?.trim().toLowerCase() || buildFallbackEmail()
+    const normalizedPhone = input.phone?.trim() || buildFallbackPhone()
+
     // Normalizar dados
     const leadData = {
       name: input.name.trim(),
-      email: input.email.trim().toLowerCase(),
-      phone: input.phone.trim(),
+      email: normalizedEmail,
+      phone: normalizedPhone,
       company: input.company?.trim() || null,
       employees: input.employees || null,
       message: input.message?.trim() || null,
@@ -43,6 +54,7 @@ export async function createLead(
       utm_source: input.utm_source || null,
       utm_medium: input.utm_medium || null,
       utm_campaign: input.utm_campaign || null,
+      interest: input.interest?.trim() || null,
       status: 'novo',
     }
 

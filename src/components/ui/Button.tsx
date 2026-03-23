@@ -32,11 +32,14 @@ export function Button({
   rel,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center rounded-md font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]'
+  const baseStyles =
+    'inline-flex items-center justify-center rounded-md font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] hover:-translate-y-0.5'
   
   const variants = {
-    primary: 'bg-brand-vibrant text-white hover:bg-brand-vibrant/90 focus:ring-brand-vibrant shadow-sm',
-    secondary: 'bg-brand-deep text-white hover:bg-brand-deep/90 focus:ring-brand-deep shadow-sm',
+    primary:
+      'bg-brand-vibrant text-white hover:bg-brand-vibrant/90 focus:ring-brand-vibrant shadow-sm hover:shadow-[0_18px_34px_-18px_rgba(123,0,255,0.9)]',
+    secondary:
+      'bg-brand-deep text-white hover:bg-brand-deep/90 focus:ring-brand-deep shadow-sm hover:shadow-[0_18px_34px_-20px_rgba(40,4,79,0.9)]',
     outline: 'border-2 border-brand-vibrant text-brand-vibrant hover:bg-brand-light/20 focus:ring-brand-vibrant',
     ghost: 'text-brand-deep hover:bg-brand-light/20 focus:ring-brand-light',
   }
@@ -84,8 +87,27 @@ export function Button({
   )
 
   if (href) {
+    const isExternalHref =
+      href.startsWith('http://') ||
+      href.startsWith('https://') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:')
+
+    if (isExternalHref) {
+      return (
+        <a
+          href={href}
+          className={combinedStyles}
+          target={target}
+          rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
+        >
+          {content}
+        </a>
+      )
+    }
+
     return (
-      <Link href={href} className={combinedStyles}>
+      <Link href={href} className={combinedStyles} target={target} rel={rel}>
         {content}
       </Link>
     )

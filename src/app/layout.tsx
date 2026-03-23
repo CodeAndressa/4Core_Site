@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { AppShell } from '@/components/layout/AppShell'
+import { PageViewTracker } from '@/components/tracking/PageViewTracker'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -44,13 +46,6 @@ export const metadata: Metadata = {
   },
 }
 
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
-import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
-import { AdminButton } from '@/components/ui/AdminButton'
-import { Chatbot } from '@/components/ui/Chatbot'
-import { PageViewTracker } from '@/components/tracking/PageViewTracker'
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -60,12 +55,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
         <PageViewTracker />
-        <Header />
-        <main className="flex-1 pt-16">{children}</main>
-        <Footer />
-        <WhatsAppButton />
-        <AdminButton />
-        <Chatbot />
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   )

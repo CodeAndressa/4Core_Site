@@ -1,28 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AnalyticsService } from '@/lib/services/analyticsService'
-import { createClient } from '@/lib/supabase/server'
-
-/**
- * GET /api/analytics
- * 
- * Endpoint protegido para obter dados do dashboard
- * Requer autenticação
- */
+import { requireAuthenticatedUser } from '@/lib/apiSecurity'
 
 export async function GET(request: NextRequest) {
+  const auth = await requireAuthenticatedUser()
+  if (!auth.ok) {
+    return auth.response
+  }
+
   try {
-    // Verificar autenticação
-    const supabase = await createClient()
-    const { data: { user }, error: authError } = await supabase.auth.getUser()
-
-    if (authError || !user) {
-      return NextResponse.json(
-        { success: false, error: 'Não autorizado' },
-        { status: 401 }
-      )
-    }
-
-    // Obter parâmetros de data
     const { searchParams } = new URL(request.url)
     const startDate = searchParams.get('startDate')
     const endDate = searchParams.get('endDate')
@@ -34,7 +20,6 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Buscar dados do dashboard
     const dashboard = await AnalyticsService.getDashboard(startDate, endDate)
 
     return NextResponse.json({ success: true, data: dashboard })

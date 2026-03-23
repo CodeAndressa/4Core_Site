@@ -86,18 +86,20 @@ export function trackWhatsAppClick(page: string) {
 }
 
 // Helper: Track form submit
-export function trackFormSubmit(page: string) {
+export function trackFormSubmit(page: string, source?: string) {
   trackEvent({
     type: 'form_submit',
     page,
+    source,
   })
 }
 
 // Helper: Track form view
-export function trackFormView(page: string) {
+export function trackFormView(page: string, source?: string) {
   trackEvent({
     type: 'form_view',
     page,
+    source,
   })
 }
 
@@ -107,5 +109,30 @@ export function trackCTAClick(page: string, source?: string) {
     type: 'cta_click',
     page,
     source,
+  })
+}
+
+// Helpers: Diagnóstico
+export function trackDiagnosticoStart(page: string) {
+  trackEvent({
+    type: 'diagnostico_start',
+    page,
+    source: 'diagnostico',
+  })
+}
+
+export function trackDiagnosticoAnswer(page: string, source: string) {
+  trackEvent({
+    type: 'diagnostic_answer',
+    page,
+    source,
+  })
+}
+
+export function trackDiagnosticoComplete(page: string) {
+  trackEvent({
+    type: 'diagnostico_complete',
+    page,
+    source: 'diagnostico',
   })
 }

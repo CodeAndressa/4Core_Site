@@ -6,10 +6,11 @@ export function AdminButton() {
   return (
     <Link
       href="/admin/login"
-      className="fixed top-20 left-4 w-8 h-8 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-white text-xs opacity-20 hover:opacity-100 transition-opacity duration-300 z-50"
-      title="Admin"
+      className="fixed top-20 left-4 rounded-full border border-brand-deep/20 bg-white/80 px-3 py-1 text-[11px] font-semibold text-brand-deep shadow-sm backdrop-blur transition hover:bg-white z-40"
+      title="Acesso administrativo"
+      aria-label="Acesso administrativo"
     >
-      🔒
+      Admin
     </Link>
   )
 }

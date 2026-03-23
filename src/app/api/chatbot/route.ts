@@ -1,14 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import ChatbotService, { ConversationState } from '@/lib/services/chatbotService'
 import { supabaseAdmin } from '@/lib/supabase'
-
-/**
- * POST /api/chatbot
- * 
- * Endpoint para processar mensagens do chatbot
- */
+import { enforceRateLimit, validateTrustedOrigin } from '@/lib/apiSecurity'
 
 export async function POST(request: NextRequest) {
+  const originCheck = validateTrustedOrigin(request)
+  if (!originCheck.ok) {
+    return originCheck.response
+  }
+
+  const rateLimit = enforceRateLimit(request, 'chatbot:message', {
+    limit: 30,
+    windowMs: 5 * 60 * 1000,
+  })
+  if (!rateLimit.ok) {
+    return rateLimit.response
+  }
+
   try {
     const body = await request.json()
     const { message, conversationState } = body
@@ -20,18 +28,21 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Se não houver estado, iniciar nova conversa
-    let state: ConversationState = conversationState || ChatbotService.initConversation()
-
-    // Processar mensagem
+    const previousState: ConversationState | null = conversationState || null
+    const state = previousState || ChatbotService.initConversation()
     const { response, updatedState } = await ChatbotService.processMessage(message, state)
-
-    // Verificar se deve mostrar botões de contato
     const showContactButtons = ChatbotService.shouldShowContactButtons(updatedState)
 
-    // Se lead foi capturado, salvar no Supabase
-    if (updatedState.leadCaptured && !conversationState?.leadCaptured) {
-      await saveLead(updatedState)
+    const leadJustCaptured = updatedState.leadCaptured && !previousState?.leadCaptured
+    if (leadJustCaptured) {
+      const saveResult = await saveLead(updatedState)
+
+      if (!saveResult.success) {
+        return NextResponse.json(
+          { success: false, error: saveResult.error || 'Erro ao salvar lead do chatbot' },
+          { status: 500 }
+        )
+      }
     }
 
     return NextResponse.json({
@@ -54,28 +65,25 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * Salvar lead no Supabase
- */
 async function saveLead(state: ConversationState) {
   if (!supabaseAdmin) {
     console.error('Supabase não configurado')
-    return
+    return { success: false as const, error: 'CRM não configurado' }
   }
 
   try {
     const leadData = ChatbotService.prepareLeadForDatabase(state)
 
-    const { error } = await supabaseAdmin
-      .from('chatbot_leads')
-      .insert(leadData)
+    const { error } = await supabaseAdmin.from('chatbot_leads').insert(leadData)
 
     if (error) {
       console.error('Erro ao salvar lead:', error)
-    } else {
-      console.log('Lead salvo com sucesso:', leadData.email || leadData.phone)
+      return { success: false as const, error: error.message }
     }
+
+    return { success: true as const }
   } catch (error) {
     console.error('Erro ao salvar lead:', error)
+    return { success: false as const, error: 'Erro interno ao salvar lead' }
   }
 }

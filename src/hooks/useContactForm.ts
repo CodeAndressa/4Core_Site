@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { contactFormSchema } from '@/lib/validators'
 import type { ContactFormValues } from '@/lib/validators'
@@ -17,36 +17,28 @@ interface UseContactFormReturn {
   reset: () => void
 }
 
-/**
- * Hook customizado para lógica do formulário de contato.
- * Separa completamente a lógica de estado/submit da UI do formulário.
- *
- * Responsabilidades:
- * - Validação client-side via Zod
- * - Envio para a API Route
- * - Gerenciamento de estados (idle, submitting, success, error)
- * - Tratamento de erros (field-level e server-level)
- */
 export function useContactForm(): UseContactFormReturn {
   const [status, setStatus] = useState<FormStatus>('idle')
   const [serverMessage, setServerMessage] = useState('')
-  const [fieldErrors, setFieldErrors] = useState<
-    Partial<Record<keyof ContactFormValues, string>>
-  >({})
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof ContactFormValues, string>>>({})
   const pathname = usePathname()
 
-  const reset = useCallback(() => {
+  useEffect(() => {
+    if (pathname) {
+      trackFormView(pathname, 'contact_form')
+    }
+  }, [pathname])
+
+  const reset = () => {
     setStatus('idle')
     setServerMessage('')
     setFieldErrors({})
-  }, [])
+  }
 
-  const handleSubmit = useCallback(async (formData: ContactFormValues) => {
-    // Limpar erros anteriores
+  const handleSubmit = async (formData: ContactFormValues) => {
     setFieldErrors({})
     setServerMessage('')
 
-    // Validação client-side
     const validation = contactFormSchema.safeParse(formData)
 
     if (!validation.success) {
@@ -65,7 +57,6 @@ export function useContactForm(): UseContactFormReturn {
       return
     }
 
-    // Envio para a API
     setStatus('submitting')
 
     try {
@@ -80,16 +71,14 @@ export function useContactForm(): UseContactFormReturn {
       if (result.success) {
         setStatus('success')
         setServerMessage(result.message)
-        
-        // Track form submit
+
         if (pathname) {
-          trackFormSubmit(pathname)
+          await trackFormSubmit(pathname, 'contact_form')
         }
       } else {
         setStatus('error')
         setServerMessage(result.message)
 
-        // Se a API retornou erros de campo, exibir
         if (result.errors) {
           const apiErrors: Partial<Record<keyof ContactFormValues, string>> = {}
           for (const [key, messages] of Object.entries(result.errors)) {
@@ -102,11 +91,9 @@ export function useContactForm(): UseContactFormReturn {
       }
     } catch {
       setStatus('error')
-      setServerMessage(
-        'Erro de conexão. Verifique sua internet e tente novamente.'
-      )
+      setServerMessage('Erro de conexao. Verifique sua internet e tente novamente.')
     }
-  }, [])
+  }
 
   return {
     status,

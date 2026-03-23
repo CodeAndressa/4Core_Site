@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 import { ConversationState } from '@/lib/services/chatbotService'
 import { Solution } from '@/lib/knowledgeBase'
-import { company } from '@/data/company'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -68,7 +68,7 @@ export function Chatbot() {
         },
       ])
     }
-  }, [isOpen])
+  }, [isOpen, messages.length])
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return
@@ -156,7 +156,7 @@ export function Chatbot() {
             {/* Logo */}
             <div className="relative">
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1.5">
-                <img src="/favicon.ico" alt="4Core" className="w-full h-full object-contain" />
+                <Image src="/favicon.ico" alt="4Core" width={28} height={28} className="w-full h-full object-contain" />
               </div>
               {/* Pulse indicator */}
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -179,7 +179,7 @@ export function Chatbot() {
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5">
-            <img src="/favicon.ico" alt="4Core" className="w-full h-full object-contain" />
+            <Image src="/favicon.ico" alt="4Core" width={28} height={28} className="w-full h-full object-contain" />
           </div>
           <div>
             <h3 className="font-bold">4Core</h3>
@@ -192,8 +192,9 @@ export function Chatbot() {
         <button
           onClick={() => setIsOpen(false)}
           className="text-white hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition"
+          aria-label="Fechar chatbot"
         >
-          ✕
+          x
         </button>
       </div>
 
@@ -222,17 +223,22 @@ export function Chatbot() {
                   <button
                     key={idx}
                     onClick={() => {
-                      // Adicionar solução aos interessados
-                      if (conversationState) {
-                        conversationState.interestedSolutions = [
-                          ...(conversationState.interestedSolutions || []),
-                          solution.id
-                        ]
+                      const nextState = conversationState
+                        ? {
+                            ...conversationState,
+                            interestedSolutions: Array.from(
+                              new Set([...(conversationState.interestedSolutions || []), solution.id])
+                            ),
+                          }
+                        : null
+
+                      if (nextState) {
+                        setConversationState(nextState)
                       }
-                      
-                      const summary = conversationState 
-                        ? generateWhatsAppSummary(conversationState)
-                        : `Olá! Gostaria de falar com um especialista sobre ${solution.name}`
+
+                      const summary = nextState
+                        ? generateWhatsAppSummary(nextState)
+                        : `Ola! Gostaria de falar com um especialista sobre ${solution.name}`
                       const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5511984295040'
                       const whatsappMessage = encodeURIComponent(summary)
                       window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank')
@@ -344,7 +350,7 @@ export function Chatbot() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             placeholder="Digite sua mensagem..."
             disabled={loading}
             className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:bg-gray-100"
@@ -364,3 +370,5 @@ export function Chatbot() {
     </div>
   )
 }
+
+

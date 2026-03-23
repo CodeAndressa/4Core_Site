@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { ROUTES } from '@/lib/constants'
 
 const navLinks = [
-  { label: 'Soluções', href: '/solucoes' },
+  { label: 'Solucoes', href: '/solucoes' },
   { label: 'Sobre', href: ROUTES.about },
   { label: 'Contato', href: ROUTES.contact },
 ]
@@ -17,6 +18,8 @@ const navLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const useLightHeader = pathname === '/' && !isScrolled
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8)
@@ -36,36 +39,44 @@ export function Header() {
       }`}
     >
       <Container>
-        {/* Nav — altura fixa de 64px, logo e itens sempre centralizados */}
-        <nav className="flex items-center justify-between h-16">
-
-          {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0 group">
-          <Image
-              src={isScrolled ? '/images/logo-purple.png' : '/images/logo-black.png'}
+        <nav className="flex items-center justify-between h-[72px]">
+          <Link
+            href="/"
+            className={`flex items-center shrink-0 group rounded-xl px-2 py-1.5 transition-all ${
+              useLightHeader
+                ? 'bg-white/12 border border-white/20 shadow-[0_14px_34px_-22px_rgba(223,204,255,0.8)] backdrop-blur-sm'
+                : 'bg-white/65 border border-black/[0.06] shadow-sm'
+            }`}
+          >
+            <Image
+              src={useLightHeader ? '/images/logo-white.png' : isScrolled ? '/images/logo-purple.png' : '/images/logo-black.png'}
               alt="4Core"
-              width={120}
-              height={38}
-              className="h-9 lg:h-10 w-auto"
+              width={170}
+              height={52}
+              className={`h-11 lg:h-12 w-auto ${useLightHeader ? 'drop-shadow-[0_6px_14px_rgba(223,204,255,0.45)]' : ''}`}
               priority
             />
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-sm font-medium text-text-secondary hover:text-brand-deep transition-colors duration-200 group"
+                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 group ${
+                  useLightHeader ? 'text-white/85 hover:text-white' : 'text-text-secondary hover:text-brand-deep'
+                }`}
               >
                 {link.label}
-                <span className="absolute bottom-0 left-4 right-4 h-px bg-brand-vibrant scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
+                <span
+                  className={`absolute bottom-0 left-4 right-4 h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left ${
+                    useLightHeader ? 'bg-brand-lilac' : 'bg-brand-vibrant'
+                  }`}
+                />
               </Link>
             ))}
           </div>
 
-          {/* CTA desktop */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href={ROUTES.contact}
@@ -76,9 +87,10 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile toggle */}
           <button
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-brand-deep hover:bg-brand-vibrant/8 transition-colors"
+            className={`md:hidden flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${
+              useLightHeader ? 'text-white hover:bg-white/10' : 'text-brand-deep hover:bg-brand-vibrant/8'
+            }`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Menu"
           >
@@ -87,7 +99,6 @@ export function Header() {
         </nav>
       </Container>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div

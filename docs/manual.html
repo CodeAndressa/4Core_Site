@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Sistema 4Core — Guia Técnico e Operacional</title>
+    <style>
+        :root {
+            --brand-deep: #0F0022;
+            --brand-vibrant: #7B00FF;
+            --brand-light: #F8F4FF;
+            --surface-white: #FFFFFF;
+            --surface-gray: #F9FAFB;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --border-default: #E5E7EB;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--surface-white);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        /* Sidebar */
+        nav#sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--brand-deep);
+            color: white;
+            position: fixed;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            padding-left: 0.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            display: block;
+            transition: all 0.2s;
+        }
+
+        .menu-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .menu-link.active {
+            background: var(--brand-vibrant);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main#main-content {
+            margin-left: var(--sidebar-width);
+            padding: 3rem 4rem;
+            max-width: 1000px;
+            flex-grow: 1;
+        }
+
+        section {
+            padding-bottom: 4rem;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid var(--border-default);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--brand-deep); }
+        h2 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--brand-deep); border-left: 4px solid var(--brand-vibrant); padding-left: 1rem; }
+        h3 { font-size: 1.3rem; margin-top: 1.5rem; margin-bottom: 1rem; }
+        p { margin-bottom: 1.2rem; color: var(--text-secondary); }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: var(--brand-light);
+            color: var(--brand-vibrant);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Callouts / Alertas */
+        .callout {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid;
+            background: var(--surface-gray);
+        }
+
+        .callout.info { border-color: var(--brand-vibrant); background: #F8F4FF; }
+        .callout.success { border-color: #10B981; background: #ECFDF5; }
+        .callout.warning { border-color: #F59E0B; background: #FFFBEB; }
+        .callout.critical { border-color: #EF4444; background: #FEF2F2; }
+
+        /* Code Block */
+        pre {
+            background: #1E1E1E;
+            color: #D4D4D4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        code { font-family: 'Fira Code', monospace; background: #f0f0f0; padding: 0.2rem 0.4rem; border-radius: 4px; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-default);
+        }
+
+        th { background: var(--brand-deep); color: white; }
+        tr:nth-child(even) { background: var(--surface-gray); }
+
+        /* Cards */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            padding: 1.5rem;
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav#sidebar { width: 0; display: none; }
+            main#main-content { margin-left: 0; padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="sidebar">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            4Core Docs
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item"><a href="#visao-geral" class="menu-link active">1. Visão Geral</a></li>
+            <li class="menu-item"><a href="#arquitetura" class="menu-link">2. Arquitetura</a></li>
+            <li class="menu-item"><a href="#tecnologias" class="menu-link">3. Tecnologias</a></li>
+            <li class="menu-item"><a href="#funcionalidades" class="menu-link">4. Funcionalidades</a></li>
+            <li class="menu-item"><a href="#fluxos" class="menu-link">5. Fluxos do Sistema</a></li>
+            <li class="menu-item"><a href="#crm" class="menu-link">6. CRM (Supabase)</a></li>
+            <li class="menu-item"><a href="#eventos" class="menu-link">7. Sistema de Eventos</a></li>
+            <li class="menu-item"><a href="#chatbot" class="menu-link">8. Chatbot com IA</a></li>
+            <li class="menu-item"><a href="#apis" class="menu-link">9. APIs do Sistema</a></li>
+            <li class="menu-item"><a href="#campos" class="menu-link">10. Campos Importantes</a></li>
+            <li class="menu-item"><a href="#expandir" class="menu-link">11. Como Expandir</a></li>
+            <li class="menu-item"><a href="#boas-praticas" class="menu-link">12. Boas Práticas</a></li>
+            <li class="menu-item"><a href="#guia-rapido" class="menu-link">13. Guia Rápido</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <header style="margin-bottom: 4rem;">
+            <h1>Manual do Sistema 4Core</h1>
+            <p>Guia técnico definitivo para desenvolvedores e equipe de operações.</p>
+        </header>
+
+        <!-- 1. VISÃO GERAL -->
+        <section id="visao-geral">
+            <h2>1. Visão Geral</h2>
+            <p>O sistema 4Core é uma plataforma de geração de leads e gestão comercial integrada, desenhada para atuar como o portal principal de uma consultoria especializada em controle de ponto e acesso.</p>
+            <div class="grid-cards">
+                <div class="card">
+                    <strong>Lead Gen</strong>
+                    <p>Foco total em converter visitantes em oportunidades de negócio.</p>
+                </div>
+                <div class="card">
+                    <strong>SDR Automático</strong>
+                    <p>Chatbot com IA que qualifica e captura leads 24/7.</p>
+                </div>
+                <div class="card">
+                    <strong>BI Integrado</strong>
+                    <p>Análise de tráfego e conversão em tempo real.</p>
+                </div>
+            </div>
+            <div class="callout info">
+                <strong>Conexão:</strong> O usuário entra pelo institucional → Faz o diagnóstico ou usa o chatbot (Ambos validam interesse) → Os dados são sincronizados no Supabase → O admin gerencia os resultados no Dashboard de BI.
+            </div>
+        </section>
+
+        <!-- 2. ARQUITETURA -->
+        <section id="arquitetura">
+            <h2>2. Arquitetura</h2>
+            <p>O projeto utiliza o <strong>Next.js (App Router)</strong> como fundação, separando claramente as responsabilidades.</p>
+            
+            <h3>Estrutura principal:</h3>
+            <ul>
+                <li><code>/src/app</code>: Rotas, páginas e layouts.</li>
+                <li><code>/src/app/api</code>: Endpoints de backend (Next API Routes).</li>
+                <li><code>/src/lib/services</code>: Lógica de negócio e integração com Supabase.</li>
+                <li><code>/src/components</code>: UI modularizada (Sections, Forms, Admin).</li>
+            </ul>
+
+            <div class="callout info">
+                <strong>Fluxo de Dados:</strong> O frontend chama API Routes → API Routes usam Services → Services consultam Supabase/Groq.
+            </div>
+
+            <pre>
+4Core/
+├── src/
+│   ├── app/           # Rotas e Páginas
+│   ├── components/    # UI Modular
+│   ├── lib/
+│   │   ├── services/  # Camada de Dados
+│   │   └── supabase/  # Configuração DB
+│   └── types/         # Tipagem TypeScript
+└── docs/              # Documentação
+            </pre>
+        </section>
+
+        <!-- 3. TECNOLOGIAS -->
+        <section id="tecnologias">
+            <h2>3. Tecnologias</h2>
+            <table>
+                <tr><th>Tecnologia</th><th>Uso no Projeto</th></tr>
+                <tr><td><strong>Next.js 16</strong></td><td>Framework de aplicação (Frontend + Backend)</td></tr>
+                <tr><td><strong>TypeScript</strong></td><td>Tipagem estática em 100% do código</td></tr>
+                <tr><td><strong>Tailwind CSS v4</strong></td><td>Estilização ultra-rápida via CSS Variables</td></tr>
+                <tr><td><strong>Supabase</strong></td><td>Banco de Dados (PostgreSQL), CRM e Auth</td></tr>
+                <tr><td><strong>Groq (Llama 3.3)</strong></td><td>Motor de IA para o Chatbot SDR</td></tr>
+                <tr><td><strong>Nodemailer</strong></td><td>Envio de notificações de novos leads via SMTP</td></tr>
+            </table>
+        </section>
+
+        <!-- 4. FUNCIONALIDADES -->
+        <section id="funcionalidades">
+            <h2>4. Funcionalidades Detalhadas</h2>
+            
+            <div class="card">
+                <h3>🔍 Diagnóstico Interativo</h3>
+                <p>Questionário multistep que engaja o usuário e retorna um score de maturidade trabalhista, capturando o lead ao final.</p>
+                <code>Localizado em: src/components/sections/DiagnosticSection.tsx</code>
+            </div>
+
+            <div class="card">
+                <h3>🤖 Chatbot SDR (Sales Dev Representative)</h3>
+                <p>Chat interativo com IA que tira dúvidas técnicas sobre Portaria 671 e qualifica o lead perguntando o tamanho da empresa e o modelo de trabalho.</p>
+                <code>Localizado em: src/lib/services/chatbotService.ts</code>
+            </div>
+
+            <div class="card">
+                <h3>📊 BI / Analytics Dashboard</h3>
+                <p>Área administrativa protegida para monitorar ROI, cliques no WhatsApp e taxa de conversão por página.</p>
+                <code>Rota: /admin/dashboard</code>
+            </div>
+        </section>
+
+        <!-- 5. FLUXOS DO SISTEMA -->
+        <section id="fluxos">
+            <h2>5. Fluxos do Sistema</h2>
+            <div class="callout success">
+                <strong>Fluxo Principal (Caminho Feliz):</strong>
+                <ol>
+                    <li>Visitante entra na Home atraído pela promessa de conformidade.</li>
+                    <li>Identifica um risco na seção de "Risco Trabalhista".</li>
+                    <li>Clica em "Fazer Diagnóstico Único".</li>
+                    <li>Responde 5 perguntas → Vê resultado crítico.</li>
+                    <li>Preenche nome/email/tel para receber relatório completo.</li>
+                    <li><strong>Ação Interna:</strong> O lead cai na tabela do Supabase e o comercial recebe um e-mail em tempo real.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 6. CRM (SUPABASE) -->
+        <section id="crm">
+            <h2>6. CRM (Supabase)</h2>
+            <p>Os dados são armazenados de forma estruturada no PostgreSQL do Supabase.</p>
+            
+            <h3>Tabela: <code>leads</code></h3>
+            <table>
+                <tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr>
+                <tr><td>id</td><td>uuid (PK)</td><td>Identificador único</td></tr>
+                <tr><td>name</td><td>text</td><td>Nome completo do lead</td></tr>
+                <tr><td>email</td><td>text</td><td>Email de contato</td></tr>
+                <tr><td>phone</td><td>text</td><td>Telefone com DDD</td></tr>
+                <tr><td>status</td><td>text</td><td>Status (novo, contatado, qualificado)</td></tr>
+                <tr><td>source_page</td><td>text</td><td>Página onde converteu</td></tr>
+                <tr><td>utm_source</td><td>text</td><td>Origem da campanha</td></tr>
+            </table>
+
+            <div class="callout info">
+                <strong>Políticas de RLS:</strong> A tabela `leads` permite inserção pública (para anonimous) mas leitura apenas para o role `service_role` (nosso backend).
+            </div>
+        </section>
+
+        <!-- 7. SISTEMA DE EVENTOS -->
+        <section id="eventos">
+            <h2>7. Sistema de Eventos</h2>
+            <p>O rastreamento de eventos é feito através da biblioteca <code>trackEvent.ts</code>.</p>
+            <pre>
+// Exemplo de uso
+trackEvent({
+  type: 'whatsapp_click',
+  page: '/solucoes/controle-de-jornada',
+  source: 'floating_button'
+});
+            </pre>
+            <p><strong>Uso no BI:</strong> Esses eventos são agregados pelo <code>AnalyticsService</code> para gerar gráficos de barras e cálculos de Bounce Rate no dashboard.</p>
+        </section>
+
+        <!-- 8. CHATBOT -->
+        <section id="chatbot">
+            <h2>8. Chatbot com IA</h2>
+            <div class="callout info">
+                O chatbot utiliza a <strong>Base de Conhecimento</strong> localizada em <code>src/lib/knowledgeBase.ts</code> como fonte de verdade.
+            </div>
+            <p><strong>Lógica de Decisão:</strong></p>
+            <ul>
+                <li>Detecta intenção via keywords (comprar, dúvida, preço).</li>
+                <li>Calcula Score de Qualificação (0-100) com base no tamanho da empresa.</li>
+                <li>Troca de papéis: Começa como informador e termina como capturador de dados.</li>
+            </ul>
+        </section>
+
+        <!-- 9. APIs -->
+        <section id="apis">
+            <h2>9. APIs do Sistema</h2>
+            
+            <div class="card">
+                <strong>POST <code>/api/lead</code></strong>
+                <p>Cria um lead diretamente. Requer <code>name</code>, <code>email</code> e <code>phone</code>.</p>
+                <code style="display:block;">Req: { name: string, email: string, phone: string, source_page: string }</code>
+                <code style="display:block; margin-top:0.5rem;">Res: { success: boolean, data: Lead }</code>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <strong>POST <code>/api/events</code></strong>
+                <p>Captura interação do usuário.</p>
+                <code style="display:block;">Req: { type: string, page: string, session_id: string }</code>
+            </div>
+        </section>
+
+        <!-- 10. CAMPOS IMPORTANTES -->
+        <section id="campos">
+            <h2>10. Campos Importantes</h2>
+            <p>Ao analisar dados no Supabase, atente-se a:</p>
+            <ul>
+                <li><strong>qualification_score</strong> (tabela chatbot_leads): Define se o comercial deve ligar em 5 min ou 24h.</li>
+                <li><strong>session_id</strong> (tabela events): Permite reconstruir a jornada do usuário no site (funil).</li>
+                <li><strong>employees</strong>: Faixa de tamanho da empresa para precificação correta.</li>
+            </ul>
+        </section>
+
+        <!-- 11. COMO EXPANDIR -->
+        <section id="expandir">
+            <h2>11. Como Expandir o Sistema</h2>
+            <h3>Adicionar novo Evento:</h3>
+            <ol>
+                <li>Localize <code>src/types/analytics.ts</code> e adicione o tipo no enum <code>EventType</code>.</li>
+                <li>Crie um helper em <code>src/lib/tracking/trackEvent.ts</code>.</li>
+                <li>Chame o helper no componente desejado.</li>
+            </ol>
+            
+            <h3>Adicionar Nova Solução/Produto:</h3>
+            <ol>
+                <li>Adicione os dados estáticos em <code>src/data/products.ts</code> para o site.</li>
+                <li>Adicione o contexto no <code>knowledgeBase.ts</code> para o chatbot aprender sobre ele.</li>
+            </ol>
+        </section>
+
+        <!-- 12. BOAS PRÁTICAS -->
+        <section id="boas-praticas">
+            <h2>12. Boas Práticas</h2>
+            <div class="callout warning">
+                <strong>Regra de Ouro:</strong> Nunca faça queries diretas ao Supabase nos componentes. Use sempre a camada de <code>Services</code>.
+            </div>
+            <ul>
+                <li><strong>Tipagem:</strong> Sempre defina interfaces em <code>src/types/</code> antes de implementar.</li>
+                <li><strong>Validação:</strong> Use o <code>contactFormSchema</code> (Zod) para qualquer novo formulário.</li>
+                <li><strong>Contexto:</strong> Sempre mantenha o <code>CLAUDE_CONTEXT.md</code> atualizado após grandes mudanças arquiteturais.</li>
+            </ul>
+        </section>
+
+        <!-- 13. GUIA RÁPIDO -->
+        <section id="guia-rapido">
+            <h2>13. Guia Rápido (Uso Prático)</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <strong>Como ver leads?</strong>
+                    <p>Acesse o Dashboard Administrativo via <code>/admin/dashboard</code> ou direto no painel do Supabase na tabela <code>leads</code>.</p>
+                </div>
+                <div class="card">
+                    <strong>Como simular o bot?</strong>
+                    <p>Abra o site, clique no ícone de chat e diga "Dúvida sobre Portaria 671" para ver a filtragem da IA.</p>
+                </div>
+                <div class="card">
+                    <strong>Como testar track?</strong>
+                    <p>No console do navegador: <code>localStorage.getItem('4core_session_id')</code> deve mostrar seu ID de tracking.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; color: var(--text-secondary); margin-top: 5rem; padding-bottom: 2rem;">
+            &copy; 2026 4Core Consultoria — Manual Gerado para Uso Interno.
+        </footer>
+    </main>
+
+    <script>
+        // Smooth scroll and active link tracking
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.menu-link');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Basic smooth scroll fix
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

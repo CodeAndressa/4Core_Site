@@ -1,5 +1,4 @@
-import { Hero } from '@/components/sections/Hero'
-import { DiagnosticSection } from '@/components/sections/DiagnosticSection'
+import { HomeHeroDiagnostic } from '@/components/sections/HomeHeroDiagnostic'
 import { Solutions } from '@/components/sections/Solutions'
 import { RiskSection } from '@/components/sections/RiskSection'
 import { Contrast } from '@/components/sections/Contrast'
@@ -8,14 +7,13 @@ import { FAQ } from '@/components/sections/FAQ'
 import { CTA } from '@/components/sections/CTA'
 
 /**
- * Página Inicial da 4Core - Otimizada para Conversão
- * Ordem estratégica: Hero (risco) → Diagnóstico → Soluções → Prova Social → CTA
+ * Pagina Inicial da 4Core - Otimizada para Conversao
+ * Ordem estrategica: Hero (risco + diagnostico via pop-up) -> Solucoes -> Prova Social -> CTA
  */
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <DiagnosticSection />
+      <HomeHeroDiagnostic />
       <Solutions />
       <RiskSection />
       <Contrast />
@@ -25,6 +23,3 @@ export default function HomePage() {
     </>
   )
 }
-
-
-

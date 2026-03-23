@@ -2,12 +2,19 @@
  * Tipos do sistema de Analytics e Eventos
  */
 
-export type EventType = 
-  | 'page_view'
-  | 'whatsapp_click'
-  | 'form_submit'
-  | 'form_view'
-  | 'cta_click'
+export const TRACKABLE_EVENT_TYPES = [
+  'page_view',
+  'whatsapp_click',
+  'form_submit',
+  'form_view',
+  'cta_click',
+  'diagnostico_start',
+  'diagnostico_complete',
+  'diagnostic_answer',
+  'lead_captured',
+] as const
+
+export type EventType = (typeof TRACKABLE_EVENT_TYPES)[number]
 
 export type DeviceType = 'mobile' | 'desktop' | 'tablet'
 
