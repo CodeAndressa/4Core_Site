@@ -107,8 +107,8 @@ export function Chatbot() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-4 group z-50"
-        aria-label="Abrir chat com IA"
+        className="fixed bottom-32 right-4 group z-50"
+        aria-label="Fale com a 4Core"
       >
         {/* Botão principal */}
         <div className="relative">
@@ -130,8 +130,8 @@ export function Chatbot() {
             
             {/* Texto */}
             <div className="text-left">
-              <div className="text-white font-bold text-sm">Assistente IA</div>
-              <div className="text-purple-100 text-xs">Online agora</div>
+              <div className="text-white font-bold text-sm">Fale com a 4Core</div>
+              <div className="text-purple-100 text-xs">Atendimento inteligente</div>
             </div>
           </div>
         </div>
@@ -148,10 +148,10 @@ export function Chatbot() {
             <img src="/favicon.ico" alt="4Core" className="w-full h-full object-contain" />
           </div>
           <div>
-            <h3 className="font-bold">Assistente IA 4Core</h3>
+            <h3 className="font-bold">4Core</h3>
             <p className="text-xs text-purple-100 flex items-center gap-1">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              Online agora
+              Atendimento inteligente
             </p>
           </div>
         </div>
