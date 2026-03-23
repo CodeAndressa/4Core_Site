@@ -441,6 +441,62 @@ export class ChatbotService {
   }
   
   /**
+   * Gerar resumo da conversa para WhatsApp
+   */
+  static generateConversationSummary(state: ConversationState): string {
+    const parts: string[] = []
+    
+    // Soluções de interesse
+    if (state.interestedSolutions.length > 0) {
+      const solutionNames = state.interestedSolutions
+        .map(id => knowledgeBase.solutions.find(s => s.id === id)?.name)
+        .filter(Boolean)
+        .join(', ')
+      parts.push(`Me interessei em: ${solutionNames}`)
+    }
+    
+    // Dados de qualificação
+    if (state.qualificationData.company_size) {
+      parts.push(`Empresa com ${state.qualificationData.company_size} funcionários`)
+    }
+    
+    if (state.qualificationData.work_model) {
+      parts.push(`Modelo: ${state.qualificationData.work_model}`)
+    }
+    
+    if (state.qualificationData.current_system) {
+      parts.push(`Sistema atual: ${state.qualificationData.current_system}`)
+    }
+    
+    if (state.qualificationData.urgency) {
+      parts.push(`Urgência: ${state.qualificationData.urgency}`)
+    }
+    
+    if (state.qualificationData.main_problem) {
+      parts.push(`Problema: ${state.qualificationData.main_problem}`)
+    }
+    
+    // Adicionar chamada final
+    parts.push('Gostaria de falar com um especialista')
+    
+    return parts.join('. ') + '.'
+  }
+  
+  /**
+   * Verificar se deve mostrar botões de contato
+   */
+  static shouldShowContactButtons(state: ConversationState): boolean {
+    // Mostrar se escolheu uma solução
+    if (state.interestedSolutions.length > 0) return true
+    
+    // Mostrar após 6+ mensagens do usuário
+    const userMessages = state.messages.filter(m => m.role === 'user').length
+    if (userMessages >= 6) return true
+    
+    return false
+  }
+  
+  /**
    * Preparar lead para envio ao Supabase
    */
   static prepareLeadForDatabase(state: ConversationState): ChatbotLead {

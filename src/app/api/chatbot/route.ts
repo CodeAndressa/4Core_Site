@@ -26,6 +26,9 @@ export async function POST(request: NextRequest) {
     // Processar mensagem
     const { response, updatedState } = await ChatbotService.processMessage(message, state)
 
+    // Verificar se deve mostrar botões de contato
+    const showContactButtons = ChatbotService.shouldShowContactButtons(updatedState)
+
     // Se lead foi capturado, salvar no Supabase
     if (updatedState.leadCaptured && !conversationState?.leadCaptured) {
       await saveLead(updatedState)
@@ -39,6 +42,7 @@ export async function POST(request: NextRequest) {
         needsLeadCapture: response.needsLeadCapture,
         conversationEnded: response.conversationEnded,
         conversationState: updatedState,
+        showContactButtons,
       },
     })
   } catch (error) {

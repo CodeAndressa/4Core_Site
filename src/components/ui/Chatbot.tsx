@@ -12,6 +12,36 @@ interface Message {
   showContactButtons?: boolean
 }
 
+// Função para gerar resumo da conversa para WhatsApp
+function generateWhatsAppSummary(state: ConversationState): string {
+  const parts: string[] = ['Olá! Vim do chat do site.']
+  
+  // Soluções de interesse
+  if (state.interestedSolutions && state.interestedSolutions.length > 0) {
+    const solutionNames = state.interestedSolutions.join(', ')
+    parts.push(`Me interessei em: ${solutionNames}`)
+  }
+  
+  // Dados de qualificação
+  if (state.qualificationData) {
+    if (state.qualificationData.company_size) {
+      parts.push(`Empresa com ${state.qualificationData.company_size} funcionários`)
+    }
+    
+    if (state.qualificationData.work_model) {
+      parts.push(`Modelo: ${state.qualificationData.work_model}`)
+    }
+    
+    if (state.qualificationData.main_problem) {
+      parts.push(`Necessidade: ${state.qualificationData.main_problem}`)
+    }
+  }
+  
+  parts.push('Gostaria de falar com um especialista.')
+  
+  return parts.join(' ')
+}
+
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
@@ -70,8 +100,8 @@ export function Chatbot() {
           solutions: result.data.solutions,
         }
         
-        // Se o lead foi capturado ou conversa tem mais de 6 mensagens, mostrar botões de contato
-        if (result.data.conversationState?.leadCaptured || messages.length >= 6) {
+        // Verificar se deve mostrar botões de contato
+        if (result.data.conversationState && result.data.showContactButtons) {
           newMessage.showContactButtons = true
         }
         
@@ -192,10 +222,19 @@ export function Chatbot() {
                   <button
                     key={idx}
                     onClick={() => {
+                      // Adicionar solução aos interessados
+                      if (conversationState) {
+                        conversationState.interestedSolutions = [
+                          ...(conversationState.interestedSolutions || []),
+                          solution.id
+                        ]
+                      }
+                      
+                      const summary = conversationState 
+                        ? generateWhatsAppSummary(conversationState)
+                        : `Olá! Gostaria de falar com um especialista sobre ${solution.name}`
                       const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5511984295040'
-                      const whatsappMessage = encodeURIComponent(
-                        `Olá! Gostaria de falar com um especialista sobre ${solution.name}`
-                      )
+                      const whatsappMessage = encodeURIComponent(summary)
                       window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank')
                     }}
                     className="w-full bg-white border-2 border-purple-200 hover:border-purple-400 rounded-lg p-3 text-left transition-all hover:shadow-md group"
@@ -234,7 +273,10 @@ export function Chatbot() {
                   {/* WhatsApp Comercial 1 */}
                   <button
                     onClick={() => {
-                      const message = encodeURIComponent('Olá! Vim do chat do site e gostaria de falar com um especialista.')
+                      const summary = conversationState 
+                        ? generateWhatsAppSummary(conversationState)
+                        : 'Olá! Vim do chat do site e gostaria de falar com um especialista.'
+                      const message = encodeURIComponent(summary)
                       window.open(`https://wa.me/5541988476431?text=${message}`, '_blank')
                     }}
                     className="w-full bg-green-500 hover:bg-green-600 text-white rounded-lg px-4 py-3 flex items-center justify-center gap-2 transition-all font-medium text-sm shadow-sm hover:shadow-md"
@@ -248,7 +290,10 @@ export function Chatbot() {
                   {/* WhatsApp Comercial 2 */}
                   <button
                     onClick={() => {
-                      const message = encodeURIComponent('Olá! Vim do chat do site e gostaria de falar com um especialista.')
+                      const summary = conversationState 
+                        ? generateWhatsAppSummary(conversationState)
+                        : 'Olá! Vim do chat do site e gostaria de falar com um especialista.'
+                      const message = encodeURIComponent(summary)
                       window.open(`https://wa.me/5541988035657?text=${message}`, '_blank')
                     }}
                     className="w-full bg-green-500 hover:bg-green-600 text-white rounded-lg px-4 py-3 flex items-center justify-center gap-2 transition-all font-medium text-sm shadow-sm hover:shadow-md"
