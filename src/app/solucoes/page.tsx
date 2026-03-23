@@ -13,57 +13,53 @@ const iconMap = {
 
 export default function SolutionsDirectory() {
   return (
-    <main className="flex-1 min-h-screen bg-surface-white">
-      {/* Hero Section */}
-      <section className="pb-20 lg:pb-32 bg-brand-deep text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-vibrant/10 blur-3xl pointer-events-none" />
+    <main className="flex-1 min-h-screen bg-white">
+      {/* Hero Section - Compacto */}
+      <section className="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
         <Container>
-           <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-none mb-10">
-              Soluções técnicas <br />
-              <span className="text-brand-vibrant underline decoration-white/10 uppercase">em conformidade.</span>
-           </h1>
-           <p className="text-xl lg:text-3xl text-brand-light/70 max-w-3xl font-medium leading-relaxed">
-             Da gestão de jornada ao monitoramento de segurança operacional, entregamos consultoria técnica baseada em performance e estabilidade.
-           </p>
+          <div className="max-w-3xl">
+            <h1 className="text-4xl lg:text-5xl font-bold text-brand-deep mb-6 tracking-tight">
+              Nossas Soluções
+            </h1>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Portfólio completo de relógios de ponto, software e controle de acesso para sua empresa.
+            </p>
+          </div>
         </Container>
       </section>
 
-      {/* Category Folders */}
-      <section className="py-24">
+      {/* Category Sections */}
+      <section className="py-16">
         <Container>
-          <div className="space-y-32">
+          <div className="space-y-24">
             {categories.map((cat, i) => {
               const catProducts = products.filter(p => p.categories.includes(cat.slug as any))
               
               return (
-                <div key={cat.slug} className="group">
-                  <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-16 border-b border-border-light pb-12">
-                     <div className="max-w-3xl">
-                        <div className="w-20 h-20 bg-brand-vibrant/10 rounded-3xl flex items-center justify-center text-brand-vibrant mb-8 group-hover:scale-110 transition-transform">
-                           {iconMap[cat.slug as keyof typeof iconMap]}
-                        </div>
-                        <h2 className="text-4xl lg:text-5xl font-semibold text-brand-deep mb-6 tracking-tight">
-                           {cat.name}
-                        </h2>
-                        <p className="text-lg lg:text-xl text-text-secondary leading-relaxed font-medium">
-                           {cat.description}
-                        </p>
-                     </div>
-                     <Link 
-                        href={`/solucoes/${cat.slug}`}
-                        className="inline-flex items-center gap-4 text-brand-vibrant font-bold text-lg uppercase tracking-tight hover:gap-6 transition-all"
-                     >
-                        Ver categoria completa <ArrowRight />
-                     </Link>
+                <div key={cat.slug} id={cat.slug}>
+                  {/* Category Header */}
+                  <div className="mb-12">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-brand-vibrant/10 rounded-xl flex items-center justify-center text-brand-vibrant">
+                        {iconMap[cat.slug as keyof typeof iconMap]}
+                      </div>
+                      <h2 className="text-3xl lg:text-4xl font-bold text-brand-deep tracking-tight">
+                        {cat.name}
+                      </h2>
+                    </div>
+                    <p className="text-base text-gray-600 leading-relaxed max-w-3xl">
+                      {cat.description}
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-                     {catProducts.map((prod) => (
-                       <ProductCard
-                         key={prod.slug}
-                         product={prod}
-                       />
-                     ))}
+                  {/* Products Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    {catProducts.map((prod) => (
+                      <ProductCard
+                        key={prod.slug}
+                        product={prod}
+                      />
+                    ))}
                   </div>
                 </div>
               )
