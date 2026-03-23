@@ -35,6 +35,7 @@ export async function POST(request: Request) {
     }
 
     // Salvar lead no Supabase
+    console.log('[api/contact] Tentando salvar lead no Supabase...')
     const leadResult = await createLead({
       name: result.data.name,
       email: result.data.email,
@@ -46,9 +47,13 @@ export async function POST(request: Request) {
       source_channel: 'form',
     })
 
+    console.log('[api/contact] Resultado do Supabase:', leadResult)
+
     if (!leadResult.success) {
       console.error('[api/contact] Erro ao salvar lead:', leadResult.error)
       // NÃO bloqueia o fluxo - continua para enviar email
+    } else {
+      console.log('[api/contact] Lead salvo com sucesso no Supabase')
     }
 
     // Envio do e-mail

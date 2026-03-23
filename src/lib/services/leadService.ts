@@ -20,10 +20,18 @@ import type { CreateLeadInput, Lead, LeadServiceResponse } from '@/types/lead'
 export async function createLead(
   input: CreateLeadInput
 ): Promise<LeadServiceResponse> {
-  // Se Supabase não estiver configurado, retorna sucesso silencioso
+  // Debug: verificar se Supabase está configurado
+  console.log('[leadService] supabaseAdmin:', supabaseAdmin ? 'CONFIGURADO' : 'NÃO CONFIGURADO')
+  console.log('[leadService] SUPABASE_URL:', process.env.SUPABASE_URL ? 'PRESENTE' : 'AUSENTE')
+  console.log('[leadService] SUPABASE_SERVICE_ROLE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'PRESENTE' : 'AUSENTE')
+  
+  // Se Supabase não estiver configurado, retorna erro
   if (!supabaseAdmin) {
-    console.warn('[leadService] Supabase não configurado - lead não será salvo')
-    return { success: true }
+    console.error('[leadService] Supabase não configurado - variáveis de ambiente ausentes')
+    return { 
+      success: false,
+      error: 'Sistema de CRM não configurado'
+    }
   }
 
   try {
@@ -43,6 +51,8 @@ export async function createLead(
       status: 'novo',
     }
 
+    console.log('[leadService] Tentando inserir lead:', { email: leadData.email, name: leadData.name })
+
     // Inserir no Supabase
     const { data, error } = await supabaseAdmin
       .from('leads')
@@ -52,6 +62,9 @@ export async function createLead(
 
     if (error) {
       console.error('[leadService] Erro ao inserir lead:', error)
+      console.error('[leadService] Error code:', error.code)
+      console.error('[leadService] Error message:', error.message)
+      console.error('[leadService] Error details:', error.details)
       
       // Tratamento de erro de duplicata
       if (error.code === '23505') {
@@ -63,7 +76,7 @@ export async function createLead(
 
       return {
         success: false,
-        error: 'Erro ao salvar lead no banco de dados.',
+        error: `Erro ao salvar lead: ${error.message}`,
       }
     }
 
