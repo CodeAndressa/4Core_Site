@@ -39,27 +39,26 @@ export function CTA() {
               </div>
               
               <h2 className="text-4xl lg:text-6xl font-bold mb-8 leading-[1.1] tracking-tight">
-                Sua folha <br /> livre de riscos <br /> 
-                <span className="text-brand-vibrant">trabalhistas.</span>
+                Pronto para eliminar <br /> riscos trabalhistas?
               </h2>
               
               <p className="text-lg lg:text-xl text-white/60 mb-12 leading-relaxed max-w-md font-medium">
-                Garanta o compliance técnico absoluto na sua empresa com equipamento homologado e implementação estratégica.
+                Agende uma avaliação gratuita e descubra como a 4Core pode blindar sua empresa.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                     href="/contato" 
-                    className="bg-brand-vibrant text-white hover:bg-white hover:text-brand-vibrant px-10 py-6 text-base font-bold shadow-premium border-none"
+                    className="bg-white text-brand-deep hover:bg-gray-100 px-10 py-6 text-base font-bold shadow-2xl border-none"
                 >
-              Receba orientação para implementar com segurança <ArrowRight className="ml-2 w-4 h-4" />
+              Solicitar avaliação gratuita <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
                 <Button 
                     href={getWhatsAppUrl()} 
                     target="_blank"
-                    className="bg-white/10 text-white hover:bg-white hover:text-brand-deep px-10 py-6 text-base font-bold transition-all border-white/10 border backdrop-blur-sm"
+                    className="bg-green-600 text-white hover:bg-green-700 px-10 py-6 text-base font-bold transition-all border-none"
                 >
-                  <MessageCircle className="mr-2 w-5 h-5 text-brand-vibrant" /> WhatsApp
+                  <MessageCircle className="mr-2 w-5 h-5" /> Falar no WhatsApp
                 </Button>
               </div>
             </div>
