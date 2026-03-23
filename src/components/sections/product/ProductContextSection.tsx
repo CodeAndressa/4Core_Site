@@ -17,7 +17,7 @@ interface ProductContextProps {
  * Responde: Para quem é? O que resolve? Quando usar? Que risco evita?
  */
 
-export function ProductContext({ forWho, solves, when, risk }: ProductContextProps) {
+export function ProductContextSection({ forWho, solves, when, risk }: ProductContextProps) {
   return (
     <Section variant="white">
       <Container>
