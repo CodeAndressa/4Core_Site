@@ -127,7 +127,7 @@ export function ContactForm() {
                 'w-full bg-surface-gray border border-border-light rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-vibrant transition-all text-brand-deep',
                 (errors.phone || fieldErrors.phone) && 'border-red-500 bg-red-50'
               )}
-              placeholder="(00) 00000-0000"
+              placeholder="11987654321 ou (11) 98765-4321"
             />
             {(errors.phone || fieldErrors.phone) && (
               <span className="text-red-500 text-xs font-medium">

@@ -17,11 +17,13 @@ export const contactFormSchema = z.object({
 
   phone: z
     .string()
-    .min(14, 'Informe um telefone válido com DDD.')
-    .max(15, 'Telefone inválido.')
-    .regex(
-      /^\(\d{2}\)\s?\d{4,5}-\d{4}$/,
-      'Formato esperado: (11) 99999-9999'
+    .min(1, 'Telefone é obrigatório.')
+    .refine(
+      (val) => {
+        const digits = val.replace(/\D/g, '')
+        return digits.length === 11 && /^\d{2}9\d{8}$/.test(digits)
+      },
+      'Informe um telefone válido com DDD e 9 dígitos (ex: 11987654321).'
     ),
 
   company: z
