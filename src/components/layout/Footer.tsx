@@ -172,7 +172,20 @@ export function Footer() {
               <Link href="/privacidade" className="hover:text-white transition-colors">Privacidade</Link>
               <Link href="/compliance" className="hover:text-white transition-colors">Compliance</Link>
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20">© {currentYear} {company.name}. Todos os direitos reservados.</p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20">© {currentYear} {company.name}. Todos os direitos reservados.</p>
+              <p className="text-[10px] font-medium text-white/15">
+                Desenvolvido por{' '}
+                <a 
+                  href="https://www.linkedin.com/in/andressasoaresvalesko/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-brand-vibrant hover:text-white transition-colors"
+                >
+                  Andressa Soares
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </Container>
