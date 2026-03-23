@@ -166,11 +166,13 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-white/20">
-          <p>© {currentYear} {company.name}. Todos os direitos reservados.</p>
-          <div className="flex gap-8">
-             <Link href="#" className="hover:text-white transition-colors">Privacidade</Link>
-             <Link href="#" className="hover:text-white transition-colors">Compliance</Link>
+        <div className="pt-12 border-t border-white/5">
+          <div className="flex flex-col items-center gap-6 text-center">
+            <div className="flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/20">
+              <Link href="/privacidade" className="hover:text-white transition-colors">Privacidade</Link>
+              <Link href="/compliance" className="hover:text-white transition-colors">Compliance</Link>
+            </div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20">© {currentYear} {company.name}. Todos os direitos reservados.</p>
           </div>
         </div>
       </Container>

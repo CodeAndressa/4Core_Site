@@ -486,14 +486,15 @@ export class ChatbotService {
    * Verificar se deve mostrar botões de contato
    */
   static shouldShowContactButtons(state: ConversationState): boolean {
-    // Mostrar se escolheu uma solução
-    if (state.interestedSolutions.length > 0) return true
+    // Apenas mostrar se escolheu uma solução E já tem dados suficientes
+    const hasChosenSolution = state.interestedSolutions.length > 0
+    const hasEnoughData = Object.keys(state.qualificationData).length >= 3
     
-    // Mostrar após 6+ mensagens do usuário
+    // OU se já teve muitas interações (8+)
     const userMessages = state.messages.filter(m => m.role === 'user').length
-    if (userMessages >= 6) return true
+    const tooManyMessages = userMessages >= 8
     
-    return false
+    return (hasChosenSolution && hasEnoughData) || tooManyMessages
   }
   
   /**
