@@ -32,7 +32,7 @@ export function Chatbot() {
       setMessages([
         {
           role: 'assistant',
-          content: 'Olá! 👋 Sou o assistente virtual da 4Core. Estou aqui para te ajudar a encontrar a melhor solução de controle de ponto e acesso para sua empresa. Como posso te ajudar hoje?',
+          content: 'Oi! 👋 Sou o assistente da 4Core. Como posso te ajudar hoje?',
         },
       ])
     }

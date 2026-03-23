@@ -58,47 +58,53 @@ const SYSTEM_PROMPT = `Você é um SDR (Sales Development Representative) digita
 
 ## SEU PAPEL:
 - Atuar como pré-vendedor consultivo
-- Qualificar leads através de perguntas estratégicas
-- Recomendar soluções baseadas no perfil do cliente
+- Fazer perguntas estratégicas UMA DE CADA VEZ
+- Recomendar soluções APENAS após entender o cenário
 - Capturar dados de contato (email ou telefone)
-- NÃO é suporte técnico, é VENDAS
 
 ## PERSONALIDADE:
-- Tom: Profissional e consultivo
-- Estilo: Direto e objetivo
-- Abordagem: Diagnóstico antes de venda
+- Tom: Amigável e profissional
+- Estilo: Conversacional e direto
+- Respostas: CURTAS (máximo 2-3 linhas)
 
 ## REGRAS OBRIGATÓRIAS:
 1. NUNCA invente informações sobre produtos ou preços
-2. SEMPRE faça perguntas de qualificação antes de sugerir solução
-3. PRIORIZE entender o cenário do cliente
-4. Use linguagem clara, sem jargões excessivos
-5. Seja empático com os problemas do cliente
-6. SEMPRE tente capturar email ou telefone antes de encerrar
-7. Ofereça próximo passo claro (WhatsApp, especialista, material)
+2. Faça APENAS UMA pergunta por vez
+3. AGUARDE a resposta antes de sugerir soluções
+4. Use linguagem simples e clara
+5. Respostas CURTAS e objetivas
+6. NÃO liste múltiplas opções de uma vez
+7. Conduza a conversa de forma natural, como um humano
 
 ## SOLUÇÕES DISPONÍVEIS:
-1. REP-P Facial Topdata - Relógio de ponto com reconhecimento facial
+1. REP-P Facial - Relógio de ponto com reconhecimento facial
 2. TopPonto Web - Software em nuvem para gestão de jornada
 3. TopPonto Mobile - App para equipes externas/home office
-4. Catracas e Bloqueios - Controle de acesso físico
-5. Terminais de Acesso Facial - Controle de áreas restritas
-6. Bastão de Ronda Viggia - Controle de rondas de segurança
+4. Catracas - Controle de acesso físico
+5. Terminais Faciais - Controle de áreas restritas
+6. Bastão de Ronda - Controle de rondas de segurança
 
 ## FLUXO DE CONVERSA:
-1. Cumprimentar e entender necessidade inicial
-2. Fazer perguntas de qualificação (tamanho, modelo de trabalho, problema)
-3. Recomendar soluções baseadas no perfil
-4. Capturar email ou telefone
-5. Oferecer próximo passo (contato com especialista)
+1. Cumprimentar de forma amigável
+2. Perguntar qual a necessidade (UMA pergunta)
+3. Fazer perguntas de qualificação (UMA por vez)
+4. SOMENTE após 3-4 respostas, sugerir solução
+5. Capturar email ou telefone
+6. Oferecer próximo passo
+
+## ESTILO DE RESPOSTA:
+❌ ERRADO: "Temos várias opções: REP-P Facial que custa X, TopPonto Web que faz Y, e também..."
+✅ CORRETO: "Entendi! Para te ajudar melhor, quantos funcionários vocês têm?"
+
+❌ ERRADO: "Baseado no seu perfil, recomendo as seguintes soluções: 1) REP-P Facial porque..."
+✅ CORRETO: "Perfeito! Para 50 funcionários presenciais, o ideal é o REP-P Facial. Quer saber mais?"
 
 ## CAPTURA DE LEAD:
-- Momento: Após 3-4 interações ou quando cliente demonstrar interesse
-- Abordagem: "Para te enviar uma proposta personalizada, qual seu e-mail ou WhatsApp?"
-- Se recusar: Oferecer material gratuito em troca
-- OBRIGATÓRIO: Não encerrar sem tentar capturar
+- Momento: Após demonstrar interesse em solução específica
+- Abordagem: "Posso te enviar mais detalhes por e-mail?"
+- Se recusar: "Sem problemas! Prefere WhatsApp?"
 
-Responda de forma natural, consultiva e sempre conduza a conversa para qualificação e captura de lead.`
+Responda de forma natural, conversacional e SEMPRE aguarde a resposta antes de avançar.`
 
 // ============================================
 // CHATBOT SERVICE
@@ -116,7 +122,7 @@ export class ChatbotService {
     // 1. Detectar intenção
     const intent = findMatchingIntent(userMessage)
     
-    // 2. Buscar soluções relevantes
+    // 2. Buscar soluções relevantes (mas não mostrar automaticamente)
     const relevantSolutions = findRelevantSolution(userMessage)
     
     // 3. Verificar se é captura de lead
@@ -158,10 +164,13 @@ export class ChatbotService {
     // 9. Verificar se precisa capturar lead
     const needsLeadCapture = this.shouldCaptureLeadNow(conversationState)
     
-    // 10. Construir resposta
+    // 10. Mostrar soluções APENAS se o bot mencionou alguma especificamente
+    const shouldShowSolutions = this.shouldShowSolutions(assistantMessage, relevantSolutions)
+    
+    // 11. Construir resposta
     const response: ChatbotResponse = {
       message: assistantMessage,
-      solutions: relevantSolutions.length > 0 ? relevantSolutions : undefined,
+      solutions: shouldShowSolutions ? relevantSolutions.slice(0, 1) : undefined, // Mostrar apenas 1
       needsLeadCapture,
       conversationEnded: conversationState.currentStep === 'closing',
     }
@@ -181,8 +190,8 @@ export class ChatbotService {
           ...messages,
         ],
         model: 'llama-3.3-70b-versatile',
-        temperature: 0.7,
-        max_tokens: 500,
+        temperature: 0.8,
+        max_tokens: 150,
       })
       
       return completion.choices[0]?.message?.content || 'Desculpe, não consegui processar sua mensagem.'
@@ -200,55 +209,56 @@ export class ChatbotService {
     intent: UserIntent | null,
     solutions: Solution[]
   ): string {
-    let context = '## CONTEXTO DA CONVERSA:\n\n'
+    let context = '## CONTEXTO:\n\n'
     
     // Intenção detectada
     if (intent) {
-      context += `Intenção detectada: ${intent.intent}\n`
-      context += `Próxima pergunta sugerida: ${intent.nextQuestion || 'Continuar qualificação'}\n\n`
+      context += `Intent: ${intent.intent}\n`
+      if (intent.nextQuestion) {
+        context += `Sugestão: ${intent.nextQuestion}\n`
+      }
+      context += '\n'
     }
     
-    // Dados de qualificação coletados
-    if (Object.keys(state.qualificationData).length > 0) {
-      context += '## DADOS COLETADOS:\n'
+    // Dados coletados (resumido)
+    const dataCount = Object.keys(state.qualificationData).length
+    if (dataCount > 0) {
+      context += `Dados coletados: ${dataCount}/7\n`
       Object.entries(state.qualificationData).forEach(([key, value]) => {
         context += `- ${key}: ${value}\n`
       })
       context += '\n'
     }
     
-    // Soluções relevantes
-    if (solutions.length > 0) {
-      context += '## SOLUÇÕES RELEVANTES:\n'
-      solutions.forEach(solution => {
-        context += `\n### ${solution.name}\n`
-        context += `${solution.description}\n`
-        context += `Ideal para: ${solution.targetAudience.join(', ')}\n`
-        context += `Resolve: ${solution.problemsSolved[0]}\n`
-      })
+    // Soluções relevantes (apenas nomes)
+    if (solutions.length > 0 && dataCount >= 2) {
+      context += 'Soluções relevantes: '
+      context += solutions.map(s => s.name).join(', ')
+      context += '\n\n'
+    }
+    
+    // Score e ações
+    if (dataCount >= 3) {
+      const score = calculateQualificationScore(state.qualificationData)
+      context += `Score: ${score}/100\n`
+      
+      if (score > 70 && !state.leadCaptured) {
+        context += 'AÇÃO: Lead quente! Capture contato agora.\n'
+      }
       context += '\n'
     }
     
-    // Score de qualificação
-    if (Object.keys(state.qualificationData).length >= 3) {
-      const score = calculateQualificationScore(state.qualificationData)
-      context += `## SCORE DE QUALIFICAÇÃO: ${score}/100\n\n`
-      
-      if (score > 70) {
-        context += 'Lead QUENTE - Priorizar captura de contato!\n\n'
-      }
-    }
-    
-    // Status de captura de lead
-    if (!state.leadCaptured && state.messages.length >= 6) {
-      context += '## AÇÃO NECESSÁRIA:\n'
-      context += 'Já houve interação suficiente. CAPTURE o email ou telefone agora!\n'
-      context += 'Use: "Para te enviar uma proposta personalizada, qual seu e-mail ou WhatsApp?"\n\n'
-    }
-    
-    if (state.leadCaptured) {
-      context += '## LEAD CAPTURADO ✓\n'
-      context += 'Email/telefone já coletado. Ofereça próximo passo (contato com especialista).\n\n'
+    // Instruções baseadas no estado
+    if (state.messages.length <= 2) {
+      context += 'INSTRUÇÃO: Faça UMA pergunta para entender a necessidade.\n'
+    } else if (dataCount < 3) {
+      context += 'INSTRUÇÃO: Continue qualificando. Faça UMA pergunta por vez.\n'
+    } else if (dataCount >= 3 && solutions.length > 0 && !state.leadCaptured) {
+      context += 'INSTRUÇÃO: Sugira UMA solução específica (a mais relevante).\n'
+    } else if (!state.leadCaptured && state.messages.length >= 6) {
+      context += 'INSTRUÇÃO: Capture email/telefone AGORA.\n'
+    } else if (state.leadCaptured) {
+      context += 'INSTRUÇÃO: Lead capturado! Ofereça próximo passo.\n'
     }
     
     return context
@@ -381,6 +391,28 @@ export class ChatbotService {
     if (state.interestedSolutions.length > 0 && state.messages.length >= 4) return true
     
     return false
+  }
+  
+  /**
+   * Verificar se deve mostrar soluções
+   */
+  private static shouldShowSolutions(assistantMessage: string, solutions: Solution[]): boolean {
+    if (solutions.length === 0) return false
+    
+    const messageLower = assistantMessage.toLowerCase()
+    
+    // Verificar se o bot mencionou alguma solução específica
+    const mentionedSolution = solutions.some(solution => {
+      const nameLower = solution.name.toLowerCase()
+      return messageLower.includes(nameLower) || 
+             messageLower.includes('rep-p') ||
+             messageLower.includes('topponto') ||
+             messageLower.includes('catraca') ||
+             messageLower.includes('bastão') ||
+             messageLower.includes('terminal')
+    })
+    
+    return mentionedSolution
   }
   
   /**
