@@ -33,9 +33,9 @@ export function Solutions() {
             className="max-w-2xl"
           >
             <SectionHeading
-              subtitle="Nossas soluções"
-              title="Relógio de ponto + software: solução completa."
-              description="Do equipamento robusto ao software inteligente, entregamos um ecossistema completo para gestão de jornada e acesso."
+              subtitle="Soluções por cenário"
+              title="Escolha a solução certa para seu tipo de empresa"
+              description="Cada negócio tem necessidades únicas. Veja qual solução resolve seu problema específico."
               noMargin
             />
           </motion.div>

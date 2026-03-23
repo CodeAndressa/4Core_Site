@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Users, Building2, Shield } from 'lucide-react'
 import { Product } from '@/types/product'
 import { Badge } from '@/components/ui/Badge'
 
@@ -10,28 +10,68 @@ interface ProductCardProps {
   badgeText?: string
 }
 
+// Contexto de uso para cada produto
+const productContext: Record<string, { forWho: string; solves: string; when: string }> = {
+  'relogio-de-ponto': {
+    forWho: 'Empresas com equipes presenciais',
+    solves: 'Elimina fraudes e garante conformidade com Portaria 671',
+    when: 'Quando você precisa de registro biométrico certificado'
+  },
+  'ponto-web': {
+    forWho: 'Departamento Pessoal e RH',
+    solves: 'Automatiza fechamento de folha e reduz retrabalho',
+    when: 'Quando você precisa de gestão centralizada e relatórios'
+  },
+  'sistema-de-ponto': {
+    forWho: 'Equipes remotas e externas',
+    solves: 'Controla jornada com geolocalização e foto',
+    when: 'Quando seus funcionários trabalham fora da empresa'
+  },
+  'controle-de-acesso': {
+    forWho: 'Empresas com áreas restritas',
+    solves: 'Controla entrada/saída e garante segurança',
+    when: 'Quando você precisa restringir acesso a áreas sensíveis'
+  },
+  'catraca': {
+    forWho: 'Empresas com alto fluxo de pessoas',
+    solves: 'Automatiza controle de acesso físico',
+    when: 'Quando você precisa de controle de fluxo automatizado'
+  },
+  'bastao-de-ronda': {
+    forWho: 'Empresas com equipe de segurança',
+    solves: 'Monitora rondas e garante cumprimento de rotas',
+    when: 'Quando você precisa comprovar rondas de segurança'
+  }
+}
+
 export function ProductCard({ product, icon, badgeText }: ProductCardProps) {
+  const context = productContext[product.slug] || {
+    forWho: 'Empresas que buscam conformidade',
+    solves: 'Resolve problemas de controle e gestão',
+    when: 'Quando você precisa de uma solução profissional'
+  }
+
   return (
     <Link 
       href={`/solucoes/${product.categories[0]}/${product.slug}`}
       className="group block h-full focus-visible:outline-none"
     >
-      <article className="h-full bg-white rounded-[32px] border border-black/[0.03] hover:shadow-premium hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col shadow-sm">
+      <article className="h-full bg-white rounded-3xl border-2 border-gray-100 hover:border-brand-vibrant hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col">
         {/* Visual Image Header */}
-        <div className="relative h-64 w-full overflow-hidden bg-brand-deep/5">
+        <div className="relative h-56 w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
           <Image 
             src={product.image} 
             alt={product.name} 
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-brand-vibrant/10 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-multiply pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           
           {badgeText && (
-             <div className="absolute top-6 right-6 z-10">
-               <Badge variant="primary" className="shadow-premium py-1 px-3">
+             <div className="absolute top-4 right-4 z-10">
+               <Badge variant="primary" className="shadow-lg py-1.5 px-3 bg-brand-vibrant text-white">
                  {badgeText}
                </Badge>
              </div>
@@ -39,26 +79,57 @@ export function ProductCard({ product, icon, badgeText }: ProductCardProps) {
         </div>
 
         {/* Content Body */}
-        <div className="p-8 lg:p-10 flex flex-col flex-1">
-          <div className="flex items-center justify-between mb-8">
-            {icon && (
-               <div className="w-14 h-14 bg-brand-vibrant/5 rounded-2xl flex items-center justify-center text-brand-vibrant group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500">
-                 {icon}
-               </div>
-            )}
-          </div>
+        <div className="p-6 flex flex-col flex-1">
+          {/* Icon */}
+          {icon && (
+            <div className="w-12 h-12 bg-brand-vibrant/10 rounded-xl flex items-center justify-center text-brand-vibrant group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500 mb-4">
+              {icon}
+            </div>
+          )}
           
-          <h3 className="text-2xl font-bold text-brand-deep mb-4 tracking-tight group-hover:text-brand-vibrant transition-colors duration-300">
+          {/* Title */}
+          <h3 className="text-xl font-bold text-brand-deep mb-3 group-hover:text-brand-vibrant transition-colors">
             {product.name}
           </h3>
-          <p className="text-text-secondary text-base leading-relaxed font-medium line-clamp-2 mb-8">
-             {product.shortDescription}
-          </p>
+
+          {/* Para quem é */}
+          <div className="mb-4 pb-4 border-b border-gray-100">
+            <div className="flex items-start gap-2 text-sm">
+              <Users className="w-4 h-4 text-brand-vibrant shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-gray-900 mb-1">Para quem é:</p>
+                <p className="text-gray-600">{context.forWho}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* O que resolve */}
+          <div className="mb-4">
+            <div className="flex items-start gap-2 text-sm">
+              <Shield className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-gray-900 mb-1">O que resolve:</p>
+                <p className="text-gray-600">{context.solves}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Quando usar */}
+          <div className="mb-6">
+            <div className="flex items-start gap-2 text-sm">
+              <Building2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-gray-900 mb-1">Quando usar:</p>
+                <p className="text-gray-600">{context.when}</p>
+              </div>
+            </div>
+          </div>
           
-          <div className="mt-auto pt-6 border-t border-black/[0.03] flex items-center justify-between">
-             <span className="text-brand-vibrant font-bold text-xs uppercase tracking-[0.15em] flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
-               Ver Detalhes <ArrowRight className="w-4 h-4" />
-             </span>
+          {/* CTA */}
+          <div className="mt-auto pt-4 border-t border-gray-100">
+            <span className="text-brand-vibrant font-bold text-sm uppercase tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all">
+              Ver solução completa <ArrowRight className="w-4 h-4" />
+            </span>
           </div>
         </div>
       </article>
