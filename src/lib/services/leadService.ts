@@ -20,6 +20,12 @@ import type { CreateLeadInput, Lead, LeadServiceResponse } from '@/types/lead'
 export async function createLead(
   input: CreateLeadInput
 ): Promise<LeadServiceResponse> {
+  // Se Supabase não estiver configurado, retorna sucesso silencioso
+  if (!supabaseAdmin) {
+    console.warn('[leadService] Supabase não configurado - lead não será salvo')
+    return { success: true }
+  }
+
   try {
     // Normalizar dados
     const leadData = {
@@ -80,6 +86,8 @@ export async function createLead(
  * Busca lead por email
  */
 export async function getLeadByEmail(email: string): Promise<Lead | null> {
+  if (!supabaseAdmin) return null
+
   try {
     const { data, error } = await supabaseAdmin
       .from('leads')
@@ -106,6 +114,10 @@ export async function updateLeadStatus(
   leadId: string,
   status: Lead['status']
 ): Promise<LeadServiceResponse> {
+  if (!supabaseAdmin) {
+    return { success: false, error: 'Supabase não configurado' }
+  }
+
   try {
     const { data, error } = await supabaseAdmin
       .from('leads')
