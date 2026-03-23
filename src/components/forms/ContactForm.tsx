@@ -54,7 +54,7 @@ export function ContactForm() {
           Solicitação Enviada!
         </h3>
         <p className="text-text-secondary text-lg mb-10 leading-relaxed">
-          Obrigado pelo seu contato. Em breve, um de nossos especialistas entrará em contato com você para darmos o próximo passo.
+          Recebemos sua mensagem! Em breve entraremos em contato para darmos o próximo passo.
         </p>
         <Button onClick={handleNewContact} variant="outline" size="lg">
           Enviar outra mensagem
@@ -221,7 +221,7 @@ export function ContactForm() {
             fullWidth
             isLoading={status === 'submitting'}
           >
-            Solicitar Diagnose com um Especialista
+            Fale com um especialista 4Core agora mesmo
           </Button>
           <p className="mt-4 text-center text-xs text-text-muted">
             Ao clicar em solicitar, você concorda com nossa política de processamento de dados para fins comerciais.
