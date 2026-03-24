@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL, ROUTES } from '@/lib/constants'
-import { products } from '@/data/products'
+import { SITE_URL } from '@/lib/constants'
+import { solutions } from '@/data/solutions'
 
 /**
  * Geração dinâmica de sitemap para o Next.js.
@@ -9,26 +9,39 @@ import { products } from '@/data/products'
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
 
-  // Rotas estáticas
+  // Rotas estáticas principais
   const staticRoutes = [
-    '',
-    ROUTES.solutions,
-    ROUTES.about,
-    ROUTES.contact,
+    { url: `${SITE_URL}`, priority: 1 },
+    { url: `${SITE_URL}/solucoes`, priority: 0.9 },
+    { url: `${SITE_URL}/sobre`, priority: 0.8 },
+    { url: `${SITE_URL}/contato`, priority: 0.8 },
+    { url: `${SITE_URL}/compliance`, priority: 0.6 },
+    { url: `${SITE_URL}/privacidade`, priority: 0.5 },
   ].map((route) => ({
-    url: `${SITE_URL}${route}`,
+    ...route,
     lastModified,
     changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1 : 0.8,
   }))
 
-  // Rotas dinâmicas das soluções
-  const dynamicRoutes = products.map((prod) => ({
-    url: `${SITE_URL}${ROUTES.solution(prod.categories[0], prod.slug)}`,
+  // Rotas das soluções principais
+  const solutionRoutes = solutions.map((solution) => ({
+    url: `${SITE_URL}/solucoes/${solution.slug}`,
     lastModified,
     changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    priority: 0.85,
   }))
 
-  return [...staticRoutes, ...dynamicRoutes]
+  // Rotas das variantes (subpáginas)
+  const variantRoutes = solutions
+    .filter((solution) => solution.variants && solution.variants.length > 0)
+    .flatMap((solution) =>
+      solution.variants!.map((variant) => ({
+        url: `${SITE_URL}/solucoes/${solution.slug}/${variant.slug}`,
+        lastModified,
+        changeFrequency: 'monthly' as const,
+        priority: 0.75,
+      }))
+    )
+
+  return [...staticRoutes, ...solutionRoutes, ...variantRoutes]
 }

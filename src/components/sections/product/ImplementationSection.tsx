@@ -3,43 +3,65 @@
 import { motion } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { CheckCircle2, Shield, Users, Zap, HeadphonesIcon } from 'lucide-react'
+import { CheckCircle2, Shield, Users, Zap, HeadphonesIcon, MapPin, Settings, Wrench, FileText } from 'lucide-react'
+
+type SolutionCategory = 'controle-de-jornada' | 'controle-de-acesso' | 'seguranca-operacional'
+
+interface ImplementationSectionProps {
+  category?: SolutionCategory
+}
+
+const config: Record<SolutionCategory, { steps: { icon: React.ReactNode; title: string; description: string }[]; guarantees: string[] }> = {
+  'controle-de-jornada': {
+    steps: [
+      { icon: <Users className="w-6 h-6" />, title: 'Consultoria Inicial', description: 'Analisamos sua operação e desenhamos a implementação ideal para seu cenário' },
+      { icon: <Shield className="w-6 h-6" />, title: 'Configuração Técnica', description: 'Parametrizamos o sistema 100% em conformidade com a Portaria 671 e suas regras internas' },
+      { icon: <Zap className="w-6 h-6" />, title: 'Integração com ERP', description: 'Conectamos com seu sistema de folha para eliminar retrabalho e erros de importação' },
+      { icon: <HeadphonesIcon className="w-6 h-6" />, title: 'Suporte Proativo', description: 'Monitoramos indicadores e antecipamos problemas antes do fechamento da folha' },
+    ],
+    guarantees: [
+      'Conformidade 100% com Portaria 671',
+      'Dados prontos para fiscalização',
+      'Redução de 80% no tempo de fechamento',
+      'Zero retrabalho com importação de dados',
+    ],
+  },
+  'controle-de-acesso': {
+    steps: [
+      { icon: <MapPin className="w-6 h-6" />, title: 'Análise de Ambientes', description: 'Mapeamos todos os pontos de controle e definimos a topologia ideal para sua estrutura' },
+      { icon: <Settings className="w-6 h-6" />, title: 'Projeto de Integração', description: 'Desenhamos a arquitetura de coletores, leitores e software para máxima eficiência' },
+      { icon: <Wrench className="w-6 h-6" />, title: 'Instalação e Configuração', description: 'Instalamos e configuramos todos os pontos de acesso com os perfis de usuário corretos' },
+      { icon: <HeadphonesIcon className="w-6 h-6" />, title: 'Treinamento e Suporte', description: 'Capacitamos a equipe e monitoramos o sistema para garantir operação sem falhas' },
+    ],
+    guarantees: [
+      'Projeto técnico personalizado para sua estrutura',
+      'Integração com sistemas de portaria e CFTV',
+      'Controle granular por usuário, horário e área',
+      'Trilha de auditoria completa de todos os acessos',
+    ],
+  },
+  'seguranca-operacional': {
+    steps: [
+      { icon: <MapPin className="w-6 h-6" />, title: 'Mapeamento de Rondas', description: 'Definimos os pontos de verificação e o roteiro ideal de ronda para sua estrutura' },
+      { icon: <Settings className="w-6 h-6" />, title: 'Instalação dos iButtons', description: 'Fixamos os botões inteligentes em locais estratégicos e invioláveis' },
+      { icon: <Zap className="w-6 h-6" />, title: 'Configuração do TopRonda', description: 'Parametrizamos o software com horários, rotas e alertas de conformidade' },
+      { icon: <FileText className="w-6 h-6" />, title: 'Treinamento e Relatórios', description: 'Capacitamos a equipe e configuramos os relatórios automáticos de auditoria' },
+    ],
+    guarantees: [
+      '100% dos postos monitorados e verificados',
+      'Relatórios invioláveis para auditoria de segurança',
+      'Comprovação de rondas com horário e rota precisos',
+      'Alertas automáticos de desvios e não conformidades',
+    ],
+  },
+}
 
 /**
  * Seção de Implementação 4Core
  * Diferencial competitivo - mostra o que vai além do produto
  */
-
-export function ImplementationSection() {
-  const steps = [
-    {
-      icon: <Users className="w-6 h-6" />,
-      title: 'Consultoria Inicial',
-      description: 'Analisamos sua operação e desenhamos a implementação ideal para seu cenário'
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: 'Configuração Técnica',
-      description: 'Parametrizamos o sistema 100% em conformidade com a Portaria 671 e suas regras internas'
-    },
-    {
-      icon: <Zap className="w-6 h-6" />,
-      title: 'Integração com ERP',
-      description: 'Conectamos com seu sistema de folha para eliminar retrabalho e erros de importação'
-    },
-    {
-      icon: <HeadphonesIcon className="w-6 h-6" />,
-      title: 'Suporte Proativo',
-      description: 'Monitoramos indicadores e antecipamos problemas antes do fechamento da folha'
-    }
-  ]
-
-  const guarantees = [
-    'Conformidade 100% com Portaria 671',
-    'Dados prontos para fiscalização',
-    'Redução de 80% no tempo de fechamento',
-    'Zero retrabalho com importação de dados'
-  ]
+export function ImplementationSection({ category = 'controle-de-jornada' }: ImplementationSectionProps) {
+  const { steps, guarantees } = config[category]
 
   return (
     <Section variant="deep" className="relative overflow-hidden">
