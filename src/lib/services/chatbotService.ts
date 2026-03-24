@@ -43,42 +43,49 @@ function normalizeText(value: string) {
     .toLowerCase()
 }
 
-const SYSTEM_PROMPT = `Você é um SDR (Sales Development Representative) digital da 4Core, empresa especializada em soluções de controle de ponto, acesso e segurança.
+const SYSTEM_PROMPT = `Você é um SDR digital da 4Core — empresa especializada em controle de ponto, acesso e segurança patrimonial.
 
-## SEU PAPEL:
-- Atuar como pré-vendedor consultivo
-- Fazer perguntas estratégicas, uma de cada vez
-- Recomendar soluções apenas após entender o cenário
-- Capturar dados de contato (e-mail ou telefone)
+## OBJETIVO:
+Entender o cenário rapidamente → Recomendar a solução → Capturar contato → Direcionar para o comercial.
+
+## FLUXO OBRIGATÓRIO:
+1. Se o usuário JÁ forneceu contexto (empresa, tamanho, problema, solução) → RECOMENDE IMEDIATAMENTE, não pergunte mais nada
+2. Se precisar de contexto → faça NO MÁXIMO 1 pergunta objetiva e curta
+3. Após recomendar → peça contato de forma natural
+4. Após capturar contato → direcione para o WhatsApp comercial
 
 ## PERSONALIDADE:
-- Tom: amigável e profissional
-- Estilo: conversacional e direto
-- Respostas: curtas (máximo de 2 a 3 linhas)
+- Tom: profissional e consultivo
+- Estilo: direto e objetivo
+- Respostas: no máximo 3 linhas
 
-## REGRAS OBRIGATÓRIAS:
-1. Nunca invente informações sobre produtos ou preços
-2. Faça apenas uma pergunta por vez
-3. Aguarde a resposta antes de sugerir soluções
-4. Use linguagem simples e clara
-5. Priorize respostas curtas e objetivas
-6. Não liste múltiplas opções de uma vez
-7. Se o usuário fizer uma pergunta direta sobre uma solução, responda primeiro com base no contexto disponível e só depois siga qualificando
+## REGRAS CRÍTICAS:
+1. NUNCA faça mais de 1 pergunta por vez
+2. Se o usuário já deu contexto suficiente, RECOMENDE JÁ — não repita diagnóstico nem peça mais dados
+3. NUNCA diga "vou te enviar por e-mail" ou "posso te mandar por e-mail" — isso não existe
+4. Quando o usuário pedir orçamento, proposta ou especialista → PARE tudo e capture o contato AGORA
+5. Em caso de erro técnico, não exponha — diga: "Tive um problema aqui, pode repetir seu contato?"
+
+## COMO RECOMENDAR:
+Seja direto. Exemplo:
+"Para um escritório com 10 pessoas, o REP-P Facial é a solução ideal — simples, sem contato e em conformidade com a Portaria 671."
+
+## COMO CAPTURAR CONTATO:
+Após recomendar, peça assim:
+"Posso te direcionar para um especialista que explica a implementação. Me informa seu WhatsApp ou e-mail?"
+Aceite qualquer um (WhatsApp OU e-mail). Não repita o pedido se recusar.
+
+## COMO FINALIZAR:
+SEMPRE diga: "Nosso time comercial vai entrar em contato em breve. Você também pode falar direto pelo WhatsApp: (41) 98847-6431"
+NUNCA prometa envio por e-mail.
 
 ## SOLUÇÕES DISPONÍVEIS:
-1. REP-P Facial - relógio de ponto com reconhecimento facial
-2. TopPonto Web - software em nuvem para gestão de jornada
-3. TopPonto Mobile - app para equipes externas e home office
-4. Catracas - controle de acesso físico
-5. Terminais faciais - controle de áreas restritas
-6. Bastão de ronda - controle de rondas de segurança
-
-## CAPTURA DE LEAD:
-- Momento: após demonstrar interesse em uma solução específica
-- Abordagem: "Posso te enviar mais detalhes por e-mail?"
-- Se recusar: "Sem problemas! Prefere WhatsApp?"
-
-Responda de forma natural, conversacional e sempre aguarde a resposta antes de avançar.`
+- REP-P Facial: relógio de ponto com reconhecimento facial, sem contato, Portaria 671
+- TopPonto Web: software em nuvem para gestão de jornada e fechamento de folha
+- TopPonto Mobile: app para equipes externas com geolocalização
+- Catracas: controle de fluxo físico em portarias (modelos Revolution, Fit, Box, PNE)
+- Terminais Faciais: controle de acesso para áreas restritas
+- Bastão de Ronda Viggia: controle de rondas de segurança patrimonial`
 
 function cloneConversationState(state: ConversationState): ConversationState {
   return {
@@ -181,17 +188,16 @@ export class ChatbotService {
   ): string {
     let context = '## CONTEXTO:\n\n'
     const dataCount = Object.keys(state.qualificationData).length
+    const userMessages = state.messages.filter((m) => m.role === 'user').length
+    const lastUserMessage = state.messages.filter((m) => m.role === 'user').slice(-1)[0]?.content ?? ''
+    const isHighIntent = this.detectHighIntent(lastUserMessage)
 
     if (intent) {
-      context += `Intent: ${intent.intent}\n`
-      if (intent.nextQuestion) {
-        context += `Sugestão: ${intent.nextQuestion}\n`
-      }
-      context += '\n'
+      context += `Intenção detectada: ${intent.intent}\n\n`
     }
 
     if (dataCount > 0) {
-      context += `Dados coletados: ${dataCount}/7\n`
+      context += 'Contexto do usuário:\n'
       Object.entries(state.qualificationData).forEach(([key, value]) => {
         context += `- ${key}: ${value}\n`
       })
@@ -199,52 +205,31 @@ export class ChatbotService {
     }
 
     if (solutions.length > 0) {
-      context += `Soluções relevantes: ${solutions.map((solution) => solution.name).join(', ')}\n\n`
+      context += `Soluções relevantes: ${solutions.map((s) => s.name).join(', ')}\n\n`
     }
 
-    if (dataCount >= 3) {
-      const score = calculateQualificationScore(state.qualificationData)
-      context += `Score: ${score}/100\n`
-      if (score > 70 && !state.leadCaptured) {
-        context += 'AÇÃO: Lead quente. Capture e-mail ou WhatsApp.\n'
-      }
-      context += '\n'
-    }
-
-    if (state.messages.length <= 2) {
-      context += 'INSTRUÇÃO: Entenda a necessidade principal com uma pergunta objetiva.\n'
-    } else if (dataCount < 3) {
-      context += 'INSTRUÇÃO: Continue qualificando com uma pergunta por vez.\n'
-    } else if (!state.leadCaptured) {
-      context += 'INSTRUÇÃO: Recomende a solução mais adequada e peça e-mail ou WhatsApp.\n'
+    // Instrução baseada no estado — sem limiar artificial de 3 dados
+    if (isHighIntent && !state.leadCaptured) {
+      context += 'PRIORIDADE MÁXIMA: O usuário quer orçamento ou falar com especialista. CAPTURE O CONTATO AGORA. Não faça mais perguntas. Direcione para WhatsApp: (41) 98847-6431.\n'
+    } else if (state.leadCaptured) {
+      context += 'INSTRUÇÃO: Contato capturado. Finalize direcionando para o WhatsApp comercial: (41) 98847-6431.\n'
+    } else if (dataCount >= 1 || solutions.length > 0 || userMessages >= 2) {
+      context += 'INSTRUÇÃO: Você já tem contexto suficiente. Recomende a solução mais adequada agora e peça o contato do usuário (WhatsApp ou e-mail). Direcione para WhatsApp: (41) 98847-6431 ou (41) 98803-5657.\n'
     } else {
-      context += 'INSTRUÇÃO: Lead capturado. Ofereça o próximo passo.\n'
+      context += 'INSTRUÇÃO: Faça UMA pergunta objetiva para entender o cenário (ex: quantos funcionários ou qual o principal problema).\n'
     }
 
     return context
   }
 
-  private static findDirectInfoSolution(userMessage: string, solutions: Solution[]) {
-    if (solutions.length === 0) return null
-
-    const lowerMessage = userMessage.toLowerCase()
-    const looksInformational =
-      lowerMessage.includes('?') ||
-      /(o que|como funciona|para que|serve|diferença|qual a diferença|preço|valor|quanto custa|me explica)/i.test(
-        lowerMessage
-      )
-
-    return looksInformational ? solutions[0] : null
+  private static detectHighIntent(message: string): boolean {
+    const lower = message.toLowerCase()
+    return /(orçamento|orcamento|proposta|cotação|cotacao|valor|quanto custa|especialista|falar com|quero comprar|quero contratar|urgente|imediato)/i.test(lower)
   }
 
   private static buildInformationalResponse(solution: Solution) {
     const mainBenefit = solution.benefits[0]
-    const nextQuestion =
-      solution.category === 'controle-de-jornada'
-        ? 'Sua equipe é mais presencial, híbrida ou externa?'
-        : 'Hoje você precisa controlar acesso de funcionários, visitantes ou ambos?'
-
-    return `${solution.name} é ${solution.description.toLowerCase()}. O principal ganho é ${mainBenefit.toLowerCase()}. ${nextQuestion}`
+    return `${solution.name} é ${solution.description.toLowerCase()}. Principal ganho: ${mainBenefit.toLowerCase()}. Posso te conectar com um especialista para detalhar como funciona na sua operação. Me informa seu WhatsApp ou e-mail?`
   }
 
   private static resolveInformationalSolution(userMessage: string, solutions: Solution[]) {
@@ -337,7 +322,7 @@ export class ChatbotService {
       return state
     }
 
-    if (assistantMessage.toLowerCase().includes('email') || assistantMessage.toLowerCase().includes('whatsapp')) {
+    if (assistantMessage.toLowerCase().includes('whatsapp') || assistantMessage.toLowerCase().includes('98847') || assistantMessage.toLowerCase().includes('98803') || assistantMessage.toLowerCase().includes('9893')) {
       state.currentStep = 'capturing_lead'
       return state
     }
@@ -396,12 +381,9 @@ export class ChatbotService {
 
   private static shouldCaptureLeadNow(state: ConversationState): boolean {
     if (state.leadCaptured) return false
-    if (state.messages.length >= 8) return true
-
-    const score = calculateQualificationScore(state.qualificationData)
-    if (score > 70) return true
-
-    return state.interestedSolutions.length > 0 && state.messages.length >= 4
+    const userMessages = state.messages.filter((m) => m.role === 'user').length
+    // Captura após 2ª mensagem do usuário, ou assim que uma solução for identificada
+    return userMessages >= 2 || state.interestedSolutions.length > 0
   }
 
   private static shouldShowSolutions(assistantMessage: string, solutions: Solution[]): boolean {
@@ -479,10 +461,9 @@ export class ChatbotService {
 
   static shouldShowContactButtons(state: ConversationState): boolean {
     const hasChosenSolution = state.interestedSolutions.length > 0
-    const hasEnoughData = Object.keys(state.qualificationData).length >= 3
-    const userMessages = state.messages.filter((message) => message.role === 'user').length
-
-    return (hasChosenSolution && hasEnoughData) || userMessages >= 8
+    const userMessages = state.messages.filter((m) => m.role === 'user').length
+    // Mostra botões de contato após 2ª mensagem ou assim que uma solução for identificada
+    return hasChosenSolution || userMessages >= 2
   }
 
   static prepareLeadForDatabase(state: ConversationState): ChatbotLead {

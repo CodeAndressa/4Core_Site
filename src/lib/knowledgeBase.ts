@@ -503,13 +503,12 @@ export const botRules = {
   
   guidelines: [
     'NUNCA inventar informações sobre produtos ou preços',
-    'SEMPRE fazer perguntas de qualificação antes de sugerir solução',
-    'PRIORIZAR entendimento do cenário do cliente',
+    'Se o usuário já deu contexto suficiente, RECOMENDE IMEDIATAMENTE — não faça mais perguntas',
+    'Fazer no máximo 1 pergunta quando for realmente necessário entender o cenário',
     'Usar linguagem clara e sem jargões técnicos excessivos',
-    'Ser empático com os problemas do cliente',
-    'Conduzir a conversa de forma natural',
-    'Capturar lead ANTES de encerrar a conversa',
-    'Oferecer próximo passo claro (WhatsApp, especialista, material)',
+    'Capturar contato (WhatsApp OU e-mail) após recomendar — aceitar qualquer um dos dois',
+    'NUNCA prometer envio por e-mail — a 4Core não envia materiais por e-mail',
+    'Finalizar sempre direcionando para o WhatsApp comercial: (41) 98847-6431',
   ],
   
   prohibitions: [
@@ -535,45 +534,39 @@ export const botRules = {
 export const conversionTriggers: ConversionTrigger[] = [
   {
     trigger: 'high_interest',
-    condition: 'Cliente fez 3+ perguntas sobre produto específico',
+    condition: 'Cliente demonstrou interesse em uma solução',
     action: 'capture_lead',
-    message: 'Vejo que você está bem interessado! Posso te enviar uma proposta personalizada com valores e condições. Qual seu e-mail ou WhatsApp?',
+    message: 'Posso te direcionar para um especialista que vai detalhar a implementação. Me informa seu WhatsApp ou e-mail?',
   },
   {
     trigger: 'urgency_detected',
     condition: 'Cliente mencionou urgência ou prazo curto',
     action: 'suggest_specialist',
-    message: 'Entendo a urgência! Vou te conectar com um especialista que pode acelerar o processo. Me passa seu contato?',
+    message: 'Entendo a urgência. Posso te conectar agora com um especialista. Me passa seu WhatsApp ou e-mail?',
   },
   {
     trigger: 'budget_question',
-    condition: 'Cliente perguntou sobre preços',
+    condition: 'Cliente perguntou sobre preços ou orçamento',
     action: 'capture_lead',
-    message: 'Para te passar um orçamento preciso, preciso de algumas informações. Posso te enviar por e-mail ou WhatsApp?',
-  },
-  {
-    trigger: 'comparison_request',
-    condition: 'Cliente quer comparar soluções',
-    action: 'send_material',
-    message: 'Tenho um material comparativo completo. Te envio por e-mail?',
+    message: 'Posso te conectar com um especialista para um orçamento personalizado. Me informa seu WhatsApp ou e-mail?',
   },
   {
     trigger: 'technical_doubt',
     condition: 'Cliente tem dúvidas técnicas complexas',
     action: 'suggest_specialist',
-    message: 'Essa é uma ótima pergunta técnica! Nosso especialista pode te explicar melhor. Qual seu WhatsApp para ele te chamar?',
+    message: 'Nosso especialista técnico pode te responder isso com precisão. Qual seu WhatsApp para ele entrar em contato?',
   },
   {
     trigger: 'end_of_conversation',
     condition: 'Cliente indica que vai encerrar',
     action: 'capture_lead',
-    message: 'Antes de você ir, posso te enviar um resumo do que conversamos e uma proposta inicial? Só preciso do seu e-mail ou WhatsApp.',
+    message: 'Antes de ir — posso te conectar com um especialista para continuar quando quiser. Me passa seu WhatsApp ou e-mail?',
   },
   {
     trigger: 'positive_feedback',
     condition: 'Cliente demonstrou satisfação com a solução',
     action: 'suggest_whatsapp',
-    message: 'Que bom que fez sentido! Quer falar direto com nossa equipe comercial pelo WhatsApp? É só um clique: [link]',
+    message: 'Que bom que fez sentido! Nosso time comercial pode te passar todos os detalhes: (41) 98847-6431',
   },
 ]
 
@@ -583,20 +576,19 @@ export const conversionTriggers: ConversionTrigger[] = [
 
 export const leadCaptureTemplates = {
   initial: [
-    'Para te enviar uma proposta personalizada, qual seu e-mail ou WhatsApp?',
-    'Posso te mandar um material completo sobre isso. Me passa seu contato?',
-    'Vou preparar uma recomendação específica para seu caso. Qual seu e-mail?',
+    'Posso te direcionar para um especialista que explica como implementar. Me informa seu WhatsApp ou e-mail?',
+    'Nosso time pode te dar todos os detalhes. Me passa seu contato (WhatsApp ou e-mail)?',
+    'Para te conectar com um especialista, me informa seu WhatsApp ou e-mail?',
   ],
-  
+
   afterRefusal: [
-    'Sem problemas! Então me passa só seu WhatsApp para eu te adicionar no grupo de novidades?',
-    'Entendo. Pelo menos me deixa seu telefone para um especialista te ligar?',
+    'Sem problemas. Você também pode falar direto pelo WhatsApp: (41) 98847-6431',
+    'Tudo bem. Se precisar, nosso time está disponível em: (41) 98847-6431',
   ],
-  
+
   valueProposition: [
-    'Te envio um checklist gratuito de conformidade com a Portaria 671. Qual seu e-mail?',
-    'Tenho um case de sucesso de empresa similar à sua. Quer receber?',
-    'Posso te mandar uma calculadora de ROI para você ver a economia. Me passa seu e-mail?',
+    'Nosso especialista pode te mostrar como outras empresas do seu segmento implementaram. Me passa seu contato?',
+    'Posso te conectar com quem vai montar a proposta certa para o seu cenário. WhatsApp ou e-mail?',
   ],
 }
 
