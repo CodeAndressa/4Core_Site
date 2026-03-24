@@ -136,3 +136,11 @@ export function trackDiagnosticoComplete(page: string) {
     source: 'diagnostico',
   })
 }
+
+export function trackLeadCaptured(page: string, source?: string) {
+  trackEvent({
+    type: 'lead_captured',
+    page,
+    source: source ?? 'diagnostico',
+  })
+}

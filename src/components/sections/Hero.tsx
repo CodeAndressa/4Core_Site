@@ -133,7 +133,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
-              className="absolute -bottom-8 -left-12 z-20 bg-white/95 p-6 rounded-2xl shadow-2xl border border-brand-lilac/40 max-w-[280px]"
+              className="absolute -bottom-8 -right-12 z-20 bg-white/95 p-6 rounded-2xl shadow-2xl border border-brand-lilac/40 max-w-[280px]"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-brand-lilac/40 rounded-xl flex items-center justify-center text-brand-nebula">
