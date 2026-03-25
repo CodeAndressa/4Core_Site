@@ -221,7 +221,7 @@ export function Chatbot() {
                       const summary = nextState
                         ? generateWhatsAppSummary(nextState)
                         : `Olá! Gostaria de falar com um especialista sobre ${solution.name}`
-                      const whatsappNumber = '5541988476431'
+                      const whatsappNumber = '5541988035657'
                       const whatsappMessage = encodeURIComponent(summary)
                       window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank')
                     }}
