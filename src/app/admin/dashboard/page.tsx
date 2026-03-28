@@ -20,12 +20,15 @@ export default function DashboardPage() {
     start: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
     end: new Date().toISOString(),
   })
+  const [stats, setStats] = useState<any>(null)
+  const [populating, setPopulating] = useState(false)
 
   const router = useRouter()
   const supabase = createClient()
 
   useEffect(() => {
     checkAuth()
+    fetchStats()
   }, [])
 
   useEffect(() => {
@@ -78,6 +81,42 @@ export default function DashboardPage() {
     setDateRange({ start, end })
   }
 
+  const fetchStats = async () => {
+    try {
+      const response = await fetch('/api/analytics/stats')
+      const result = await response.json()
+      if (result.success) {
+        setStats(result.data)
+      }
+    } catch {
+      // Silenciar erro
+    }
+  }
+
+  const handlePopulateData = async () => {
+    if (!confirm('Isso irá adicionar dados de teste dos últimos 30 dias. Continuar?')) {
+      return
+    }
+
+    setPopulating(true)
+    try {
+      const response = await fetch('/api/analytics/populate', { method: 'POST' })
+      const result = await response.json()
+
+      if (result.success) {
+        alert(`✅ Sucesso! ${result.data.eventsCreated} eventos criados em ${result.data.sessionsCreated} sessões.`)
+        await fetchStats()
+        await fetchDashboard()
+      } else {
+        alert(`❌ Erro: ${result.error}`)
+      }
+    } catch (error) {
+      alert('❌ Erro ao popular dados')
+    } finally {
+      setPopulating(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -120,13 +159,27 @@ export default function DashboardPage() {
               <p className="text-sm text-gray-600 mt-1">
                 {new Date(data.period.start).toLocaleDateString('pt-BR')} - {new Date(data.period.end).toLocaleDateString('pt-BR')}
               </p>
+              {stats && (
+                <p className="text-xs text-gray-500 mt-1">
+                  📊 {stats.totalEvents.toLocaleString()} eventos no banco
+                </p>
+              )}
             </div>
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-            >
-              Sair
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={handlePopulateData}
+                disabled={populating}
+                className="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition disabled:opacity-50"
+              >
+                {populating ? '⏳ Populando...' : '🎲 Popular Dados'}
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+              >
+                Sair
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -138,21 +191,51 @@ export default function DashboardPage() {
 
         {!hasData ? (
           <div className="bg-white rounded-xl p-12 text-center shadow-sm border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Nenhum dado encontrado</h2>
+            <div className="text-6xl mb-4">📊</div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Nenhum dado no período selecionado</h2>
             <p className="text-gray-600 mb-6">
-              Não há eventos registrados no período selecionado.
+              {stats?.totalEvents > 0 
+                ? 'Há eventos no banco, mas não no período selecionado. Tente "Todos os dados" no filtro acima.'
+                : 'Não há eventos registrados no banco de dados.'}
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
-              <p className="text-sm text-blue-800 mb-2">
-                <strong>Como gerar dados:</strong>
-              </p>
-              <ul className="text-sm text-blue-700 text-left space-y-1">
-                <li>- Navegue pelas páginas do site</li>
-                <li>- Clique no botão WhatsApp</li>
-                <li>- Envie o formulário de contato</li>
-                <li>- Selecione &quot;Todos os dados&quot; no filtro acima</li>
-              </ul>
+            
+            <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-6">
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <p className="text-sm font-semibold text-purple-900 mb-2">🎲 Opção 1: Dados de Teste</p>
+                <p className="text-sm text-purple-700 mb-3">
+                  Clique em &quot;Popular Dados&quot; no topo para gerar 30 dias de dados realistas.
+                </p>
+                <button
+                  onClick={handlePopulateData}
+                  disabled={populating}
+                  className="w-full px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition disabled:opacity-50"
+                >
+                  {populating ? '⏳ Populando...' : '🎲 Popular Dados Agora'}
+                </button>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm font-semibold text-blue-900 mb-2">🌐 Opção 2: Dados Reais</p>
+                <p className="text-sm text-blue-700 mb-1">
+                  Navegue pelo site para gerar eventos:
+                </p>
+                <ul className="text-xs text-blue-600 text-left space-y-1">
+                  <li>✓ Visite páginas diferentes</li>
+                  <li>✓ Clique no botão WhatsApp</li>
+                  <li>✓ Envie formulários</li>
+                </ul>
+              </div>
             </div>
+
+            {stats && (
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 max-w-2xl mx-auto">
+                <p className="text-xs font-semibold text-gray-700 mb-2">📈 Status do Banco:</p>
+                <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                  <div>Total de eventos: <strong>{stats.totalEvents}</strong></div>
+                  <div>Tipos: <strong>{Object.keys(stats.eventsByType || {}).length}</strong></div>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <>

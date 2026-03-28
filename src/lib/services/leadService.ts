@@ -55,7 +55,7 @@ export async function createLead(
       utm_medium: input.utm_medium || null,
       utm_campaign: input.utm_campaign || null,
       interest: input.interest?.trim() || null,
-      status: 'novo',
+      status: 'new',
     }
 
     // Inserir no Supabase
@@ -160,5 +160,29 @@ export async function updateLeadStatus(
       success: false,
       error: 'Erro interno ao atualizar lead.',
     }
+  }
+}
+
+/**
+ * Busca todos os leads (Admin)
+ */
+export async function getAllLeads(): Promise<Lead[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error || !data) {
+      console.error('[leadService] Erro ao buscar todos os leads:', error?.message)
+      return []
+    }
+
+    return data as Lead[]
+  } catch (error) {
+    console.error('[leadService] Erro inesperado ao buscar leads:', error)
+    return []
   }
 }

@@ -13,6 +13,7 @@ export function DateFilter({ onFilterChange }: DateFilterProps) {
   const [customEnd, setCustomEnd] = useState('')
 
   const ranges = [
+    { value: '24h', label: 'Últimas 24h' },
     { value: '7d', label: 'Últimos 7 dias' },
     { value: '30d', label: 'Últimos 30 dias' },
     { value: '90d', label: 'Últimos 90 dias' },
@@ -33,6 +34,9 @@ export function DateFilter({ onFilterChange }: DateFilterProps) {
     const startDate = new Date()
     
     switch (range) {
+      case '24h':
+        startDate.setDate(endDate.getDate() - 1)
+        break
       case '7d':
         startDate.setDate(endDate.getDate() - 7)
         break
@@ -43,8 +47,8 @@ export function DateFilter({ onFilterChange }: DateFilterProps) {
         startDate.setDate(endDate.getDate() - 90)
         break
       case 'all':
-        // Começar de 1 ano atrás para pegar todos os dados
-        startDate.setFullYear(endDate.getFullYear() - 1)
+        // Começar de 2 anos atrás para pegar todos os dados
+        startDate.setFullYear(endDate.getFullYear() - 2)
         break
     }
     

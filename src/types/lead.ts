@@ -2,7 +2,7 @@
  * Tipos do sistema de Leads/CRM
  */
 
-export type LeadStatus = 'novo' | 'contatado' | 'qualificado' | 'convertido' | 'perdido'
+export type LeadStatus = 'new' | 'contacting' | 'no_response' | 'closed' | 'invalid'
 
 export const LEAD_SOURCE_CHANNELS = ['form', 'whatsapp', 'phone', 'email'] as const
 
