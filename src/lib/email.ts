@@ -92,6 +92,7 @@ export async function sendContactEmail(
  * Envia um e-mail rico e formatado para o lead que baixou um material.
  */
 function buildLeadMagnetHtml(name: string): string {
+  // force turbopack cache rebuild
   return `
     <!DOCTYPE html>
     <html lang="pt-BR">
