@@ -7,8 +7,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { cn } from '@/lib/utils'
 
-const WhatsAppButton = dynamic(
-  () => import('@/components/layout/WhatsAppButton').then((mod) => mod.WhatsAppButton),
+const FloatingContactMenu = dynamic(
+  () => import('@/components/layout/FloatingContactMenu').then((mod) => mod.FloatingContactMenu),
   { ssr: false }
 )
 const Chatbot = dynamic(() => import('@/components/ui/Chatbot').then((mod) => mod.Chatbot), {
@@ -24,6 +24,7 @@ export function AppShell({ children }: AppShellProps) {
   const isAdminRoute = pathname?.startsWith('/admin')
   const isHomeRoute = pathname === '/'
   const [showFloatingUi, setShowFloatingUi] = useState(false)
+  const [chatbotOpen, setChatbotOpen] = useState(false)
 
   useEffect(() => {
     if (isAdminRoute) {
@@ -38,11 +39,11 @@ export function AppShell({ children }: AppShellProps) {
     }
 
     if (win.requestIdleCallback) {
-      const idleId = win.requestIdleCallback(loadFloatingUi, { timeout: 1500 })
+      const idleId = win.requestIdleCallback(loadFloatingUi, { timeout: 500 })
       return () => win.cancelIdleCallback?.(idleId)
     }
 
-    const timeoutId = setTimeout(loadFloatingUi, 800)
+    const timeoutId = setTimeout(loadFloatingUi, 200)
     return () => clearTimeout(timeoutId)
   }, [isAdminRoute])
 
@@ -55,8 +56,17 @@ export function AppShell({ children }: AppShellProps) {
       <Header />
       <main className={cn('flex-1', isHomeRoute ? 'pt-0' : 'pt-[86px]')}>{children}</main>
       <Footer />
-      {showFloatingUi && <WhatsAppButton />}
-      {showFloatingUi && <Chatbot />}
+      {showFloatingUi && (
+        <FloatingContactMenu 
+          onOpenChatbot={() => setChatbotOpen(true)} 
+        />
+      )}
+      {showFloatingUi && (
+        <Chatbot 
+          isOpen={chatbotOpen} 
+          onClose={() => setChatbotOpen(false)} 
+        />
+      )}
     </>
   )
 }

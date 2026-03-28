@@ -10,8 +10,9 @@ export const WHATSAPP_MESSAGE =
   process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE ||
   'Olá! Gostaria de falar com um especialista da 4Core.'
 
-export function getWhatsAppUrl(): string {
-  const encodedMessage = encodeURIComponent(WHATSAPP_MESSAGE)
+export function getWhatsAppUrl(customMessage?: string): string {
+  const msg = customMessage || WHATSAPP_MESSAGE
+  const encodedMessage = encodeURIComponent(msg)
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
 }
 

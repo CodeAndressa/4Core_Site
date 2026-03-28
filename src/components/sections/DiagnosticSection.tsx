@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2, ArrowRight, Users, Building2, Clock, AlertTriangle, X } from 'lucide-react'
+import { CheckCircle2, ArrowRight, Users, Building2, Clock, AlertTriangle, X, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { LeadCaptureModal } from '@/components/ui/LeadCaptureModal'
+import { getWhatsAppUrl } from '@/lib/constants'
 import {
   trackDiagnosticoAnswer,
   trackDiagnosticoComplete,
@@ -302,15 +303,24 @@ export function DiagnosticSection({ isOpen, onClose }: DiagnosticSectionProps) {
                           {recommendation.cta} <ArrowRight className="ml-2 w-5 h-5" />
                         </Button>
                         <Button
+                          href={getWhatsAppUrl(`Olá! Fiz o diagnóstico no site para minha empresa com ${answers.employees} funcionários. O resultado foi: ${recommendation.title}. Como podemos prosseguir?`)}
+                          target="_blank"
+                          variant="outline"
+                          size="lg"
+                          className="px-8 py-6 text-base font-bold border-green-500 text-green-600 hover:bg-green-50"
+                        >
+                          <MessageCircle className="mr-2 w-5 h-5" /> Falar agora no WhatsApp
+                        </Button>
+                        <Button
                           onClick={() => {
                             setCurrentStep('employees')
                             setAnswers({})
                           }}
-                          variant="outline"
+                          variant="ghost"
                           size="lg"
-                          className="px-8 py-6 text-base font-bold"
+                          className="px-8 py-6 text-base font-bold text-gray-400"
                         >
-                          Refazer diagnóstico
+                          Refazer
                         </Button>
                       </div>
                     </motion.div>

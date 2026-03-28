@@ -40,16 +40,16 @@ export function WhatsAppFloat({ href, label, color, index }: WhatsAppFloatProps)
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.95 }}
       aria-label={`WhatsApp ${label}`}
-      className="flex items-center gap-2.5 pl-3 pr-4 py-2.5 rounded-full text-white shadow-2xl font-semibold text-sm transition-shadow hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+      className="flex items-center gap-1.5 sm:gap-2.5 p-2 sm:pl-3 sm:pr-4 py-2 sm:py-2.5 rounded-full text-white shadow-2xl font-semibold text-xs sm:text-sm transition-shadow hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
       style={{ backgroundColor: color }}
     >
-      <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-white/20 shrink-0">
+      <span className="relative flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 shrink-0">
         {index === 0 && (
           <span className="absolute inset-0 rounded-full animate-ping opacity-40" style={{ backgroundColor: color }} />
         )}
-        <WhatsAppIcon size={16} />
+        <WhatsAppIcon size={14} />
       </span>
-      <span>{label}</span>
+      <span className="hidden xs:inline">{label}</span>
     </motion.a>
   )
 }

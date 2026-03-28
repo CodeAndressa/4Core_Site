@@ -2,11 +2,12 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ShieldCheck, AlertTriangle, CheckCircle2, TrendingUp, Sparkles } from 'lucide-react'
+import { ShieldCheck, AlertTriangle, CheckCircle2, TrendingUp, Sparkles, MessageCircle } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
+import { getWhatsAppUrl } from '@/lib/constants'
 
 interface HeroProps {
   onOpenDiagnostic?: () => void
@@ -47,7 +48,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
               </span>
             </Badge>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.05] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.1] tracking-tight">
               Evite processos trabalhistas com{' '}
               <span className="text-brand-vibrant">controle de ponto em conformidade</span>
             </h1>
@@ -92,12 +93,31 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
               <Button
                 onClick={onOpenDiagnostic}
                 size="lg"
-                className="px-8 py-6 text-base font-black bg-gradient-to-r from-brand-lilac via-white to-brand-lilac text-brand-nebula hover:from-white hover:to-brand-lilac border border-white/35 shadow-[0_18px_42px_-18px_rgba(123,0,255,0.9)] cta-diagnostic"
+                className="px-8 py-6 text-base font-black bg-gradient-to-r from-brand-lilac via-white to-brand-lilac text-brand-nebula hover:from-white hover:to-brand-lilac border border-white/35 shadow-[0_18px_42_px_-18px_rgba(123,0,255,0.9)] cta-diagnostic"
               >
                 <Sparkles className="mr-2 w-5 h-5" />
                 Fazer diagnóstico rápido
               </Button>
             </div>
+
+            {/* Micro-CTA WhatsApp */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="mt-6 flex items-center justify-center sm:justify-start gap-2"
+            >
+              <p className="text-white/60 text-sm font-medium italic">Prefere falar agora?</p>
+              <a
+                href={getWhatsAppUrl('Olá! Vi o herói do site e gostaria de falar agora com um especialista sobre controle de ponto.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-green-400 hover:text-green-300 transition-all font-bold text-sm tracking-tight border-b border-green-400/30 hover:border-green-300 pb-0.5"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Chamar especialista no WhatsApp
+              </a>
+            </motion.div>
 
             <div className="mt-8 flex items-center gap-6 text-sm text-white/75">
               <div className="flex items-center gap-2">
@@ -115,16 +135,16 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="relative hidden lg:block"
+            className="relative block mt-12 lg:mt-0"
           >
             <div className="absolute -inset-8 rounded-[42px] bg-brand-vibrant/20 blur-3xl" />
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl bg-brand-deep/50 border border-white/10 aspect-[4/5] max-w-[500px] ml-auto">
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl bg-brand-deep/50 border border-white/10 aspect-[4/5] max-w-[500px] mx-auto lg:ml-auto">
               <Image
-                src="/images/products/app-mobile.png"
-                alt="Aplicativo Mobile TopPonto - Controle de Ponto Digital"
+                src="/images/products/facial-reader.png"
+                alt="Leitor Facial TopPonto - Reconhecimento Facial de Alta Precisão"
                 width={600}
                 height={750}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-4"
                 priority
               />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#120224] via-[#120224]/50 to-transparent" />

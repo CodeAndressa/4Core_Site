@@ -39,8 +39,23 @@ function generateWhatsAppSummary(state: ConversationState): string {
   return parts.join(' ')
 }
 
-export function Chatbot() {
-  const [isOpen, setIsOpen] = useState(false)
+export function Chatbot({ 
+  isOpen: externalIsOpen, 
+  onClose: externalOnClose 
+}: { 
+  isOpen?: boolean; 
+  onClose?: () => void 
+}) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen
+  
+  const setIsOpen = (value: boolean) => {
+    if (externalOnClose && !value) {
+      externalOnClose()
+    } else {
+      setInternalIsOpen(value)
+    }
+  }
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -130,7 +145,7 @@ export function Chatbot() {
     }
   }
 
-  if (!isOpen) {
+  if (!isOpen && externalIsOpen === undefined) {
     return (
       <button
         onClick={() => setIsOpen(true)}
@@ -149,8 +164,8 @@ export function Chatbot() {
             </div>
 
             <div className="text-left">
-              <div className="text-white font-bold text-sm">Fale com a 4Core</div>
-              <div className="text-purple-100 text-xs">Atendimento inteligente</div>
+              <div className="text-white font-bold text-sm">Contatos</div>
+              <div className="text-purple-100 text-xs hidden sm:block">Atendimento inteligente</div>
             </div>
           </div>
         </div>
@@ -159,7 +174,7 @@ export function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200">
+    <div className="fixed bottom-4 left-4 right-4 sm:right-auto sm:w-96 h-[85vh] sm:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200">
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5">
