@@ -109,7 +109,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             >
               <p className="text-white/60 text-sm font-medium italic">Prefere falar agora?</p>
               <a
-                href={getWhatsAppUrl('Olá! Vi o herói do site e gostaria de falar agora com um especialista sobre controle de ponto.')}
+                href={getWhatsAppUrl('Olá, quero falar com um especialista!')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-green-400 hover:text-green-300 transition-all font-bold text-sm tracking-tight border-b border-green-400/30 hover:border-green-300 pb-0.5"

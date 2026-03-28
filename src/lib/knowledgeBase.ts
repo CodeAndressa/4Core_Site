@@ -287,7 +287,7 @@ export const solutions: Solution[] = [
     benefits: [
       'Garantia de execução de rondas',
       'Relatórios invioláveis',
-      'Leitura ultra-rápida',
+      'Leitura ultrarrápida',
       'Alta durabilidade',
       'Custo-benefício excelente',
     ],
@@ -508,7 +508,7 @@ export const botRules = {
     'Usar linguagem clara e sem jargões técnicos excessivos',
     'Capturar contato (WhatsApp OU e-mail) após recomendar — aceitar qualquer um dos dois',
     'NUNCA prometer envio por e-mail — a 4Core não envia materiais por e-mail',
-    'Finalizar sempre direcionando para o WhatsApp comercial: (41) 98847-6431',
+    'Finalizar sempre direcionando para o WhatsApp comercial: (41) 98803-5657',
   ],
   
   prohibitions: [
@@ -566,7 +566,7 @@ export const conversionTriggers: ConversionTrigger[] = [
     trigger: 'positive_feedback',
     condition: 'Cliente demonstrou satisfação com a solução',
     action: 'suggest_whatsapp',
-    message: 'Que bom que fez sentido! Nosso time comercial pode te passar todos os detalhes: (41) 98847-6431',
+    message: 'Que bom que fez sentido! Nosso time comercial pode te passar todos os detalhes: (41) 98803-5657',
   },
 ]
 
@@ -582,8 +582,8 @@ export const leadCaptureTemplates = {
   ],
 
   afterRefusal: [
-    'Sem problemas. Você também pode falar direto pelo WhatsApp: (41) 98847-6431',
-    'Tudo bem. Se precisar, nosso time está disponível em: (41) 98847-6431',
+    'Sem problemas. Você também pode falar direto pelo WhatsApp: (41) 98803-5657',
+    'Tudo bem. Se precisar, nosso time está disponível em: (41) 98803-5657',
   ],
 
   valueProposition: [

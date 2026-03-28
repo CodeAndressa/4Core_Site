@@ -24,7 +24,7 @@ export const products: Product[] = [
     slug: 'relogio-de-ponto',
     categories: ['controle-de-jornada', 'controle-de-acesso'],
     name: 'REP-P facial: registro sem contato',
-    shortDescription: 'Hardware Topdata com IA e reconhecimento facial ultra-rápido para conformidade 671.',
+    shortDescription: 'Hardware Topdata com IA e reconhecimento facial ultrarrápido para conformidade 671.',
     description: 'Relógio de ponto com reconhecimento facial seguro, leitura precisa e total aderência às normas da Portaria 671. Equipado com IA para detecção de rosto vivo, eliminando fraudes e garantindo agilidade na entrada e saída.',
     image: '/images/topdata-facial-hero.png',
     problem: 'Fraudes no registro de ponto (marcação por terceiros), filas lentas e riscos de contaminação por contato físico.',
@@ -81,7 +81,7 @@ export const products: Product[] = [
     solution: 'App com prova de vida (reconhecimento facial) e marcação vinculada à coordenada GPS exata no momento do registro.',
     benefits: [
       'Geofencing (Cerca geográfica inteligente)',
-      'Funcionamento Offline with sincronização posterior',
+      'Funcionamento Offline com sincronização posterior',
       'Reconhecimento Facial (Bio-prova de vida)',
       'Redução de custos com infraestrutura física'
     ],
@@ -150,7 +150,7 @@ export const products: Product[] = [
     slug: 'bastao-de-ronda',
     categories: ['seguranca-operacional'],
     name: 'Bastão de ronda Viggia',
-    shortDescription: 'Soluções completa para controle de rondas, garantindo que vigilantes sigam a rota planejada.',
+    shortDescription: 'Soluções completas para controle de rondas, garantindo que vigilantes sigam a rota planejada.',
     description: 'O kit Viggia é formado por três componentes (Bastão Viggia, iButtons e Software TopRonda). Desenvolvido pela Topdata, permite monitorar de perto a equipe de vigilância para assegurar execução correta de roteiros e horários, sendo robusto, confiável e com excelente custo-benefício.',
     image: '/images/products/bastao-de-ronda.png',
     problem: 'Falta de controle efetivo sobre o percurso e os horários das rondas noturnas e de segurança patrimonial.',

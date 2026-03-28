@@ -111,7 +111,7 @@ export const solutions: Solution[] = [
       'Garante conformidade total com Portaria 671',
       'Reduz tempo de fechamento da folha',
       'Gera arquivos AFDT/ACJEF válidos para fiscalização',
-      'Elimina filas na entrada com identificação ultra-rápida',
+      'Elimina filas na entrada com identificação ultrarrápida',
       'Elimina riscos de contaminação (modelos sem contato)',
     ],
     benefits: [
@@ -132,7 +132,7 @@ export const solutions: Solution[] = [
       {
         slug: 'facial',
         name: 'Reconhecimento Facial',
-        shortDescription: 'Identificação por reconhecimento facial com IA e detecção de rosto vivo. Sem contato, higiênico e ultra-rápido.',
+        shortDescription: 'Identificação por reconhecimento facial com IA e detecção de rosto vivo. Sem contato, higiênico e ultrarrápido.',
         image: '/images/topdata-facial-hero.png',
         highlights: [
           'IA com Deep Learning para reconhecimento preciso',
@@ -417,7 +417,7 @@ export const solutions: Solution[] = [
     ],
     benefits: [
       'Kit completo: bastão + iButtons + software TopRonda',
-      'Leitura de iButtons inteligente e ultra-rápida',
+      'Leitura de iButtons inteligente e ultrarrápida',
       'Relatórios detalhados com horário de cada ponto',
       'Design emborrachado para alta durabilidade',
       'Sinalização sonora e luminosa para orientar o vigia',
