@@ -61,12 +61,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(response, { status: 500 })
     }
 
-    // Se for um cadastro da Isca Digital, disparar o email com material para o Lead
-    if (result.data.message?.includes('Isca Digital')) {
-      const magnetResult = await sendLeadMagnetEmail(result.data)
-      if (!magnetResult.success) {
-        console.error('[api/contact] Erro ao enviar material para o lead:', magnetResult.error)
-      }
+    // Aqui adicionamos a automação: todo lead que se cadastrar em qualquer lugar do site
+    // recebe o e-mail super premium apresentando a 4Core
+    const magnetResult = await sendLeadMagnetEmail(result.data)
+    if (!magnetResult.success) {
+      console.error('[api/contact] Erro ao enviar material para o lead:', magnetResult.error)
     }
 
     const responseContent: ContactApiResponse = {

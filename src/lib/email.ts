@@ -105,14 +105,14 @@ function buildLeadMagnetHtml(name: string): string {
         
         <!-- Header -->
         <div style="background-color: #28044F; padding: 40px 30px; text-align: center;">
-          <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Seu material chegou! 📄</h1>
+          <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Soluções 4Core: Prazer em conhecer! 🚀</h1>
         </div>
         
         <!-- Body -->
         <div style="padding: 40px 30px;">
           <h2 style="color: #1e293b; font-size: 20px; font-weight: 700; margin-top: 0;">Olá, ${name}.</h2>
           <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
-            Ficamos felizes com o seu interesse em garantir a conformidade da sua empresa! Entendemos que as exigências da Portaria 671 MTP podem ser confusas.
+            Nossa equipe agradece pelo seu contato! Recebemos sua solicitação e um de nossos especialistas falará com você em breve. Preparamos uma breve apresentação de como garantimos a conformidade das empresas diante das novas exigências da Portaria 671 MTP.
           </p>
           
           <div style="background-color: #f1f5f9; border-left: 4px solid #7c3aed; padding: 20px; border-radius: 4px; margin-bottom: 30px;">
@@ -129,7 +129,7 @@ function buildLeadMagnetHtml(name: string): string {
           </ul>
 
           <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
-            Estamos anexando o material completo sobre a Portaria 671 caso queira salvar. Se você sentiu que precisa modernizar as operações da sua empresa para se blindar de multas...
+            Se você sentiu que precisa modernizar as operações do seu Departamento Pessoal e RH para se blindar de multas trabalhistas, estamos à disposição.
           </p>
 
           <div style="text-align: center; margin-bottom: 20px;">
@@ -162,7 +162,7 @@ export async function sendLeadMagnetEmail(
     await transporter.sendMail({
       from: `"4Core Consultoria" <comercial@4core.site>`,
       to: data.email,
-      subject: `O Guia Portaria 671 da 4Core chegou!`,
+      subject: `Conheça a 4Core: Ponto e Acesso com Segurança Jurídica`,
       html: buildLeadMagnetHtml(data.name),
     })
 
