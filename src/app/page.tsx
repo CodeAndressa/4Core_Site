@@ -2,6 +2,7 @@ import { HomeHeroDiagnostic } from '@/components/sections/HomeHeroDiagnostic'
 import { Solutions } from '@/components/sections/Solutions'
 import { RiskSection } from '@/components/sections/RiskSection'
 import { Contrast } from '@/components/sections/Contrast'
+import { LeadMagnet } from '@/components/sections/LeadMagnet'
 import { TrustIndicators } from '@/components/sections/TrustIndicators'
 import { FAQ } from '@/components/sections/FAQ'
 import { CTA } from '@/components/sections/CTA'
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Solutions />
       <RiskSection />
       <Contrast />
+      <LeadMagnet />
       <TrustIndicators />
       <FAQ />
       <CTA />
