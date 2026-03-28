@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import type { AnalyticsDashboard } from '@/types/analytics'
 import { KPICards } from '@/components/admin/Dashboard/KPICards'
 import { TrafficChart } from '@/components/admin/Dashboard/TrafficChart'
@@ -165,6 +166,12 @@ export default function DashboardPage() {
                 </p>
               )}
             </div>
+            
+            <div className="hidden md:flex items-center gap-1 bg-gray-100 p-1 rounded-xl">
+               <Link href="/admin/dashboard" className="px-4 py-2 text-sm font-bold bg-white text-purple-600 rounded-lg shadow-sm">Analytics</Link>
+               <Link href="/admin/leads" className="px-4 py-2 text-sm font-bold text-gray-500 hover:text-gray-800 rounded-lg transition-colors">Kanban (Leads)</Link>
+            </div>
+
             <div className="flex gap-2">
               <button
                 onClick={handlePopulateData}

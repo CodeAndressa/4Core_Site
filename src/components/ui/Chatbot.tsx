@@ -75,7 +75,7 @@ export function Chatbot({
       setMessages([
         {
           role: 'assistant',
-          content: 'Olá! Sou o assistente da 4Core. Como posso te ajudar hoje?',
+          content: 'Olá! 👋 Vi que você está avaliando nossas soluções. Quer ajuda de um especialista para encontrar a melhor opção para a sua empresa?',
         },
       ])
     }
@@ -145,7 +145,8 @@ export function Chatbot({
     }
   }
 
-  if (!isOpen && externalIsOpen === undefined) {
+  if (!isOpen) {
+    if (externalIsOpen !== undefined) return null;
     return (
       <button
         onClick={() => setIsOpen(true)}
@@ -154,7 +155,6 @@ export function Chatbot({
       >
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
-
           <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3 transition-all duration-300 group-hover:scale-105">
             <div className="relative">
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1.5">
@@ -162,7 +162,6 @@ export function Chatbot({
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
             </div>
-
             <div className="text-left">
               <div className="text-white font-bold text-sm">Contatos</div>
               <div className="text-purple-100 text-xs hidden sm:block">Atendimento inteligente</div>

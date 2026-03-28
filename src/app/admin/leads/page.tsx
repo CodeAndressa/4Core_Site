@@ -1,5 +1,6 @@
 import { KanbanBoard } from '@/components/admin/leads/KanbanBoard'
 import { LayoutDashboard, Users, Filter, Download } from 'lucide-react'
+import Link from 'next/link'
 
 export default function LeadsAdminPage() {
   return (
@@ -14,6 +15,11 @@ export default function LeadsAdminPage() {
             <h1 className="text-2xl font-black text-slate-800 tracking-tight">Gestão de Leads</h1>
             <p className="text-sm text-slate-500 font-medium">Pipeline Comercial Kanban • 4Core CRM</p>
           </div>
+        </div>
+
+        <div className="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+           <Link href="/admin/dashboard" className="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-800 rounded-lg transition-colors">Analytics</Link>
+           <Link href="/admin/leads" className="px-4 py-2 text-sm font-bold bg-white text-indigo-600 rounded-lg shadow-sm">Kanban (Leads)</Link>
         </div>
 
         <div className="flex items-center gap-3">

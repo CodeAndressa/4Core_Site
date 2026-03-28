@@ -27,6 +27,18 @@ export function AppShell({ children }: AppShellProps) {
   const [chatbotOpen, setChatbotOpen] = useState(false)
 
   useEffect(() => {
+    if (isAdminRoute || !showFloatingUi) return
+    const hasSeenChatbot = sessionStorage.getItem('hasSeenChatbot')
+    if (!hasSeenChatbot) {
+      const timer = setTimeout(() => {
+        setChatbotOpen(true)
+        sessionStorage.setItem('hasSeenChatbot', 'true')
+      }, 8000)
+      return () => clearTimeout(timer)
+    }
+  }, [isAdminRoute, showFloatingUi])
+
+  useEffect(() => {
     if (isAdminRoute) {
       return
     }
