@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { contactFormSchema } from '@/lib/validators'
-import { sendContactEmail } from '@/lib/email'
+import { sendContactEmail, sendLeadMagnetEmail } from '@/lib/email'
 import { createLead } from '@/lib/services/leadService'
 import { enforceRateLimit, validateTrustedOrigin } from '@/lib/apiSecurity'
 import type { ContactApiResponse } from '@/types/contact'
@@ -59,6 +59,14 @@ export async function POST(request: NextRequest) {
       }
 
       return NextResponse.json(response, { status: 500 })
+    }
+
+    // Se for um cadastro da Isca Digital, disparar o email com material para o Lead
+    if (result.data.message?.includes('Isca Digital')) {
+      const magnetResult = await sendLeadMagnetEmail(result.data)
+      if (!magnetResult.success) {
+        console.error('[api/contact] Erro ao enviar material para o lead:', magnetResult.error)
+      }
     }
 
     const responseContent: ContactApiResponse = {

@@ -54,7 +54,7 @@ export function LeadMagnet() {
   }
 
   return (
-    <Section variant="light" className="relative overflow-hidden bg-gradient-to-br from-indigo-50 to-white">
+    <Section variant="white" className="relative overflow-hidden bg-gradient-to-br from-indigo-50 to-white">
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 p-8 opacity-10 blur-2xl pointer-events-none">
         <div className="w-96 h-96 bg-indigo-500 rounded-full"></div>

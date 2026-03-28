@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button'
 
 export default function ChecklistPage() {
   return (
-    <Section variant="light" className="pt-32 pb-24">
+    <Section variant="gray" className="pt-32 pb-24">
       <Container className="max-w-4xl">
         <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12">
           <div className="flex items-center gap-4 mb-8">
@@ -93,10 +93,10 @@ export default function ChecklistPage() {
           <div className="bg-purple-600 rounded-2xl p-8 text-center text-white">
             <h3 className="text-2xl font-bold mb-4">Ainda tem dúvidas ou marcou "Não" em algum dos itens?</h3>
             <p className="text-purple-100 mb-8 max-w-2xl mx-auto">
-              Sua empresa pode estar vulnerável a autuações trabalhistas. Fale agora com um dos nossos engenheiros especialistas para adequar seu sistema antes da próxima fiscalização.
+              Sua empresa pode estar vulnerável a autuações trabalhistas. Fale agora com nosso time comercial para adequar seu sistema antes da próxima fiscalização.
             </p>
             <Button href="/contato" size="lg" className="bg-white text-purple-600 hover:bg-gray-50 font-bold border-none">
-              Falar com Engenheiro Especialista
+              Falar com o time comercial
             </Button>
           </div>
 
