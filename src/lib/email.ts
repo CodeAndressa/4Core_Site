@@ -92,7 +92,7 @@ export async function sendContactEmail(
  * Envia um e-mail rico e formatado para o lead que baixou um material.
  */
 function buildLeadMagnetHtml(name: string): string {
-  return \`
+  return `
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -109,7 +109,7 @@ function buildLeadMagnetHtml(name: string): string {
         
         <!-- Body -->
         <div style="padding: 40px 30px;">
-          <h2 style="color: #1e293b; font-size: 20px; font-weight: 700; margin-top: 0;">Olá, \${name}.</h2>
+          <h2 style="color: #1e293b; font-size: 20px; font-weight: 700; margin-top: 0;">Olá, ${name}.</h2>
           <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
             Ficamos felizes com o seu interesse em garantir a conformidade da sua empresa! Entendemos que as exigências da Portaria 671 MTP podem ser confusas.
           </p>
@@ -150,7 +150,7 @@ function buildLeadMagnetHtml(name: string): string {
       </div>
     </body>
     </html>
-  \`
+  `
 }
 
 export async function sendLeadMagnetEmail(
@@ -159,9 +159,9 @@ export async function sendLeadMagnetEmail(
   try {
     const transporter = createTransporter()
     await transporter.sendMail({
-      from: \`"4Core Consultoria" <comercial@4core.site>\`,
+      from: `"4Core Consultoria" <comercial@4core.site>`,
       to: data.email,
-      subject: \`O Guia Portaria 671 da 4Core chegou!\`,
+      subject: `O Guia Portaria 671 da 4Core chegou!`,
       html: buildLeadMagnetHtml(data.name),
     })
 
