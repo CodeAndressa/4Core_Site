@@ -49,12 +49,12 @@ export function ProductVariants({ title = 'Modelos e variações', subtitle = 'E
                   className="bg-white rounded-2xl border-2 border-gray-100 hover:border-brand-vibrant hover:shadow-xl hover:-translate-y-1 transition-all duration-400 overflow-hidden h-full flex flex-col group"
                 >
                   {/* Image */}
-                  <div className="relative h-44 w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                  <div className="relative h-52 w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                     <Image
                       src={variant.image}
                       alt={variant.name}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       loading="lazy"
                     />
