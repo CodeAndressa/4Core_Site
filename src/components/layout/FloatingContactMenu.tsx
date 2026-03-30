@@ -42,7 +42,10 @@ export function FloatingContactMenu({ onOpenChatbot }: FloatingContactMenuProps)
   ]
 
   return (
-    <div className="fixed bottom-4 right-4 z-[999] flex flex-col items-end gap-2">
+    <div 
+      className="fixed bottom-4 right-4 z-[999] flex flex-col items-end gap-2"
+      style={{ display: 'flex', pointerEvents: 'auto' }}
+    >
       {/* Menu Items - Sempre renderizados, apenas ocultos quando fechado */}
       {isOpen && (
         <div className="flex flex-col items-end gap-2">
@@ -100,6 +103,12 @@ export function FloatingContactMenu({ onOpenChatbot }: FloatingContactMenuProps)
         type="button"
         aria-label="Menu de contatos"
         aria-expanded={isOpen}
+        style={{ 
+          display: 'flex',
+          visibility: 'visible',
+          opacity: 1,
+          zIndex: 999
+        }}
       >
         <div className="flex items-center justify-center">
           {isOpen ? (
