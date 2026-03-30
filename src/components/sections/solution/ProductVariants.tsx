@@ -54,7 +54,7 @@ export function ProductVariants({ title = 'Modelos e variações', subtitle = 'E
                       src={variant.image}
                       alt={variant.name}
                       fill
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       loading="lazy"
                     />

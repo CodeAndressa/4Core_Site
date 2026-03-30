@@ -64,10 +64,10 @@ export function ProductHero({ name, categoryName, description, image }: ProductH
                  src={image} 
                  alt={name} 
                  fill
-                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                  priority
                />
-               <div className="absolute inset-0 bg-brand-vibrant/5 mix-blend-multiply transition-opacity group-hover:opacity-0" />
+               <div className="absolute inset-0 bg-brand-vibrant/3" />
             </div>
             {/* Decorative element */}
             <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-brand-light rounded-full -z-10 blur-3xl opacity-50" />

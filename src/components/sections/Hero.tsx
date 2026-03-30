@@ -131,7 +131,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             transition={{ duration: 0.5 }}
             className="relative block mt-12 lg:mt-0"
           >
-            <div className="absolute -inset-8 rounded-[42px] bg-brand-vibrant/20 blur-3xl" />
+            <div className="absolute -inset-8 rounded-[42px] bg-brand-vibrant/5" />
             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl bg-brand-deep/50 border border-white/10 aspect-[4/5] max-w-[500px] mx-auto lg:ml-auto">
               <Image
                 src="/images/products/facial-reader.png"
