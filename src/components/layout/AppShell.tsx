@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer'
 import { FloatingContactMenu } from '@/components/layout/FloatingContactMenu'
 import { Chatbot } from '@/components/ui/Chatbot'
 import { cn } from '@/lib/utils'
+import { registerServiceWorker } from '@/lib/sw-registration'
 
 interface AppShellProps {
   children: React.ReactNode
@@ -19,9 +20,12 @@ export function AppShell({ children }: AppShellProps) {
   const [chatbotOpen, setChatbotOpen] = useState(isHomeRoute)
   const [hasMounted, setHasMounted] = useState(false)
 
-  // Abrir chatbot automaticamente após 3 segundos na HOME
+  // Register Service Worker + Abrir chatbot automaticamente após 3 segundos na HOME
   useEffect(() => {
     setHasMounted(true)
+    
+    // Register Service Worker for offline support & caching
+    registerServiceWorker()
     
     if (isAdminRoute || !isHomeRoute) {
       setChatbotOpen(false)
