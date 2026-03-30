@@ -8,6 +8,7 @@ import { FloatingContactMenu } from '@/components/layout/FloatingContactMenu'
 import { Chatbot } from '@/components/ui/Chatbot'
 import { cn } from '@/lib/utils'
 import { registerServiceWorker } from '@/lib/sw-registration'
+import { observeWebVitals } from '@/lib/web-vitals'
 
 interface AppShellProps {
   children: React.ReactNode
@@ -20,12 +21,15 @@ export function AppShell({ children }: AppShellProps) {
   const [chatbotOpen, setChatbotOpen] = useState(isHomeRoute)
   const [hasMounted, setHasMounted] = useState(false)
 
-  // Register Service Worker + Abrir chatbot automaticamente após 3 segundos na HOME
+  // Register Service Worker + Start Web Vitals tracking + Abrir chatbot automaticamente após 3 segundos na HOME
   useEffect(() => {
     setHasMounted(true)
     
     // Register Service Worker for offline support & caching
     registerServiceWorker()
+    
+    // Start observing Web Vitals (LCP, FCP, CLS, FID, TTFB)
+    observeWebVitals()
     
     if (isAdminRoute || !isHomeRoute) {
       setChatbotOpen(false)
