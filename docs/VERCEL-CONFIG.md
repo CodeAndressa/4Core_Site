@@ -58,8 +58,10 @@ Clique em **Add New** para cada variável abaixo:
 
 | Name | Value | Environment |
 |------|-------|-------------|
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | `5511984295040` | Production, Preview, Development |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | `5541988035657` | Production, Preview, Development |
 | `NEXT_PUBLIC_WHATSAPP_MESSAGE` | `Olá! Gostaria de falar com um especialista da 4Core.` | Production, Preview, Development |
+
+ℹ️ Ver `src/data/contacts.ts` para todos os números comerciais centralizados.
 
 #### 🌐 Site URL
 

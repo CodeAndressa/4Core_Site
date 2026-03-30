@@ -39,12 +39,12 @@ export function CTA() {
               </h2>
 
               <p className="text-lg lg:text-xl text-white/75 mb-12 leading-relaxed max-w-md font-medium">
-                Agende uma avaliacao gratuita e descubra como a 4Core pode blindar sua empresa.
+                Agende uma avaliação gratuita e descubra como a 4Core pode blindar sua empresa.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button href="/contato" className="bg-white text-brand-nebula hover:bg-brand-light px-10 py-6 text-base font-bold border-none">
-                  Solicitar avaliacao gratuita <ArrowRight className="ml-2 w-4 h-4" />
+                  Solicitar avaliação gratuita <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
                 <Button
                   href={getWhatsAppUrl()}

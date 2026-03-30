@@ -1,10 +1,15 @@
 /**
  * Constantes globais do projeto.
  * Valores com prefixo NEXT_PUBLIC_ são acessíveis no client.
+ * 
+ * IMPORTANTE: Todos os números comerciais estão centralizados em src/data/contacts.ts
+ * Nenhum outro telefone deve estar no projeto além do suporte.
  */
 
+import { getCommercialNumber } from '@/data/contacts'
+
 export const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5511999999999'
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || getCommercialNumber()
 
 export const WHATSAPP_MESSAGE =
   process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE ||
