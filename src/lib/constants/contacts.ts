@@ -16,7 +16,7 @@ export const CONTACTS = {
   suporte: {
     label: 'Suporte',
     phone: '+55 41 9893-9811',
-    tel: 'tel:+554198939811',
-    whatsapp: 'https://wa.me/554198939811',
+    tel: 'tel:+5541989398811',
+    whatsapp: 'https://wa.me/5541989398811',
   },
 } as const

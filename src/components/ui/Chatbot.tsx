@@ -309,7 +309,7 @@ export function Chatbot({
                         ? generateWhatsAppSummary(conversationState)
                         : 'Olá! Vim do chat do site e preciso de suporte.'
                       const message = encodeURIComponent(summary)
-                      window.open(`https://wa.me/5541989399811?text=${message}`, '_blank')
+                      window.open(`https://wa.me/5541989398811?text=${message}`, '_blank')
                     }}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-3 flex items-center justify-center gap-2 transition-all font-medium text-sm shadow-sm hover:shadow-md"
                   >
