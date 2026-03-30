@@ -23,11 +23,18 @@ export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const isAdminRoute = pathname?.startsWith('/admin')
   const isHomeRoute = pathname === '/'
-  const [showFloatingUi, setShowFloatingUi] = useState(false)
+  const [showFloatingUi, setShowFloatingUi] = useState(!isAdminRoute)
   const [chatbotOpen, setChatbotOpen] = useState(false)
 
   useEffect(() => {
-    if (isAdminRoute || !showFloatingUi) return
+    if (isAdminRoute) {
+      setShowFloatingUi(false)
+      return
+    }
+    
+    setShowFloatingUi(true)
+    
+    // Abrir chatbot automaticamente após 8 segundos na primeira visita
     const hasSeenChatbot = sessionStorage.getItem('hasSeenChatbot')
     if (!hasSeenChatbot) {
       const timer = setTimeout(() => {
@@ -36,27 +43,6 @@ export function AppShell({ children }: AppShellProps) {
       }, 8000)
       return () => clearTimeout(timer)
     }
-  }, [isAdminRoute, showFloatingUi])
-
-  useEffect(() => {
-    if (isAdminRoute) {
-      return
-    }
-
-    const loadFloatingUi = () => setShowFloatingUi(true)
-
-    const win = globalThis as Window & typeof globalThis & {
-      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number
-      cancelIdleCallback?: (id: number) => void
-    }
-
-    if (win.requestIdleCallback) {
-      const idleId = win.requestIdleCallback(loadFloatingUi, { timeout: 500 })
-      return () => win.cancelIdleCallback?.(idleId)
-    }
-
-    const timeoutId = setTimeout(loadFloatingUi, 200)
-    return () => clearTimeout(timeoutId)
   }, [isAdminRoute])
 
   if (isAdminRoute) {
