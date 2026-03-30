@@ -41,7 +41,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="primary" className="mb-6 py-2 px-4 rounded-lg bg-white/10 text-brand-light border border-white/15">
+            <Badge variant="primary" className="mb-6 py-2 px-4 rounded-lg bg-white/10 backdrop-blur-md text-brand-light border border-white/20 shadow-lg hover:border-white/40 transition-all duration-300">
               <span className="flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4" />
                 Seu controle de ponto pode estar te expondo a riscos
@@ -58,7 +58,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
               e elimina riscos trabalhistas da sua empresa.
             </p>
 
-            <div className="bg-white/8 border border-white/15 backdrop-blur-sm rounded-2xl p-6 mb-8">
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 mb-8 shadow-lg hover:shadow-xl hover:bg-white/15 transition-all duration-300">
               <p className="text-sm font-bold text-brand-vibrant mb-4 uppercase tracking-wide">Riscos que você evita:</p>
               <ul className="space-y-3">
                 {risks.map((risk, idx) => (

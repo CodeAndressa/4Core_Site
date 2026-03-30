@@ -56,7 +56,7 @@ export function ProductCard({ product, icon, badgeText }: ProductCardProps) {
       href={`/solucoes/${product.categories[0]}/${product.slug}`}
       className="group block h-full focus-visible:outline-none"
     >
-      <article className="h-full bg-white rounded-3xl border-2 border-gray-100 hover:border-brand-vibrant hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col">
+      <article className="h-full card-glow rounded-3xl overflow-hidden flex flex-col shadow-lg">
         {/* Visual Image Header */}
         <div className="relative h-56 w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
           <Image 
@@ -82,18 +82,18 @@ export function ProductCard({ product, icon, badgeText }: ProductCardProps) {
         <div className="p-6 flex flex-col flex-1">
           {/* Icon */}
           {icon && (
-            <div className="w-12 h-12 bg-brand-vibrant/10 rounded-xl flex items-center justify-center text-brand-vibrant group-hover:bg-brand-vibrant group-hover:text-white transition-all duration-500 mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-brand-vibrant/15 to-brand-vibrant/5 rounded-xl flex items-center justify-center text-brand-vibrant group-hover:from-brand-vibrant group-hover:to-brand-vibrant/90 group-hover:text-white transition-all duration-500 mb-4">
               {icon}
             </div>
           )}
           
           {/* Title */}
-          <h3 className="text-xl font-bold text-brand-deep mb-3 group-hover:text-brand-vibrant transition-colors">
+          <h3 className="text-xl font-bold text-brand-deep mb-3 group-hover:text-brand-vibrant transition-colors duration-300">
             {product.name}
           </h3>
 
           {/* Para quem é */}
-          <div className="mb-4 pb-4 border-b border-gray-100">
+          <div className="mb-4 pb-4 border-b border-gray-100 group-hover:border-brand-vibrant/20 transition-colors duration-300">
             <div className="flex items-start gap-2 text-sm">
               <Users className="w-4 h-4 text-brand-vibrant shrink-0 mt-0.5" />
               <div>
