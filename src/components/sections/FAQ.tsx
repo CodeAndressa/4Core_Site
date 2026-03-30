@@ -32,12 +32,7 @@ export function FAQ() {
   return (
     <Section variant="white" id="faq">
       <Container>
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.6 }}
-        >
+        <div className="max-w-3xl mx-auto">
           <SectionHeading
             subtitle="Dúvidas frequentes"
             title="Perguntas comuns"
@@ -45,16 +40,12 @@ export function FAQ() {
             centered
             className="mb-12 lg:mb-16"
           />
-        </motion.div>
+        </div>
         
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, i) => (
-            <motion.div 
+            <div 
               key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
               className="border-b border-gray-200 last:border-b-0"
             >
               <button
@@ -86,7 +77,7 @@ export function FAQ() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ))}
         </div>
       </Container>

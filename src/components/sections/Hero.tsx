@@ -71,17 +71,14 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             </div>
 
             <ul className="space-y-3 mb-8">
-              {solutions.map((benefit, idx) => (
-                <motion.li
-                  key={idx}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.28 + idx * 0.1 }}
+              {solutions.map((benefit) => (
+                <li
+                  key={benefit}
                   className="flex items-center gap-3 text-white/90 font-semibold"
                 >
                   <CheckCircle2 className="w-5 h-5 text-brand-vibrant shrink-0" />
                   {benefit}
-                </motion.li>
+                </li>
               ))}
             </ul>
 
@@ -101,10 +98,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
             </div>
 
             {/* Micro-CTA WhatsApp */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
+            <div
               className="mt-6 flex items-center justify-center sm:justify-start gap-2"
             >
               <p className="text-white/60 text-sm font-medium italic">Prefere falar agora?</p>
@@ -117,7 +111,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
                 <MessageCircle className="w-4 h-4" />
                 Chamar especialista no WhatsApp
               </a>
-            </motion.div>
+            </div>
 
             <div className="mt-8 flex items-center gap-6 text-sm text-white/75">
               <div className="flex items-center gap-2">
@@ -134,7 +128,7 @@ export function Hero({ onOpenDiagnostic }: HeroProps) {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
             className="relative block mt-12 lg:mt-0"
           >
             <div className="absolute -inset-8 rounded-[42px] bg-brand-vibrant/20 blur-3xl" />

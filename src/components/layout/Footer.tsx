@@ -50,8 +50,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05, y: -3 }}
-                  className="w-12 h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/60 hover:bg-brand-vibrant hover:text-white hover:border-brand-vibrant transition-all duration-300"
+                  className="w-12 h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/60 hover:bg-brand-vibrant hover:text-white hover:border-brand-vibrant transition-all duration-200"
                   aria-label={social.label}
                 >
                   {social.icon}
