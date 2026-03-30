@@ -41,86 +41,191 @@ export function FloatingContactMenu({ onOpenChatbot }: FloatingContactMenuProps)
     }
   ]
 
+  const containerStyle: React.CSSProperties = {
+    position: 'fixed',
+    bottom: '16px',
+    right: '16px',
+    zIndex: 9999,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    gap: '8px',
+    pointerEvents: 'auto',
+    visibility: 'visible',
+    opacity: 1,
+  }
+
+  const buttonStyle: React.CSSProperties = {
+    position: 'relative',
+    width: '56px',
+    height: '56px',
+    borderRadius: '50%',
+    backgroundColor: '#7B00FF',
+    color: 'white',
+    border: '2px solid rgba(255, 255, 255, 0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    boxShadow: '0 8px 30px rgba(123, 0, 255, 0.4)',
+    transition: 'all 200ms ease-in-out',
+    fontSize: '0px',
+    padding: '0px',
+    visibility: 'visible',
+    opacity: 1,
+    zIndex: 9999,
+  }
+
+  const menuItemContainerStyle: React.CSSProperties = {
+    display: isOpen ? 'flex' : 'none',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    gap: '8px',
+    visibility: 'visible',
+    opacity: 1,
+  }
+
+  const menuItemStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    backgroundColor: 'white',
+    padding: '12px',
+    borderRadius: '16px',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #f3f4f6',
+    minWidth: '220px',
+    cursor: 'pointer',
+    transition: 'all 200ms ease-in-out',
+    textDecoration: 'none',
+    color: 'inherit',
+  }
+
+  const iconContainerStyle: React.CSSProperties = {
+    width: '40px',
+    height: '40px',
+    borderRadius: '12px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    flexShrink: 0,
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+  }
+
+  const textContainerStyle: React.CSSProperties = {
+    textAlign: 'left',
+  }
+
+  const labelStyle: React.CSSProperties = {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    color: '#111827',
+    margin: '0px',
+  }
+
+  const descriptionStyle: React.CSSProperties = {
+    fontSize: '10px',
+    color: '#6b7280',
+    fontWeight: '500',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    margin: '0px',
+  }
+
   return (
-    <div 
-      className="fixed bottom-4 right-4 z-[999] flex flex-col items-end gap-2"
-      style={{ display: 'flex', pointerEvents: 'auto' }}
-    >
-      {/* Menu Items - Sempre renderizados, apenas ocultos quando fechado */}
-      {isOpen && (
-        <div className="flex flex-col items-end gap-2">
-          {menuItems.map((item) => (
-            <div key={item.id} className="opacity-100 transition-opacity duration-200">
-              {item.href ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white hover:bg-gray-50 p-3 rounded-2xl shadow-xl border border-gray-100 min-w-[220px] group transition-all hover:-translate-y-1"
-                  onClick={() => {
-                    // Track click
-                    console.log('WhatsApp comercial clicked')
-                  }}
-                >
-                  <div 
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm"
-                    style={{ backgroundColor: item.color }}
-                  >
-                    {item.icon}
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm font-bold text-gray-900 group-hover:text-brand-vibrant transition-colors">{item.label}</p>
-                    <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wide">{item.description}</p>
-                  </div>
-                </a>
-              ) : (
-                <button
-                  onClick={item.onClick}
-                  className="flex items-center gap-3 bg-white hover:bg-gray-50 p-3 rounded-2xl shadow-xl border border-gray-100 min-w-[220px] group transition-all hover:-translate-y-1"
-                  type="button"
-                >
-                  <div 
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm"
-                    style={{ backgroundColor: item.color }}
-                  >
-                    {item.icon}
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm font-bold text-gray-900 group-hover:text-brand-vibrant transition-colors">{item.label}</p>
-                    <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wide">{item.description}</p>
-                  </div>
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+    <div style={containerStyle}>
+      {/* Menu Items */}
+      <div style={menuItemContainerStyle}>
+        {menuItems.map((item) => (
+          item.href ? (
+            <a
+              key={item.id}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={menuItemStyle}
+            >
+              <div 
+                style={{
+                  ...iconContainerStyle,
+                  backgroundColor: item.color,
+                }}
+              >
+                {item.icon}
+              </div>
+              <div style={textContainerStyle}>
+                <p style={labelStyle}>{item.label}</p>
+                <p style={descriptionStyle}>{item.description}</p>
+              </div>
+            </a>
+          ) : (
+            <button
+              key={item.id}
+              onClick={item.onClick}
+              style={menuItemStyle}
+              type="button"
+            >
+              <div 
+                style={{
+                  ...iconContainerStyle,
+                  backgroundColor: item.color,
+                }}
+              >
+                {item.icon}
+              </div>
+              <div style={textContainerStyle}>
+                <p style={labelStyle}>{item.label}</p>
+                <p style={descriptionStyle}>{item.description}</p>
+              </div>
+            </button>
+          )
+        ))}
+      </div>
 
       {/* Main Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-14 h-14 rounded-full bg-brand-vibrant text-white shadow-[0_8px_30px_rgba(123,0,255,0.4)] flex items-center justify-center border-2 border-white/20 hover:shadow-[0_12px_40px_rgba(123,0,255,0.6)] transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-vibrant focus-visible:ring-offset-2"
+        style={buttonStyle}
         type="button"
         aria-label="Menu de contatos"
         aria-expanded={isOpen}
-        style={{ 
-          display: 'flex',
-          visibility: 'visible',
-          opacity: 1,
-          zIndex: 999
-        }}
       >
-        <div className="flex items-center justify-center">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {isOpen ? (
-            <X size={28} className="text-white" />
+            <X size={28} color="white" />
           ) : (
-            <div className="relative flex items-center justify-center">
-              <MessageCircle size={28} className="text-white" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-brand-vibrant animate-pulse" />
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <MessageCircle size={28} color="white" />
+              <span style={{
+                position: 'absolute',
+                top: '-4px',
+                right: '-4px',
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#ef4444',
+                borderRadius: '50%',
+                border: '2px solid #7B00FF',
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              }} />
             </div>
           )}
         </div>
       </button>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        button:hover {
+          box-shadow: 0 12px 40px rgba(123, 0, 255, 0.6);
+          transform: scale(1.1);
+        }
+        a:hover, button:not([aria-label]) { 
+          transform: translateY(-4px);
+        }
+      `}</style>
     </div>
   )
 }

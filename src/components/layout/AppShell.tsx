@@ -16,21 +16,25 @@ export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const isAdminRoute = pathname?.startsWith('/admin')
   const isHomeRoute = pathname === '/'
-  const [chatbotOpen, setChatbotOpen] = useState(false)
+  const [chatbotOpen, setChatbotOpen] = useState(isHomeRoute)
+  const [hasMounted, setHasMounted] = useState(false)
 
-  // Abrir chatbot automaticamente após 8 segundos na primeira visita
+  // Abrir chatbot automaticamente após 3 segundos na HOME
   useEffect(() => {
-    if (isAdminRoute) return
+    setHasMounted(true)
     
-    const hasSeenChatbot = sessionStorage.getItem('hasSeenChatbot')
-    if (!hasSeenChatbot) {
-      const timer = setTimeout(() => {
-        setChatbotOpen(true)
-        sessionStorage.setItem('hasSeenChatbot', 'true')
-      }, 8000)
-      return () => clearTimeout(timer)
+    if (isAdminRoute || !isHomeRoute) {
+      setChatbotOpen(false)
+      return
     }
-  }, [isAdminRoute])
+    
+    // Na home, abrir após 3 segundos
+    const timer = setTimeout(() => {
+      setChatbotOpen(true)
+    }, 3000)
+    
+    return () => clearTimeout(timer)
+  }, [isAdminRoute, isHomeRoute])
 
   if (isAdminRoute) {
     return <main className="min-h-screen">{children}</main>
