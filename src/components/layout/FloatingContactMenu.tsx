@@ -42,18 +42,22 @@ export function FloatingContactMenu({ onOpenChatbot }: FloatingContactMenuProps)
   ]
 
   return (
-    <div className="fixed bottom-4 right-4 z-[999] flex flex-col items-end pointer-events-auto">
-      {/* Menu Items */}
+    <div className="fixed bottom-4 right-4 z-[999] flex flex-col items-end gap-2">
+      {/* Menu Items - Sempre renderizados, apenas ocultos quando fechado */}
       {isOpen && (
-        <div className="flex flex-col items-end gap-2 mb-3">
+        <div className="flex flex-col items-end gap-2">
           {menuItems.map((item) => (
-            <div key={item.id} className="animate-in fade-in slide-in-from-bottom-2">
+            <div key={item.id} className="opacity-100 transition-opacity duration-200">
               {item.href ? (
                 <a
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white hover:bg-gray-50 p-3 rounded-2xl shadow-xl border border-gray-100 min-w-[220px] group transition-all"
+                  className="flex items-center gap-3 bg-white hover:bg-gray-50 p-3 rounded-2xl shadow-xl border border-gray-100 min-w-[220px] group transition-all hover:-translate-y-1"
+                  onClick={() => {
+                    // Track click
+                    console.log('WhatsApp comercial clicked')
+                  }}
                 >
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm"
@@ -69,7 +73,8 @@ export function FloatingContactMenu({ onOpenChatbot }: FloatingContactMenuProps)
               ) : (
                 <button
                   onClick={item.onClick}
-                  className="flex items-center gap-3 bg-white hover:bg-gray-50 p-3 rounded-2xl shadow-xl border border-gray-100 min-w-[220px] group transition-all"
+                  className="flex items-center gap-3 bg-white hover:bg-gray-50 p-3 rounded-2xl shadow-xl border border-gray-100 min-w-[220px] group transition-all hover:-translate-y-1"
+                  type="button"
                 >
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm"
@@ -91,16 +96,21 @@ export function FloatingContactMenu({ onOpenChatbot }: FloatingContactMenuProps)
       {/* Main Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-14 h-14 rounded-full bg-brand-vibrant text-white shadow-[0_8px_30px_rgba(123,0,255,0.4)] flex items-center justify-center border-2 border-white/20 hover:shadow-[0_12px_40px_rgba(123,0,255,0.6)] transition-all hover:scale-105 active:scale-95"
+        className="relative w-14 h-14 rounded-full bg-brand-vibrant text-white shadow-[0_8px_30px_rgba(123,0,255,0.4)] flex items-center justify-center border-2 border-white/20 hover:shadow-[0_12px_40px_rgba(123,0,255,0.6)] transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-vibrant focus-visible:ring-offset-2"
+        type="button"
+        aria-label="Menu de contatos"
+        aria-expanded={isOpen}
       >
-        {isOpen ? (
-          <X size={28} />
-        ) : (
-          <div className="relative">
-            <MessageCircle size={28} />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-brand-vibrant animate-pulse" />
-          </div>
-        )}
+        <div className="flex items-center justify-center">
+          {isOpen ? (
+            <X size={28} className="text-white" />
+          ) : (
+            <div className="relative flex items-center justify-center">
+              <MessageCircle size={28} className="text-white" />
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-brand-vibrant animate-pulse" />
+            </div>
+          )}
+        </div>
       </button>
     </div>
   )
