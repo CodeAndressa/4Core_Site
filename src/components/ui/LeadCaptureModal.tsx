@@ -7,6 +7,7 @@ import { Button } from './Button'
 import { FormField, TextField } from '@/components/ui/form'
 import { leadCaptureSchema } from '@/lib/validators'
 import { trackDiagnosticoComplete, trackLeadCaptured } from '@/lib/tracking/trackEvent'
+import { fireGoogleAdsConversion } from '@/lib/tracking/gtagConversion'
 
 interface LeadCaptureModalProps {
   isOpen: boolean
@@ -77,6 +78,7 @@ export function LeadCaptureModal({
 
       trackDiagnosticoComplete(pagePath)
       trackLeadCaptured(pagePath, 'diagnostico')
+      fireGoogleAdsConversion()
       setStep('success')
       setTimeout(() => {
         onSuccess?.()

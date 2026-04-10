@@ -72,6 +72,24 @@ export default function RootLayout({
             gtag('config', 'AW-17861688846');
           `}
         </Script>
+        <Script id="google-ads-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                'send_to': 'AW-17861688846/8nAMCP7ww-EbEI78jsVC',
+                'value': 1.0,
+                'currency': 'BRL',
+                'event_callback': callback
+              });
+              return false;
+            }
+          `}
+        </Script>
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <PageViewTracker />

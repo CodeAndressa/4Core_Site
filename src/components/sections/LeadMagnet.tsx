@@ -6,6 +6,7 @@ import { Download, ShieldAlert, CheckCircle2, ChevronRight, FileText } from 'luc
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { useRouter } from 'next/navigation'
+import { fireGoogleAdsConversion } from '@/lib/tracking/gtagConversion'
 
 export function LeadMagnet() {
   const router = useRouter()
@@ -41,6 +42,8 @@ export function LeadMagnet() {
       const data = await response.json()
 
       if (response.ok) {
+        // Dispara conversão do Google Ads
+        fireGoogleAdsConversion()
         // Redireciona para a página secreta com o Checklist
         router.push('/materiais/checklist-portaria-671')
       } else {

@@ -6,6 +6,7 @@ import { contactFormSchema } from '@/lib/validators'
 import type { ContactFormValues } from '@/lib/validators'
 import type { ContactApiResponse } from '@/types/contact'
 import { trackFormSubmit, trackFormView } from '@/lib/tracking/trackEvent'
+import { fireGoogleAdsConversion } from '@/lib/tracking/gtagConversion'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -75,6 +76,7 @@ export function useContactForm(): UseContactFormReturn {
         if (pathname) {
           await trackFormSubmit(pathname, 'contact_form')
         }
+        fireGoogleAdsConversion()
       } else {
         setStatus('error')
         setServerMessage(result.message)
